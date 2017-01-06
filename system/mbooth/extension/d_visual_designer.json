@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "1.0.1",
+    "version": "2.0.1",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "module/d_visual_designer",
@@ -141,11 +141,11 @@
     ],
     "changelog": [
         {
-            "version":"1.0.1",
+            "version":"2.0.1",
             "change":"Fix bugs"
         },
         {
-            "version":"1.0.0",
+            "version":"2.0.0",
             "change":"First version"
         }
     ]
