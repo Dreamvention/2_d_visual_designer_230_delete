@@ -6,29 +6,29 @@
     
     <file path="admin/controller/catalog/product.php">
         <operation>
-			<search><![CDATA[	protected function getForm() {]]></search>
-			<add  position="after"><![CDATA[
-    			$this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
-			]]></add>
-		</operation>
+            <search><![CDATA[   protected function getForm() {]]></search>
+            <add  position="after"><![CDATA[
+                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
+            ]]></add>
+        </operation>
     </file>
-	<file path="admin/view/template/catalog/product_form.tpl">
+    <file path="admin/view/template/catalog/product_form.tpl">
         <operation error="skip">
-			<search><![CDATA[class="form-control summernote"]]></search>
-			<add position="replace"><![CDATA[
-			class="form-control summernote d_visual_designer"
-			]]></add>
-		</operation>
-        <operation error="skip">
-			<search><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
-			<add position="replace"><![CDATA[
+            <search><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+            <add position="replace"><![CDATA[
                 <textarea name="product_description[<?php echo $language['language_id']; ?>][description]" class="d_visual_designer" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>
-			]]></add>
-		</operation>
+            ]]></add>
+        </operation>
+        <operation error="skip">
+            <search><![CDATA[class="form-control summernote"]]></search>
+            <add position="replace"><![CDATA[
+            class="form-control summernote d_visual_designer"
+            ]]></add>
+        </operation>
     </file>
     <file path="admin/controller/catalog/category.php">
         <operation>
-            <search><![CDATA[	protected function getForm() {]]></search>
+            <search><![CDATA[   protected function getForm() {]]></search>
             <add position="after"><![CDATA[
             $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
             ]]></add>
@@ -37,21 +37,21 @@
     
     <file path="admin/view/template/catalog/category_form.tpl">
         <operation error="skip">
+            <search><![CDATA[<textarea name="category_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+            <add position="replace"><![CDATA[
+                <textarea name="category_description[<?php echo $language['language_id']; ?>][description]" class="d_visual_designer" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>
+            ]]></add>
+        </operation>
+        <operation error="skip">
             <search><![CDATA[class="form-control summernote"]]></search>
             <add position="replace"><![CDATA[
             class="form-control summernote d_visual_designer"
             ]]></add>
         </operation>
-        <operation error="skip">
-			<search><![CDATA[<textarea name="category_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
-			<add position="replace"><![CDATA[
-                <textarea name="category_description[<?php echo $language['language_id']; ?>][description]" class="d_visual_designer" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>
-			]]></add>
-		</operation>
     </file>
     <file path="admin/controller/catalog/information.php">
         <operation>
-            <search><![CDATA[	protected function getForm() {]]></search>
+            <search><![CDATA[   protected function getForm() {]]></search>
             <add position="after"><![CDATA[
                 $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
             ]]></add>
@@ -59,15 +59,15 @@
     </file>
     <file path="admin/view/template/catalog/information_form.tpl">
         <operation error="skip">
-            <search><![CDATA[class="form-control summernote"]]></search>
-            <add position="replace"><![CDATA[
-            class="form-control summernote d_visual_designer"
-            ]]></add>
-        </operation>
-        <operation error="skip">
             <search><![CDATA[<textarea name="information_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
             <add position="replace"><![CDATA[
                 <textarea name="information_description[<?php echo $language['language_id']; ?>][description]" class="d_visual_designer" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['description'] : ''; ?></textarea>
+            ]]></add>
+        </operation>
+        <operation error="skip">
+            <search><![CDATA[class="form-control summernote"]]></search>
+            <add position="replace"><![CDATA[
+            class="form-control summernote d_visual_designer"
             ]]></add>
         </operation>
     </file>
@@ -75,7 +75,7 @@
         <operation>
             <search><![CDATA[$data['description']]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
+                $this->load->model('module/d_visual_designer');
                 $designer_data = array(
                     'token' => '5864c32f56c94',
                     'content' => $product_info['description'],
@@ -83,7 +83,7 @@
                     'id' => $product_id
                 );
                 
-                $product_info['description'] = $this->model_extension_module_d_visual_designer->parseDescription($designer_data);
+                $product_info['description'] = $this->model_module_d_visual_designer->parseDescription($designer_data);
             ]]></add>
         </operation>
     </file>
@@ -91,8 +91,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $product_info['description'] = $this->model_extension_module_d_visual_designer->getText($product_info['description']);
+                $this->load->model('module/d_visual_designer');
+                $product_info['description'] = $this->model_module_d_visual_designer->getText($product_info['description']);
             ]]></add>
         </operation>
     </file>
@@ -100,8 +100,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $this->load->model('module/d_visual_designer');
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
@@ -109,8 +109,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $this->load->model('module/d_visual_designer');
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
@@ -118,8 +118,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $this->load->model('module/d_visual_designer');
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
@@ -127,8 +127,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $product_info['description'] = $this->model_extension_module_d_visual_designer->getText($product_info['description']);
+                $this->load->model('module/d_visual_designer');
+                $product_info['description'] = $this->model_module_d_visual_designer->getText($product_info['description']);
             ]]></add>
         </operation>
     </file>
@@ -136,8 +136,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $this->load->model('module/d_visual_designer');
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
@@ -145,8 +145,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $this->load->model('module/d_visual_designer');
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
@@ -154,8 +154,8 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $this->load->model('module/d_visual_designer');
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
@@ -163,22 +163,22 @@
         <operation>
             <search><![CDATA[$data['products'][] = array(]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
+                $this->load->model('module/d_visual_designer');
                 
-                $result['description'] = $this->model_extension_module_d_visual_designer->getText($result['description']);
+                $result['description'] = $this->model_module_d_visual_designer->getText($result['description']);
             ]]></add>
         </operation>
     </file>
     <file path="catalog/model/catalog/category.php">
         <operation>
             <search><![CDATA[public function getCategory($category_id) {]]></search>
-            <add position="after"><![CDATA[$this->load->model('extension/module/d_visual_designer');]]>
+            <add position="after"><![CDATA[$this->load->model('module/d_visual_designer');]]>
             </add>
         </operation>
         <operation>
             <search><![CDATA[return $query->row;]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
+                $this->load->model('module/d_visual_designer');
                 
                 $designer_data = array(
                     'token' => '5864c33ab26ac',
@@ -187,7 +187,7 @@
                     'id' => $category_id
                 );
                 
-                $query->row['description'] = $this->model_extension_module_d_visual_designer->parseDescription($designer_data);
+                $query->row['description'] = $this->model_module_d_visual_designer->parseDescription($designer_data);
                 ]]>
                 </add>
         </operation>
@@ -196,7 +196,7 @@
         <operation>
             <search><![CDATA[return $query->row;]]></search>
             <add position="before"><![CDATA[
-                $this->load->model('extension/module/d_visual_designer');
+                $this->load->model('module/d_visual_designer');
                 
                 $designer_data = array(
                     'token' => '5864c343f014d',
@@ -205,7 +205,7 @@
                     'id' => $information_id
                 );
                 
-                $query->row['description'] = $this->model_extension_module_d_visual_designer->parseDescription($designer_data);
+                $query->row['description'] = $this->model_module_d_visual_designer->parseDescription($designer_data);
                 ]]>
                 </add>
         </operation>
