@@ -86,13 +86,13 @@ class ControllerDVisualDesignerModuleRow extends Controller {
 		
 		$size = explode('+', $setting_layout['size']);
 		
-		$default_column_setting = $this->model_module_d_visual_designer->getSettingBlock('column');
+		$default_column_setting = $this->model_extension_module_d_visual_designer->getSettingBlock('column');
 		
 		if(count($size) > count($items)){
 			$count = count($size) - count($items);
 			
 			for ($i=0; $i < $count; $i++) { 
-				$block_id = 'column_'.$this->model_module_d_visual_designer->getRandomString();
+				$block_id = 'column_'.$this->model_extension_module_d_visual_designer->getRandomString();
 				$items[$block_id] = array(
 					'setting' => $default_column_setting,
 	                'sort_order' => 99,
