@@ -1,0 +1,96 @@
+<?php
+/*
+ *	location: admin/controller
+ */
+
+class ControllerExtensionModuleDVisualDesigner extends Controller {
+	private $codename = 'd_visual_designer';
+	private $route = 'extension/module/d_visual_designer';
+	private $extension = '';
+	private $config_file = '';
+	private $store_id = 0;
+	
+	private $error = array();
+
+	public function __construct($registry) {
+		parent::__construct($registry);
+		$this->load->model($this->route);
+
+		$this->d_shopunity = (file_exists(DIR_SYSTEM.'mbooth/extension/d_shopunity.json'));
+		
+		if($this->d_shopunity){
+			$this->load->model('d_shopunity/mbooth');
+			$this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
+		}
+		
+		
+		
+		$this->store_id = (isset($this->request->get['store_id'])) ? $this->request->get['store_id'] : 0;
+	}
+
+	public function index(){
+
+		if(!$this->d_shopunity){
+		   $this->required();
+		   return false;
+		}
+
+		$this->load->model('d_shopunity/mbooth');
+
+	    $this->model_d_shopunity_mbooth->validateDependencies($this->codename);
+		$this->load->controller('d_visual_designer/setting');
+	}
+
+	public function required(){
+		$this->load->language($this->route);
+		$this->document->setTitle($this->language->get('heading_title_main'));
+		$data['heading_title'] = $this->language->get('heading_title_main');
+		$data['text_not_found'] = $this->language->get('text_not_found');
+		$data['breadcrumbs'] = array();
+
+		$data['header'] = $this->load->controller('common/header');
+		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['footer'] = $this->load->controller('common/footer');
+
+		$this->response->setOutput($this->load->view('error/not_found.tpl', $data));
+	}
+
+	public function install() {
+			if($this->d_shopunity){
+				$this->load->model('d_shopunity/ocmod');
+				$this->model_d_shopunity_ocmod->setOcmod('d_visual_designer.xml', 1);
+				$this->model_d_shopunity_ocmod->refreshCache();
+				
+				$this->load->model('d_shopunity/mbooth');
+				$this->model_d_shopunity_mbooth->installDependencies($this->codename);
+			}
+			
+			$this->load->model('user/user_group');
+			
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/designer');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/designer');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/route');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/route');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/setting');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/setting');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/template');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/template');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/instruction');
+			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/instruction');
+			
+			$this->{'model_extension_module_'.$this->codename}->createDatabase();
+	}
+
+	public function uninstall() {
+
+		if($this->d_shopunity){
+			$this->load->model('d_shopunity/ocmod');
+			$this->model_d_shopunity_ocmod->setOcmod('d_visual_designer.xml', 0);
+			$this->model_d_shopunity_ocmod->refreshCache();
+
+		}
+
+		$this->{'model_extension_module_'.$this->codename}->dropDatabase();
+	}
+}
+?>
