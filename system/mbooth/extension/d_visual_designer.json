@@ -38,8 +38,6 @@
         "system/config/d_visual_designer/column.php",
         "system/config/d_visual_designer/row.php",
         "system/config/d_visual_designer/text.php",
-        
-        "vqmod/xml/a_vqmod_d_visual_designer.xml",
 
         "admin/controller/extension/module/d_visual_designer.php",
         "admin/language/en-gb/extension/module/d_visual_designer.php",
@@ -60,7 +58,7 @@
         "catalog/language/english/extension/module/d_visual_designer.php",
         "catalog/language/ru-ru/extension/module/d_visual_designer.php",
         "catalog/language/russian/extension/module/d_visual_designer.php",
-        "catalog/model/module/extension/d_visual_designer.php",
+        "catalog/model/extension/module/d_visual_designer.php",
         "catalog/view/theme/default/javascript/d_visual_designer.js",
 
         "admin/view/template/d_visual_designer_template/main.tpl",
