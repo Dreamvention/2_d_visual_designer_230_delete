@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -140,6 +140,10 @@
         "catalog/view/javascript/d_visual_designer"
     ],
     "changelog": [
+        {
+            "version":"2.0.2",
+            "change":"Fix ocmod frontend"
+        },
         {
             "version":"2.0.1",
             "change":"Fix bugs"
