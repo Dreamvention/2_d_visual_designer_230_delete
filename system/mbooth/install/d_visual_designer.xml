@@ -172,7 +172,7 @@
     <file path="catalog/model/catalog/category.php">
         <operation>
             <search><![CDATA[public function getCategory($category_id) {]]></search>
-            <add position="after"><![CDATA[$this->load->model('module/d_visual_designer');]]>
+            <add position="after"><![CDATA[$this->load->model('extension/module/d_visual_designer');]]>
             </add>
         </operation>
         <operation>
