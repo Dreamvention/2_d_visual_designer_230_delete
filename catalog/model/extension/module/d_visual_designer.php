@@ -452,7 +452,9 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                     $edit_status = true;
                     break;
                 case $route_info['frontend_route']:
-                    $edit_status = true;
+                    if(isset($this->request->get['edit'])){
+                        $edit_status = true;
+                    }
                     break;
                 
                 default:
@@ -676,6 +678,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 $template_data[] = array(
                     'template_id' => $row['template_id'],
                     'content' => $row['content'],
+                    'image' => $row['image'],
                     'sort_order' => $row['sort_order'],
                     'name' => $row['name']
                 );

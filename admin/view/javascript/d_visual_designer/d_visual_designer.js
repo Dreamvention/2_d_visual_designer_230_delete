@@ -177,7 +177,10 @@ var d_visual_designer = {
     //Инициализация оповещения при закрытии
     initAlertClose:function(){
         var that = this;
-        
+        $('button[type=submit]').on('click',function(){
+            that.setting.stateEdit = false;
+        });
+
         window.onbeforeunload = function() {
             if(that.setting.stateEdit){
                 return true;
@@ -231,6 +234,12 @@ var d_visual_designer = {
                 }
                 return res.join(options['hash']['chart']);
             });   
+            window.Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+              if(v1 === v2) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        });
         }
           
     },
@@ -684,30 +693,31 @@ var d_visual_designer = {
         });    
     },
     //Сохранение
-    saveContent:function(element){
+    saveContent:function(callback = null){
         
         var that = this;
-        
-        var designer_id = $(element).closest('.vd.content').attr('id');
         
         $.ajax({
             type: 'post',
             url: that.setting.form.attr('action'),
             data: that.setting.form.serialize(),
-            beforeSend: function () {
-                element.html($(that.template.loader).html());
-            },
-            complete: function () {
-                element.html('<i class="fa fa-floppy-o"></i>')
-            },
             success: function (response) {
-                that.setting.form.find('#'+designer_id).find('.vd-notify').fadeIn('slow');
                 that.setting.stateEdit = false;
-                setTimeout(function(){
-                    that.setting.form.find('#'+designer_id).find('.vd-notify').fadeOut('slow');
-                },2000)
+                callback();
             }
         });
+    },
+    //Открытие Frontend Редактора
+    openFrontend:function(href){
+        var that = this;
+
+        if(this.setting.stateEdit){
+            this.saveContent(function(){
+                location.href=href;
+            });
+        }else{
+            location.href=href;
+        }
     },
     //Возвращает массив дочерних блоков
     getCloneBlock:function(block_id, designer_id, block_id_new = false, parent_id = false, child=false){
@@ -777,10 +787,19 @@ var d_visual_designer = {
     },
     //Вызов окна редактирование layout
     showEditLayout: function(target, designer_id){
+
+        var items = this.getBlockByParent(designer_id, target);
+
+        var size = [];
+
+        for (var key in items) {
+            size.push(items[key]['setting']['size']);
+        }
+
         var data = {
             'target' : target,
             'designer_id': designer_id,
-            'items':this.getBlockByParent(designer_id, target)
+            'size':size.join('+')
         };
         
         var html = this.templateСompile(this.template.row_layout, data);

@@ -7442,6 +7442,7 @@
     border-bottom: 1px solid #c8c8c8; }
   .vd-popup.edit-layout > .popup-content {
     padding: 0px;
+    max-height: 450px;
     border-bottom: 1px solid #c8c8c8; }
     .vd-popup.edit-layout > .popup-content > .setting {
       padding: 0px 30px 30px 30px; }
@@ -7604,86 +7605,80 @@
       line-height: normal;
       border-width: 0;
       background: white; }
-    .vd-popup .popup-content .layout-edit > h3 {
-      position: relative;
-      box-sizing: border-box;
-      width: 100%;
-      margin: 0;
-      padding: 21px 30px;
-      cursor: move;
-      cursor: default;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      color: #fff;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      background-color: #2A4B80;
-      font-size: 1.125rem;
-      font-size: 1.125rem;
-      font-weight: 600;
-      line-height: 1rem; }
-    .vd-popup .popup-content .layout-edit > ul.column-layout {
-      padding: 30px 0 10px 30px !important;
-      list-style-type: disc;
-      line-height: 26px; }
-      .vd-popup .popup-content .layout-edit > ul.column-layout > li {
-        display: inline-block;
-        box-sizing: border-box;
-        width: 27%;
-        margin-right: 20px;
-        margin-bottom: 20px;
-        cursor: pointer; }
-        .vd-popup .popup-content .layout-edit > ul.column-layout > li > span.column {
-          display: inline-block;
-          float: left;
-          box-sizing: border-box;
-          padding: 0 2px; }
-          .vd-popup .popup-content .layout-edit > ul.column-layout > li > span.column > span {
+    .vd-popup .popup-content .layout-edit {
+      margin: 0px; }
+      .vd-popup .popup-content .layout-edit > div.layout {
+        padding-top: 10px;
+        padding-bottom: 10px; }
+        .vd-popup .popup-content .layout-edit > div.layout.active > a > span > span {
+          background: #59a1da; }
+        .vd-popup .popup-content .layout-edit > div.layout:hover > a > span > span {
+          background: #59a1da; }
+        .vd-popup .popup-content .layout-edit > div.layout > a:hover {
+          cursor: pointer; }
+        .vd-popup .popup-content .layout-edit > div.layout > a > span {
+          display: block;
+          width: 176px;
+          height: 50px;
+          margin-left: auto;
+          margin-right: auto;
+          border-radius: 5px;
+          padding: 2px;
+          float: left; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span > span {
+            background: #83BDEB;
             display: block;
-            height: 30px;
-            -webkit-transition: background .2s ease;
-            transition: background .2s ease;
-            text-align: center;
-            text-indent: -9999em;
-            background: #29c4a9;
-            font-size: 11px; }
+            width: 100%;
+            height: 100%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-12 {
+            width: 100%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-11 {
+            width: 91.66666%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-10 {
+            width: 83.33333%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-9 {
+            width: 75%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-8 {
+            width: 66.66666%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-7 {
+            width: 58.33333%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-6 {
+            width: 50%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-5 {
+            width: 41.66666%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-4 {
+            width: 33.33333%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-3 {
+            width: 25%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-2 {
+            width: 16.66666%; }
+          .vd-popup .popup-content .layout-edit > div.layout > a > span.layout-1 {
+            width: 8.333333%; }
     .vd-popup .popup-content .popup-new-template {
-      overflow-y: auto;
-      height: auto;
       padding: 5px; }
       .vd-popup .popup-content .popup-new-template > .element {
-        position: relative;
-        float: left;
-        overflow: hidden;
-        height: 75px;
         margin: 0 !important;
         padding: 5px !important;
         list-style: none;
         -webkit-transition: border-color .2s;
         transition: border-color .2s; }
         .vd-popup .popup-content .popup-new-template > .element:hover > .template > a {
-          cursor: pointer;
-          color: white;
-          background: #73B338; }
+          text-decoration: none; }
+          .vd-popup .popup-content .popup-new-template > .element:hover > .template > a > img {
+            border: 10px solid #98dfaa;
+            cursor: pointer; }
         .vd-popup .popup-content .popup-new-template > .element > .template {
-          display: table;
-          width: 230px;
-          height: 69px;
-          border: 1px solid #F1F4F9;
-          background: #F1F4F9; }
+          text-align: center; }
           .vd-popup .popup-content .popup-new-template > .element > .template > a {
-            position: relative;
-            display: table-cell;
-            padding: 2px 4px 2px 67px;
-            vertical-align: middle;
-            white-space: normal;
-            text-decoration: none;
-            color: #000;
-            outline: 0;
             font-weight: 600;
             line-height: 14px; }
+            .vd-popup .popup-content .popup-new-template > .element > .template > a > img {
+              border: 10px solid transparent;
+              border-radius: 5px; }
+            .vd-popup .popup-content .popup-new-template > .element > .template > a > p.title {
+              color: #000;
+              font-weight: bold;
+              font-size: 16px; }
       .vd-popup .popup-content .popup-new-template > .title {
         margin: 0 1em 0 0;
         color: inherit;

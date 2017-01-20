@@ -30,7 +30,7 @@ $_['text_success_update']          = 'Successfully updated!';
 $_['text_success_template_save']   = 'Successfully saved!';
 $_['text_success_clone_block']     = ' cloned.';
 $_['text_success_remove_block']    = ' deleted!';
-$_['text_welcome_header']          = 'You have a blank page <br> Start adding content or templates';
+$_['text_welcome_header']          = 'You have blank page <br> Start adding content or templates';
 $_['text_add_block']               = 'Add block';
 $_['text_add_text_block']          = 'Add Text block';
 $_['text_add_template']            = 'Add Template';
@@ -39,6 +39,18 @@ $_['text_cover']                   = 'Cover';
 $_['text_contain']                 = 'Contain';
 $_['text_no_repeat']               = 'No repeat';
 $_['text_repeat']                  = 'Repeat';
+
+$_['text_column_1']                = '1 Column';
+$_['text_column_1_2']              = '1:2 Column';
+$_['text_column_1_2_1']            = '1:2:1 Column';
+$_['text_column_1_3']              = '1:3 Column';
+$_['text_column_1_3_1']            = '1:3:1 Column';
+$_['text_column_1_3_2']            = '1:3:2 Column';
+$_['text_column_2']                = '2 Column';
+$_['text_column_2_1']              = '2:1 Column';
+$_['text_column_2_1_2']            = '2:1:2 Column';
+$_['text_column_3_1_3']            = '3:1:3 Column';
+$_['text_column_3_1_2']            = '3:1:2 Column';
 
 //tab
 $_['tab_save_block']               = 'Save Template';
@@ -82,3 +94,4 @@ $_['entry_border']                 = 'Border';
 $_['entry_image']                  = 'Background image';
 $_['entry_image_style']            = 'Style background image';
 $_['entry_size']                   = 'Size';
+

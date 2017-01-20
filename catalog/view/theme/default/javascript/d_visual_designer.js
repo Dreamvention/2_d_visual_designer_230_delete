@@ -154,11 +154,14 @@ var d_visual_designer = {
         var block_info = this.data[designer_id][block_id];
         
         this.getChildBlock(old_parent_id, designer_id);
-        
+        if(this.tmpSetting.items[old_parent_id]!= undefined ){
+            delete this.tmpSetting.items[old_parent_id];
+        }
+         
         var count_childs = Object.keys(this.tmpSetting.items).length;
         
         if(block_info['parent'] != '' && count_childs == 0 && old_parent_id != parent_id){
-            this.settings[designer_id].find('.block-content[data-id='+old_parent_id+']').empty();
+            this.settings[designer_id].form.find('.block-content[data-id='+old_parent_id+']').empty();
         }
     },
     //обновление sort_order
@@ -190,9 +193,13 @@ var d_visual_designer = {
                     res.push(value[key]['setting']['size']);
                 }
                 return res.join(options['hash']['chart']);
-            });      
+            }); 
+            window.Handlebars.registerHelper('ifCond', function(v1, v2, options) {
+              if(v1 === v2) {
+                return options.fn(this);
+                }     
+            });
         }
-          
     },
     //Инициализация ColorPicker
     initColorpicker:function(){
@@ -244,7 +251,7 @@ var d_visual_designer = {
                 }
             }
         });
-        if(this.popup_setting.stick && !this.popup.hasClass('add_block')){
+        if(this.popup_setting.stick && !this.popup.hasClass('add_block') && !this.popup.hasClass('edit-layout')){
             this.stickPopup();
         }
         else {
@@ -532,9 +539,20 @@ var d_visual_designer = {
     },
     //Вызов окна редактирование layout
     showEditLayout: function(target, designer_id){
+        
+        var items = this.getBlockByParent(designer_id, target);
+
+        var size = [];
+
+        for (var key in items) {
+            size.push(items[key]['setting']['size']);
+        }
+        console.log(items);
+        console.log(size);
         var data = {
             'target' : target,
-            'items':this.getBlockByParent(designer_id, target),
+            'designer_id': designer_id,
+            'size':size.join('+')
         };
         
         var content = this.templateСompile(this.template.row_layout, data);
