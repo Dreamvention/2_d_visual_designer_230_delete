@@ -139,9 +139,15 @@
         "catalog/view/theme/default/template/d_visual_designer",
         "catalog/view/theme/default/stylesheet/d_visual_designer",
         "catalog/view/theme/default/image/d_visual_designer",
-        "catalog/view/javascript/d_visual_designer"
+        "catalog/view/javascript/d_visual_designer",
+        
+        "image/catalog/d_visual_designer"
     ],
     "changelog": [
+        {
+            "version":"1.0.3",
+            "change":"1.Fix bugs 2.Redesigned popup window for editing layout.3.Redesigned popup window for template selection."
+        }, 
         {
             "version":"2.0.2",
             "change":"Fix ocmod frontend"
