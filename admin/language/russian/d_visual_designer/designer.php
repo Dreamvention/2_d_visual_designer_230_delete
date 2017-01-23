@@ -40,25 +40,13 @@ $_['text_contain']                 = 'Contain';
 $_['text_no_repeat']               = 'No repeat';
 $_['text_repeaе']                  = 'Repeat';
 
-$_['text_column_1']                = '1 Колонка';
-$_['text_column_1_2']              = '1:2 Колонки';
-$_['text_column_1_2_1']            = '1:2:1 Колонки';
-$_['text_column_1_3']              = '1:3 Колонки';
-$_['text_column_1_3_1']            = '1:3:1 Колонки';
-$_['text_column_1_3_2']            = '1:3:2 Колонки';
-$_['text_column_2']                = '2 Колонки';
-$_['text_column_2_1']              = '2:1 Колонки';
-$_['text_column_2_1_2']            = '2:1:2 Колонки';
-$_['text_column_3_1_3']            = '3:1:3 Колонки';
-$_['text_column_3_1_2']            = '3:1:2 Колонки';
-
 //tab
 $_['tab_save_block']               = 'Сохранить шаблон';
 $_['tab_templates']                = 'Шаблоны';
 $_['tab_all_blocks']               = 'Все';
-$_['tab_content_blocks']           = 'Содержимое';
-$_['tab_social_blocks']            = 'Социальные';
-$_['tab_structure_blocks']         = 'Структура';
+$_['tab_category_content']         = 'Содержимое';
+$_['tab_category_social']          = 'Социальные';
+$_['tab_category_structure']       = 'Структура';
 $_['tab_css']                      = 'CSS';
 
 //Button

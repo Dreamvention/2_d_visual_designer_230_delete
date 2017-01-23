@@ -1,38 +1,34 @@
 <form class="form-horizontal" id="form-vd-<?php echo $designer_id; ?>">
-<div class="content vd" id="<?php echo $designer_id; ?>">
-    <div class="vd" id="sortable"><?php echo $content; ?></div>
-    <div class="vd-helper">
-        <a id="vd-add-button" class="vd-button vd-add-block vd-btn-add"></a>
-    </div>
-    <div class="vd-welcome">
-        <div class="vd-welcome-brand">
-            <!-- <img src="http://localhost/wordpress44/wp-content/plugins/js_composer/assets/vc/logo/64x64.png" alt=""> -->
+    <div class="content vd" id="<?php echo $designer_id; ?>">
+        <div class="vd" id="sortable"><?php echo $content; ?></div>
+        <div class="vd-helper">
+            <a id="vd-add-button" class="vd-button vd-add-block vd-btn-add"></a>
         </div>
-        <div class="vd-welcome-header">
-            <?php echo $text_welcome_header; ?>
-        </div>
-        <div class="vd-button-group">
-            <a id="vd-add-button" class="vd-button vd-add-block" title="Add Element">
-                <i class="fa fa-plus"></i>
-                <?php echo $text_add_block; ?>
-            </a>
-            <a id="vd-add-text-block" class="vd-button vd-add-text-block" title="Add text block">
-                <i class="fa fa-pencil-square-o">
-                </i>
-                <?php echo $text_add_text_block; ?>
-            </a>
-            <a id="vd-add-template" class="vd-button vd-add-template">
-                <i class="fa fa-list"></i>
-                <?php echo $text_add_template; ?>
-            </a>
-        </div>
-        <div class="vc_welcome-visible-ne">
-            <a id="vc_not-empty-add-element" class="vc_add-element-not-empty-button" title="Add Element" data-vc-element="add-element-action">
-            </a>
+        <div class="vd-welcome">
+            <div class="vd-welcome-header">
+                <?php echo $text_welcome_header; ?>
+            </div>
+            <div class="vd-button-group">
+                <a id="vd-add-button" class="vd-button vd-add-block" title="Add Element">
+                    <i class="fa fa-plus"></i>
+                    <?php echo $text_add_block; ?>
+                </a>
+                <a id="vd-add-text-block" class="vd-button vd-add-text-block" title="Add text block">
+                    <i class="fa fa-pencil-square-o">
+                    </i>
+                    <?php echo $text_add_text_block; ?>
+                </a>
+                <a id="vd-add-template" class="vd-button vd-add-template">
+                    <i class="fa fa-list"></i>
+                    <?php echo $text_add_template; ?>
+                </a>
+            </div>
+            <div class="vc_welcome-visible-ne">
+                <a id="vc_not-empty-add-element" class="vc_add-element-not-empty-button" title="Add Element" data-vc-element="add-element-action">
+                </a>
+            </div>
         </div>
     </div>
-</div>
-
 </form>
 <script type="text/html" id="template-helper-sortable">
     <div class="helper-sortable {{type}}">
@@ -49,16 +45,24 @@
             </div> -->
             <a class="close"></a>
         </div>
+        <div class="popup-tabs">
+            <ul class="vd-nav">
+                <li class="active"><a href="#tab-get-template" data-toggle="tab" data-category="{{all}}"><?php echo $tab_all_blocks; ?></a></li>
+                {{#categories}}
+                <li><a id="new-block-tab"  data-toggle="tab" data-category="{{key}}">{{title}}</a></li>
+                {{/categories}}
+            </ul>
+        </div>
         <div class="popup-content">
             <div class="row popup-new-block">
                 {{#blocks}}
                 <div class="col-md-3 col-sm-6 col-xs-12 element">
                     <div class="block">
-                        <a id="add_block" name="type" data-title="{{{title}}}" data-type="{{{type}}}">
+                        <a id="add_block" name="type" data-title="{{{title}}}" data-type="{{{type}}}" data-category="{{category}}">
                             <span><img src="{{{image}}}" class="image"></span>
                             {{{title}}}
                             <i class="description">
-                                {{{description}}}
+                            {{{description}}}
                             </i>
                         </a>
                     </div>
@@ -69,7 +73,6 @@
             <input type="hidden" name="designer_id" value='{{{designer_id}}}'/>
             <input type="hidden" name="level" value='{{{level}}}'/>
         </div>
-    </div>
     </div>
 </script>
 <script type="text/html" id="template-add-template">
@@ -90,14 +93,14 @@
                     <div class="form-group">
                         <label class="control-label"><?php echo $entry_name; ?></label>
                         <div class="fg-setting">
-                        <?php foreach ($languages as $language) { ?>
-                          <div class="input-group pull-left">
-                            <span class="input-group-addon">
-                                <img src="<?php echo $language['flag']; ?>" title="<?php echo $language['name']; ?>" />
-                            </span>
-                            <input type="text" name="template_description[<?php echo $language['language_id']; ?>][name]" value="" placeholder="<?php echo $entry_name; ?>" class="form-control" />
-                          </div>
-                          <?php } ?>
+                            <?php foreach ($languages as $language) { ?>
+                            <div class="input-group pull-left">
+                                <span class="input-group-addon">
+                                    <img src="<?php echo $language['flag']; ?>" title="<?php echo $language['name']; ?>" />
+                                </span>
+                                <input type="text" name="template_description[<?php echo $language['language_id']; ?>][name]" value="" placeholder="<?php echo $entry_name; ?>" class="form-control" />
+                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <div class="popup-footer">
@@ -113,7 +116,6 @@
                                     <img src="{{{image}}}"/>
                                     <p class="title">{{{name}}}</p>
                                 </a>
-
                             </div>
                         </div>
                         {{/templates}}
@@ -121,7 +123,6 @@
                 </div>
             </div>
         </div>
-
         <input type="hidden" name="target" value=''/>
         <input type="hidden" name="designer_id" value='{{designer_id}}'/>
     </div>
@@ -232,7 +233,7 @@
                             <select name="design_border_style" class="form-control">
                                 {{#select design_border_style}}
                                 <?php foreach($styles as $key => $value){ ?>
-                                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                                 <?php } ?>
                                 {{/select}}
                             </select>
@@ -250,7 +251,7 @@
                             <a href="" id="thumb-vd-image" data-toggle="image" class="img-thumbnail">
                                 <img src="{{{design_background_thumb}}}" alt="" title="" data-placeholder="<?php echo $placeholder; ?>"/>
                             </a>
-                              <input type="hidden" name="design_background_image" value="{{{design_background_image}}}" id="input-vd-image" />
+                            <input type="hidden" name="design_background_image" value="{{{design_background_image}}}" id="input-vd-image" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -259,7 +260,7 @@
                             <select name="design_background_image_style" class="form-control">
                                 {{#select design_background_image_style}}
                                 <?php foreach($image_styles as $key => $value){ ?>
-                                    <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
+                                <option value="<?php echo $key; ?>"><?php echo $value; ?></option>
                                 <?php } ?>
                                 {{/select}}
                             </select>
@@ -281,7 +282,7 @@
                         <div class="fg-setting">
                             <input type="text" name="additional_css_class" class="form-control" value="{{{additional_css_class}}}">
                         </div>
-                    </div> 
+                    </div>
                     <div class="form-group">
                         <label class="control-label"><?php echo $entry_additional_css_before; ?></label>
                         <div class="fg-setting">
@@ -297,10 +298,10 @@
                     <div class="form-group">
                         <label class="control-label"><?php echo $entry_additional_css_after; ?></label>
                         <div class="fg-setting">
-                           <textarea name="additional_css_after" class="form-control">{{{additional_css_after}}}</textarea>
-                       </div>
-                   </div>
-               </div>
+                            <textarea name="additional_css_after" class="form-control">{{{additional_css_after}}}</textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="popup-footer">
@@ -396,8 +397,8 @@
                         <div class="input-group">
                             <input type="text" class="form-control" name="size" value="{{size}}"/>
                             <span class="input-group-btn">
-                               <button id="layoutSet" class="btn btn-default" type="button"><?php echo $text_set_custom; ?></button>
-                             </span>
+                                <button id="layoutSet" class="btn btn-default" type="button"><?php echo $text_set_custom; ?></button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -408,12 +409,8 @@
     </div>
 </script>
 <script type="text/html" id="template-popover">
-    <button type="button" id="button-image" class="btn btn-primary">
-        <i class="fa fa-pencil"></i>
-    </button>
-    <button type="button" id="button-clear" class="btn btn-danger">
-        <i class="fa fa-trash-o"></i>
-    </button>
+    <button type="button" id="button-image" class="btn btn-primary"><i class="fa fa-pencil"></i></button>
+    <button type="button" id="button-clear" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
 </script>
 <script>
 var setting = {
@@ -478,7 +475,10 @@ $('#<?php echo $designer_id; ?>').on('click','a[id=button_copy]',function(){
     var block_id = $(this).closest('.block-container').attr('id');
     d_visual_designer.cloneBlock('<?php echo $designer_id; ?>', block_id);
 });
-
+$(document).off('click', '.vd-popup.add_block > .popup-tabs > .vd-nav > li > a');
+$(document).on('click', '.vd-popup.add_block > .popup-tabs > .vd-nav > li > a', function(){
+    d_visual_designer.search($(this).data('category'), '.vd-popup > .popup-content .popup-new-block > .element', 'a', 'data-category');
+});
 $(document).off('keyup', '.vd-popup.add_block > .popup-header input[name=search]');
 $(document).on('keyup', '.vd-popup.add_block > .popup-header input[name=search]', function(){
     d_visual_designer.search($(this).val(), '.vd-popup > .popup-content .popup-new-block > .element', 'a')

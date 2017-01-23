@@ -390,10 +390,9 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
             $results = $this->{'model_'.$this->codename.'_designer'}->getBlocks();
             $json['success'] = 'success';
+
             $json['blocks'] = array();
-            $json['socials'] = array();
-            $json['contents'] = array();
-            $json['structures'] = array();
+            $json['categories'] = array();
 
             foreach ($results as $block) {
 
@@ -408,9 +407,17 @@ class ControllerDVisualDesignerDesigner extends Controller {
                 }
                 if($setting['display']){
                     if(($level >= $setting['level_min']) && ($level <= $setting['level_max']) || ($level == '0' && $setting['level_min'] == '2')){
+                        $category_info = array(
+                            'key' => $setting['category'],
+                            'title' => $this->language->get('tab_category_'.$setting['category'])
+                        );
+                        if(!in_array($category_info, $json['categories'])){
+                            $json['categories'][] = $category_info;
+                        }
                         $json['blocks'][] = array(
                             'sort_order' => $setting['sort_order'],
                             'title' => $this->language->get('text_title'),
+                            'category' => $setting['category'],
                             'type'	=> $block,
                             'description' => $this->language->get('text_description'),
                             'image' => $image
