@@ -8,6 +8,7 @@ class ModelDVisualDesignerTemplate extends Model {
     public function addTemplate($data){
         $this->db->query("INSERT INTO ".DB_PREFIX."visual_designer_template SET 
             content='".$this->db->escape($data['content'])."', 
+            category='".$data['category']."',
             image='".$data['image']."',
             sort_order='".$data['sort_order']."'
         ");
@@ -32,6 +33,7 @@ class ModelDVisualDesignerTemplate extends Model {
         $this->db->query("UPDATE ".DB_PREFIX."visual_designer_template SET 
         content='".$this->db->escape($data['content'])."', 
         image='".$data['image']."',
+        category='".$data['category']."',
         sort_order='".$data['sort_order']."'
         WHERE template_id='".$template_id."'");
         
@@ -99,6 +101,7 @@ class ModelDVisualDesignerTemplate extends Model {
                     'template_id' => $row['template_id'],
                     'content' => $row['content'],
                     'sort_order' => $row['sort_order'],
+                    'category' => $row['category'],
                     'name' => $row['name'],
                     'image' => $row['image']
                 );

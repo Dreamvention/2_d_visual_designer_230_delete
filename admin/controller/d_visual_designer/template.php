@@ -325,6 +325,7 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $data['text_instructions'] = $this->language->get('text_instructions');
         $data['text_file_manager'] = $this->language->get('text_file_manager');
 
+        $data['entry_category'] = $this->language->get('entry_category');
 		$data['entry_name'] = $this->language->get('entry_name');
         $data['entry_content'] = $this->language->get('entry_content');
         $data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -410,6 +411,14 @@ class ControllerDVisualDesignerTemplate extends Controller {
 			$data['name'] = $template_info['name'];
 		} else {
 			$data['name'] = '';
+		}	
+
+		if (isset($this->request->post['category'])) {
+			$data['category'] = $this->request->post['category'];
+		} elseif (!empty($template_info)) {
+			$data['category'] = $template_info['category'];
+		} else {
+			$data['category'] = '';
 		}
         
 		if (isset($this->request->post['image'])) {
@@ -497,33 +506,39 @@ class ControllerDVisualDesignerTemplate extends Controller {
     }
 
     public function getTemplates(){
-        $json = array();
+    	$json = array();
 
-        $templates = $this->model_d_visual_designer_template->getTemplates();
+    	$templates = $this->model_d_visual_designer_template->getTemplates();
 
-        $json['templates'] = array();
+    	$json['templates'] = array();
+    	$json['categories'] = array();
 
-        foreach ($templates as $template) {
-            
-            $this->load->model('tool/image');
-            
-            if(file_exists(DIR_IMAGE.$template['image'])){
-                $thumb = $this->model_tool_image->resize($template['image'], 156, 171);
-            }
-            else{
-                $thumb = $this->model_tool_image->resize('no_image.png', 156, 171);
-            }
-            $json['templates'][] = array(
-                'template_id' => $template['template_id'],
-                'image' => $thumb,
-                'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
-            );
-        }
+    	foreach ($templates as $template) {
+    		
+    		$this->load->model('tool/image');
+    		
+    		if(file_exists(DIR_IMAGE.$template['image'])){
+    			$thumb = $this->model_tool_image->resize($template['image'], 156, 171);
+    		}
+    		else{
+    			$thumb = $this->model_tool_image->resize('no_image.png', 156, 171);
+    		}
 
-        $json['success'] = 'success';
+    		if(!empty($template['category']) && !in_array(ucfirst($template['category']), $json['categories'])){
+    			$json['categories'][] = ucfirst($template['category']);
+    		}
+    		$json['templates'][] = array(
+    			'template_id' => $template['template_id'],
+    			'image' => $thumb,
+    			'category' => ucfirst($template['category']),
+    			'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
+    			);
+    	}
 
-        $this->response->addHeader('Content-Type: application/json');
-        $this->response->setOutput(json_encode($json));
+    	$json['success'] = 'success';
+
+    	$this->response->addHeader('Content-Type: application/json');
+    	$this->response->setOutput(json_encode($json));
     }
 
     public function getTemplate(){

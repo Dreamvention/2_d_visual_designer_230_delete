@@ -54,6 +54,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="control-label col-sm-2"><?php echo $entry_category; ?></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="category" value="<?php echo $category; ?>"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label col-sm-2"><?php echo $entry_content; ?></label>
                         <div class="col-sm-10">
                             <textarea class="form-control summernote d_visual_designer" name="content" ><?php echo $content; ?></textarea>
