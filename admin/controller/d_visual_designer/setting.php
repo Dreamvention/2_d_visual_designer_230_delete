@@ -30,7 +30,6 @@ class ControllerDVisualDesignerSetting extends Controller {
 
         //save post
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            unset($this->request->post[$this->codename.'_setting']['template']);
             $this->model_setting_setting->editSetting($this->codename, $this->request->post, $this->store_id);
             $this->session->data['success'] = $this->language->get('text_success');
             
@@ -44,17 +43,11 @@ class ControllerDVisualDesignerSetting extends Controller {
         $this->document->addScript('view/javascript/shopunity/bootstrap-switch/bootstrap-switch.min.js');
         $this->document->addStyle('view/stylesheet/shopunity/bootstrap-switch/bootstrap-switch.css');
 
-        $this->document->addScript('view/javascript/d_visual_designer/library/handlebars-v4.0.5.js');
-        // Add more styles, links or scripts to the project is necessary
         $url_params = array();
         $url = '';
 
         if(isset($this->response->get['store_id'])){
             $url_params['store_id'] = $this->store_id;
-        }
-
-        if(isset($this->response->get['config'])){
-            $url_params['config'] = $this->response->get['config'];
         }
 
         $url = ((!empty($url_params)) ? '&' : '' ) . http_build_query($url_params);
@@ -65,18 +58,11 @@ class ControllerDVisualDesignerSetting extends Controller {
             'text' => $this->language->get('text_home'),
             'href' => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL')
         );
-        if(VERSION >= '2.3.0.0'){
-            $data['breadcrumbs'][] = array(
-                'text'      => $this->language->get('text_module'),
-                'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'].'&type=module', 'SSL')
-            );
-        }
-        else{
-            $data['breadcrumbs'][] = array(
-                'text'      => $this->language->get('text_module'),
-                'href'      => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
-            );
-        }
+        
+        $data['breadcrumbs'][] = array(
+            'text'      => $this->language->get('text_module'),
+            'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'].'&type=module', 'SSL')
+        );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title_main'),
@@ -99,9 +85,6 @@ class ControllerDVisualDesignerSetting extends Controller {
         $data['store_id'] = $this->store_id;
         $data['stores'] = $this->model_d_shopunity_setting->getStores();
         $data['extension'] = $this->extension;
-
-        $this->config_file = $this->model_d_shopunity_setting->getConfigFileName($this->codename);
-        $data['config'] = $this->config_file;
 
         if (!empty($this->extension['support']['email'])) {
             $data['support_email'] = $this->extension['support']['email'];
@@ -187,9 +170,6 @@ class ControllerDVisualDesignerSetting extends Controller {
         //get setting
         $data['setting'] = $this->model_d_shopunity_setting->getSetting($this->codename);
 
-        //get config
-        $data['config_files'] = $this->model_d_shopunity_setting->getConfigFileNames($this->codename);
-
         $this->load->model('setting/store');
 
         $data['header'] = $this->load->controller('common/header');
@@ -199,10 +179,6 @@ class ControllerDVisualDesignerSetting extends Controller {
             $this->response->setOutput($this->load->view('d_visual_designer/setting.tpl', $data));
     }
     private function validate($permission = 'modify') {
-
-        if (isset($this->request->post['config'])) {
-            return false;
-        }
 
         $this->language->load($this->route);
 
