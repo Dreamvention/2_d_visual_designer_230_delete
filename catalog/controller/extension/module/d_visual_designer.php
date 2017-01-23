@@ -565,8 +565,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $template_info = $this->{'model_extension_module_'.$this->codename}->getTemplate($template_id);
 
             if(!empty($template_info)){
-                $this->load->model('module/d_visual_designer');
-
+                
                 $result = $this->{'model_extension_module_'.$this->codename}->parseDescriptionWithoutDesigner($template_info['content']);
                 $json['content'] = $result['content'];
                 $json['setting'] = $result['setting'];
