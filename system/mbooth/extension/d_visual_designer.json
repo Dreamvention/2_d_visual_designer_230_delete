@@ -146,7 +146,7 @@
     "changelog": [
         {
             "version":"2.0.4",
-            "change":"1. Divided adding and saving a template. \n\r2. Redesign save template. \n\r3.Added categories of blocks 4.Added categories of templates \n\r4.Fix bugs."
+            "change":"1. Divided adding and saving a template. \n\r2. Redesign save template. \n\r3.Added categories of blocks. \n\r4.Added categories of templates \n\r4.Fix bugs."
         },   
         {
             "version":"2.0.3",
