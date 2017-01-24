@@ -186,6 +186,7 @@
     
     &.add_template{
         left: 20%;
+        top: 13%;
 
         width: 60%;
         > .popup-tabs {
@@ -210,6 +211,7 @@
             border-bottom-right-radius: 5px;
             border-bottom-left-radius: 5px;
         }
+
     }
     &.add_block{
         left: 20%;
@@ -246,12 +248,12 @@
                 }
             }
         }
-         > .popup-tabs{
+        > .popup-tabs{
             .vd-nav{
                 background: #8bc15b;
                 li{
                     > a{
-                        cursor: pointer;
+						cursor: pointer;
                         &:hover{
                             background-color: #a6d27e;
                         }
@@ -263,7 +265,7 @@
                     }
                 }
             }
-        }
+		}
         > .popup-content{
             max-height: 450px;
 
@@ -418,6 +420,20 @@
             // margin-bottom: 0px;
 
             font-family: Open Sans,Helvetica,Roboto,Arial,sans-serif;
+
+            &.has-error{
+                > label{
+                    color: #f56b6b;
+                }
+                .form-control{
+                    border-color: #f56b6b;
+                }
+                .text-danger{
+                    background-color: white;
+                    color: #f56b6b;
+                }
+            }
+
             > label{
                 display: inline-block;
 

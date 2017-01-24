@@ -325,11 +325,11 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $data['text_instructions'] = $this->language->get('text_instructions');
         $data['text_file_manager'] = $this->language->get('text_file_manager');
 
-        $data['entry_category'] = $this->language->get('entry_category');
 		$data['entry_name'] = $this->language->get('entry_name');
         $data['entry_content'] = $this->language->get('entry_content');
         $data['entry_sort_order'] = $this->language->get('entry_sort_order');
         $data['entry_image'] = $this->language->get('entry_image');
+        $data['entry_category'] = $this->language->get('entry_category');
         
         $data['button_save'] = $this->language->get('button_save');
 		$data['button_cancel'] = $this->language->get('button_cancel');
@@ -343,7 +343,7 @@ class ControllerDVisualDesignerTemplate extends Controller {
 		if (isset($this->error['name'])) {
 			$data['error_name'] = $this->error['name'];
 		} else {
-			$data['error_name'] = array();
+			$data['error_name'] = '';
 		}
 
 		$url = '';
@@ -392,28 +392,15 @@ class ControllerDVisualDesignerTemplate extends Controller {
             $template_info = $this->{'model_'.$this->codename.'_template'}->getTemplate($this->request->get['template_id']);
         }
 
-
-		$this->load->model('localisation/language');
-
-		$data['languages'] = $this->model_localisation_language->getLanguages();
-
-        foreach ($data['languages'] as $key =>  $language){
-            if(VERSION >= '2.2.0.0'){
-                $data['languages'][$key]['flag'] = 'language/'.$language['code'].'/'.$language['code'].'.png';
-            }else{
-                $data['languages'][$key]['flag'] = 'view/image/flags/'.$language['image'];
-            }
-        }
-
 		if (isset($this->request->post['name'])) {
 			$data['name'] = $this->request->post['name'];
 		} elseif (!empty($template_info)) {
 			$data['name'] = $template_info['name'];
 		} else {
 			$data['name'] = '';
-		}	
+		}
 
-		if (isset($this->request->post['category'])) {
+        if (isset($this->request->post['category'])) {
 			$data['category'] = $this->request->post['category'];
 		} elseif (!empty($template_info)) {
 			$data['category'] = $template_info['category'];
@@ -456,14 +443,6 @@ class ControllerDVisualDesignerTemplate extends Controller {
 			$data['content'] = '';
 		}
 
-        if (isset($this->request->post['template_description'])) {
-            $data['template_description'] = $this->request->post['template_description'];
-        } elseif (isset($this->request->get['template_id'])) {
-            $data['template_description'] = $this->{'model_'.$this->codename.'_template'}->getTemplateDescriptions($this->request->get['template_id']);
-        } else {
-            $data['template_description'] = array();
-        }
-
 		if (isset($this->request->post['store_id'])) {
 			$data['store_id'] = $this->request->post['store_id'];
 		} elseif (!empty($subscriber_info)) {
@@ -484,12 +463,11 @@ class ControllerDVisualDesignerTemplate extends Controller {
         if (!$this->user->hasPermission('modify', 'd_visual_designer/template')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
-        foreach ($this->request->post['template_description'] as $language_id => $value) {
-            if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 64)) {
-                $this->error['name'][$language_id] = $this->language->get('error_name');
-            }
-        }
-
+        
+    	if ((utf8_strlen($this->request->post['name']) < 1) || (utf8_strlen($this->request->post['name']) > 255)) {
+    		$this->error['name'] = $this->language->get('error_name');
+    	}
+        
         if ($this->error && !isset($this->error['warning'])) {
             $this->error['warning'] = $this->language->get('error_warning');
         }
@@ -506,39 +484,39 @@ class ControllerDVisualDesignerTemplate extends Controller {
     }
 
     public function getTemplates(){
-    	$json = array();
+        $json = array();
 
-    	$templates = $this->model_d_visual_designer_template->getTemplates();
+        $templates = $this->model_d_visual_designer_template->getTemplates();
 
-    	$json['templates'] = array();
-    	$json['categories'] = array();
+        $json['templates'] = array();
+        $json['categories'] = array();
 
-    	foreach ($templates as $template) {
-    		
-    		$this->load->model('tool/image');
-    		
-    		if(file_exists(DIR_IMAGE.$template['image'])){
-    			$thumb = $this->model_tool_image->resize($template['image'], 156, 171);
-    		}
-    		else{
-    			$thumb = $this->model_tool_image->resize('no_image.png', 156, 171);
-    		}
+        foreach ($templates as $template) {
+            
+            $this->load->model('tool/image');
+            
+            if(file_exists(DIR_IMAGE.$template['image'])){
+                $thumb = $this->model_tool_image->resize($template['image'], 156, 171);
+            }
+            else{
+                $thumb = $this->model_tool_image->resize('no_image.png', 156, 171);
+            }
 
-    		if(!empty($template['category']) && !in_array(ucfirst($template['category']), $json['categories'])){
-    			$json['categories'][] = ucfirst($template['category']);
-    		}
-    		$json['templates'][] = array(
-    			'template_id' => $template['template_id'],
-    			'image' => $thumb,
-    			'category' => ucfirst($template['category']),
-    			'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
-    			);
-    	}
+            if(!empty($template['category']) && !in_array(ucfirst($template['category']), $json['categories'])){
+            	$json['categories'][] = ucfirst($template['category']);
+            }
+            $json['templates'][] = array(
+                'template_id' => $template['template_id'],
+                'image' => $thumb,
+                'category' => ucfirst($template['category']),
+                'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
+            );
+        }
 
-    	$json['success'] = 'success';
+        $json['success'] = 'success';
 
-    	$this->response->addHeader('Content-Type: application/json');
-    	$this->response->setOutput(json_encode($json));
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 
     public function getTemplate(){
@@ -581,16 +559,31 @@ class ControllerDVisualDesignerTemplate extends Controller {
             $content = $this->request->post['content'];
         }
 
-        if(isset($this->request->post['template_description'])){
-            $template_description = $this->request->post['template_description'];
+        if(isset($this->request->post['name'])){
+            $name = $this->request->post['name'];
+        } 
+
+        if(isset($this->request->post['image'])){
+            $image = $this->request->post['image'];
+        } 
+
+        if(isset($this->request->post['category'])){
+            $category = $this->request->post['category'];
         }
 
-        if(isset($template_description) && isset($content)){
-        	$this->{'model_'.$this->codename.'_template'}->addTemplate($template_description+array('content' => $content,'image'=>'', 'sort_order'=>0));
+        if($this->validateForm()){
+        	$template_info = array(
+        		'name' => $name,
+        		'image' => $image,
+        		'category' => $category,
+        		'content' => $content,
+        		'sort_order' => '0'
+        	);
+        	$this->{'model_'.$this->codename.'_template'}->addTemplate($template_info);
         	$json['success'] = 'success';
         }
         else{
-        	$json['error'] = 'error';
+        	$json['error'] = $this->error;
         }
 
         $this->response->addHeader('Content-Type: application/json');
@@ -650,10 +643,10 @@ class ControllerDVisualDesignerTemplate extends Controller {
         } else {
             $data['base'] = HTTP_CATALOG;
         }
-        $this->load->model('extension/module/'.$this->codename);
+        $this->load->model('module/'.$this->codename);
         $this->load->model('user/user_group');
-        $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', 'common/d_elfinder');
-        $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', 'common/d_elfinder'); 
+        $this->model_user_user_group->addPermission($this->{'model_module_'.$this->codename}->getGroupId(), 'access', 'common/d_elfinder');
+        $this->model_user_user_group->addPermission($this->{'model_module_'.$this->codename}->getGroupId(), 'modify', 'common/d_elfinder'); 
         
         $data['route'] = 'common/d_elfinder';
         

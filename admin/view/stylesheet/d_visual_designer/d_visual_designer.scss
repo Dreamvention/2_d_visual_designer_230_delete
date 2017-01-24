@@ -49,6 +49,11 @@
     }
 }
 
+.modal-backdrop
+{
+    display: none;
+}
+
 .content {
     position: relative;
 
@@ -845,9 +850,9 @@
     }
 
     &.add_template{
-      width: 60%;
-      left: 20%;
-      > .popup-tabs {
+        width: 60%;
+        left: 20%;
+        > .popup-tabs {
             li {
                 > a {
                     cursor: pointer;
@@ -902,12 +907,12 @@
                 }
             }
         }
-        > .popup-tabs{
+		> .popup-tabs{
             .vd-nav{
                 background: #8bc15b;
                 li{
                     > a{
-                        cursor: pointer;
+						cursor: pointer;
                         &:hover{
                             background-color: #a6d27e;
                         }
@@ -919,7 +924,7 @@
                     }
                 }
             }
-        }
+		}
         > .popup-content{
             max-height: 450px;
 
@@ -1115,6 +1120,11 @@
             margin-bottom: 0px;
 
             font-family: Open Sans,Helvetica,Roboto,Arial,sans-serif;
+            &.has-error{
+                > label{
+                    color: #f56b6b;
+                }
+            }
             > label{
                 display: block;
 
@@ -1391,7 +1401,7 @@ span.module_name {
     > div.layout{
         padding-top:10px;
         padding-bottom:10px;
-        &.active{
+		&.active{
 			> a {
 				> span{
 					> span{

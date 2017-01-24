@@ -23,19 +23,12 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 		
 		$this->db->query("CREATE TABLE IF NOT EXISTS ".DB_PREFIX."visual_designer_template (
 			`template_id` INT(11) NOT NULL AUTO_INCREMENT,
+			`name` VARCHAR(256) NOT NULL,
 			`image` VARCHAR(256) NOT NULL,
 			`category` VARCHAR(64) NOT NULL,
 			`content` MEDIUMTEXT NULL,
 			`sort_order` INT(11) NULL DEFAULT NULL,
 			PRIMARY KEY (`template_id`)
-		)
-		COLLATE='utf8_general_ci' ENGINE=MyISAM;");
-		
-		$this->db->query("CREATE TABLE IF NOT EXISTS ".DB_PREFIX."visual_designer_template_description (
-			`template_id` INT(11) NOT NULL,
-			`language_id` INT(11) NOT NULL,
-			`name` VARCHAR(256) NULL DEFAULT NULL,
-			PRIMARY KEY (`template_id`, `language_id`)
 		)
 		COLLATE='utf8_general_ci' ENGINE=MyISAM;");
 
@@ -54,20 +47,12 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 					}
 				}
 			}
-			if($this->config->get('config_language_id')!=1){
-			  $sql = "INSERT INTO ".DB_PREFIX."visual_designer_template_description
-				(`template_id`, `language_id`, `name`)
-				SELECT `template_id`, '".$this->config->get('config_language_id')."', `name`
-				FROM ".DB_PREFIX."visual_designer_template_description";
-			  $this->db->query($sql);
-		  }
 	  }
 	}
 	
 	public function dropDatabase(){
 		$this->db->query("DROP TABLE IF EXISTS ".DB_PREFIX."visual_designer_route");
 		$this->db->query("DROP TABLE IF EXISTS ".DB_PREFIX."visual_designer_template");
-		$this->db->query("DROP TABLE IF EXISTS ".DB_PREFIX."visual_designer_template_description");
 	}
 	
 	public function ajax($link){

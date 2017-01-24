@@ -6,6 +6,7 @@ $_['text_classic_mode']            = 'Классический режим';
 $_['text_backend_editor']          = 'Backend Редактор';
 $_['text_frontend_editor']         = 'Frontend Редактор';
 $_['text_add_template']            = 'Шаблоны';
+$_['text_save_template']           = 'Сохранить Шаблон';
 $_['text_search']                  = 'Поиск';
 
 $_['text_dotted']                  = 'Точечный';
@@ -37,9 +38,14 @@ $_['tab_design']                   = 'Дизайн';
 $_['tab_css']                      = 'CSS';
 $_['tab_all_blocks']               = 'Все';
 $_['tab_category_content']         = 'Содержимое';
-$_['tab_content_social']           = 'Социальные';
+$_['tab_category_social']          = 'Социальные';
 $_['tab_category_structure']       = 'Структура';
 $_['tab_css']                      = 'CSS';
+
+//Button
+$_['button_saved']                 = "<i class='fa fa-check' aria-hidden='true'></i>Сохранено";
+$_['button_save']                  = 'Сохранить изменения';
+$_['button_close']                 = 'Закрыть';
 
 
 //help
@@ -66,3 +72,9 @@ $_['entry_border']                 = 'Размер рамки';
 $_['entry_image']                  = 'Фон';
 $_['entry_image_style']            = 'Положение фона';
 $_['entry_size']                   = 'Задать вручную';
+$_['entry_category']               = 'Тег категории';
+$_['entry_sort_order']             = 'Порядковый номер';
+$_['entry_image_template']         = 'Изображение шаблона';
+
+//error
+$_['error_template_name']         = 'Название Шаблона должно быть от 3 до 255 символов!';

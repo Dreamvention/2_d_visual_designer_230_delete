@@ -5,6 +5,7 @@
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
+
 <div class="vd mode_switch btn-group"  role="group" >
     <a id="button_classic" data-id="<?php echo $designer_id; ?>" class="btn btn-default"><?php echo $text_classic_mode; ?></a>
     <a id="button_vd" data-id="<?php echo $designer_id; ?>" class="btn btn-default hidden"><?php echo $text_backend_editor; ?></a>
@@ -24,6 +25,9 @@
             </a>
         </div>
         <div class="pull-right">
+            <a id="button_save_template" class="btn btn-default">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </a>
             <a id="button_full_screen" class="btn btn-default">
                 <i class="fa fa-arrows-alt" aria-hidden="true"></i>
             </a>
@@ -67,61 +71,56 @@
     </div>
 </script>
 <script type="text/html" id="template-add-block">
- <div class="popup add_block">
-    <div class="popup-header">
-        <h2 class="title"><?php echo $text_add_block; ?></h2>
+    <div class="popup add_block">
+        <div class="popup-header">
+            <h2 class="title"><?php echo $text_add_block; ?></h2>
             <!-- <div class="search">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 <input type="text" name="search" placeholder="<?php echo $text_search; ?>" value=""/>
             </div> -->
-        <a class="close"></a>
-    </div>
-    {{#if categories}}
-    <div class="popup-tabs">
-        <ul class="vd-nav">
-            <li class="active"><a href="#tab-get-template" data-toggle="tab" data-category="{{all}}"><?php echo $tab_all_blocks; ?></a></li>
-            {{#categories}}
-            <li><a id="new-block-tab"  data-toggle="tab" data-category="{{this}}">{{this}}</a></li>
-            {{/categories}}
-        </ul>
-    </div>
-    {{/if}}
-    <div class="popup-content">
-        <div class="row popup-new-block">
-          {{#blocks}}
-            <div class="col-md-3 col-sm-6 col-xs-12 element">
-                <div class="block">
-                    <a id="add_block" name="type" data-title="{{{title}}}" data-type="{{{type}}}" data-category="{{category}}">
-                        <span><img src="{{{image}}}" class="image"></span>
-                        {{{title}}}
-                        <i class="description">
-                            {{{description}}}
-                        </i>
-                    </a>
-                </div>
-            </div>
-        {{/blocks}}
+            <a class="close"></a>
         </div>
-        <input type="hidden" name="target" value='{{{target}}}'/>
-        <input type="hidden" name="designer_id" value='{{{designer_id}}}'/>
-        <input type="hidden" name="level" value='{{{level}}}'/>
+        {{#if categories}}
+        <div class="popup-tabs">
+            <ul class="vd-nav">
+                <li class="active"><a href="#tab-get-template" data-toggle="tab" data-category=""><?php echo $tab_all_blocks; ?></a></li>
+                {{#categories}}
+                <li><a id="new-block-tab"  data-toggle="tab" data-category="{{this}}">{{this}}</a></li>
+                {{/categories}}
+            </ul>
+        </div>
+        {{/if}}
+        <div class="popup-content">
+            <div class="row popup-new-block">
+                {{#blocks}}
+                <div class="col-md-3 col-sm-6 col-xs-12 element">
+                    <div class="block">
+                        <a id="add_block" name="type" data-title="{{{title}}}" data-type="{{{type}}}" data-category="{{category}}">
+                            <span><img src="{{{image}}}" class="image"></span>
+                            {{{title}}}
+                            <i class="description">
+                            {{{description}}}
+                            </i>
+                        </a>
+                    </div>
+                </div>
+                {{/blocks}}
+            </div>
+            <input type="hidden" name="target" value='{{{target}}}'/>
+            <input type="hidden" name="designer_id" value='{{{designer_id}}}'/>
+            <input type="hidden" name="level" value='{{{level}}}'/>
+        </div>
     </div>
-</div>
 </script>
+
 <script type="text/x-handlebars-template" id="template-add-template">
     <div class="popup add_template" style="max-height:75vh;">
         <div class="popup-header">
             <h2 class="title"><?php echo $text_add_template; ?></h2>
             <a class="close"></a>
         </div>
-        <div class="popup-tabs active">
-            <ul class="vd-nav">
-                <li class="active"><a href="#tab-get-template" data-toggle="tab"><?php echo $tab_templates; ?></a></li>
-                <li><a href="#tab-save-template" data-toggle="tab"><?php echo $tab_save_block; ?></a></li>
-            </ul>
-        </div>
         {{#if categories}}
-        <div class="popup-tabs templates">
+        <div class="popup-tabs">
             <ul class="vd-nav">
                 <li class="active"><a href="#tab-get-template" data-toggle="tab" data-category=""><?php echo $tab_all_blocks; ?></a></li>
                 {{#categories}}
@@ -131,46 +130,63 @@
         </div>
         {{/if}}
         <div class="popup-content">
-            <div class="tab-content body">
-                <div class="tab-pane" id="tab-save-template">
-                    <div class="form-group">
-                        <label class="control-label"><?php echo $entry_name; ?></label>
-                        <div class="fg-setting">
-                            <?php foreach ($languages as $language) { ?>
-                            <div class="input-group pull-left">
-                                <span class="input-group-addon">
-                                    <img src="<?php echo $language['flag']; ?>" title="<?php echo $language['name']; ?>" />
-                                </span>
-                                <input type="text" name="template_description[<?php echo $language['language_id']; ?>][name]" value="" placeholder="<?php echo $entry_name; ?>" class="form-control" />
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <div class="popup-footer">
-                        <a id="saveTemplate" class="vd-btn save"><?php echo $button_save; ?></a>
+            <div class="popup-new-template">
+                {{#templates}}
+                <div class="col-md-3 col-sm-6 col-xs-12 element">
+                    <div class="template">
+                        <a id="add_template" data-id="{{template_id}}" name="type" data-category="{{category}}">
+                            <img src="{{{image}}}"/>
+                            <p class="title">{{{name}}}</p>
+                        </a>
                     </div>
                 </div>
-                <div class="tab-pane active" id="tab-get-template">
-                    <div class="popup-new-template">
-                        {{#templates}}
-                        <div class="col-md-3 col-sm-6 col-xs-12 element">
-                            <div class="template">
-                                <a id="add_template" data-id="{{template_id}}" name="type" data-category="{{category}}">
-                                    <img src="{{{image}}}"/>
-                                    <p class="title">{{{name}}}</p>
-                                </a>
-                            </div>
-                        </div>
-                        {{/templates}}
-                    </div>
-                </div>
+                {{/templates}}
             </div>
         </div>
         <input type="hidden" name="target" value=''/>
         <input type="hidden" name="designer_id" value='{{designer_id}}'/>
     </div>
 </script>
-
+<script type="text/x-handlebars-template" id="template-save-template">
+    <div class="popup save_template" style="max-height:75vh;">
+        <div class="popup-header">
+            <h2 class="title"><?php echo $text_save_template; ?></h2>
+            <a class="close"></a>
+        </div>
+        <div class="popup-content">
+            <div class="form-group">
+                <label class="control-label"><?php echo $entry_name; ?></label>
+                <div class="fg-setting">
+                    <input type="text" name="name" value="" placeholder="<?php echo $entry_name; ?>" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><?php echo $entry_category; ?></label>
+                <div class="fg-setting">
+                    <input type="text" name="category" value="" placeholder="<?php echo $entry_category; ?>" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><?php echo $entry_image_template; ?></label>
+                <div class="fg-setting">
+                    <a href="" id="thumb-vd-image" data-toggle="image" class="img-thumbnail">
+                        <img src="<?php echo $placeholder; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>"/>
+                    </a>
+                    <input type="hidden" name="image" value="" id="input-vd-image" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label"><?php echo $entry_sort_order; ?></label>
+                <div class="fg-setting">
+                    <input type="text" name="sort_order" value="" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <a id="saveTemplate" class="vd-btn save" data-designer-id="{{designer_id}}" data-loading-text="<?php echo $button_saved; ?>"><?php echo $button_save; ?></a>
+        </div>
+    </div>
+</script>
 <script type="text/x-handlebars-template" id="template-edit-block">
     <div class="popup-header">
         <h2 class="title">{{{block_title}}} <?php echo $text_edit_block; ?></h2>
@@ -458,6 +474,7 @@ var teplate = {
     add_block:$('script#template-add-block:first'),
     edit_block:$('script#template-edit-block:first'),
     add_template:$('script#template-add-template:first'),
+    save_template:$('script#template-save-template:first'),
     helper:$('script#template-helper-sortable:first'),
     loader:$('script#template-loader:first')
 
@@ -474,6 +491,7 @@ $('#<?php echo $designer_id; ?>').on('click','a[id=button_layout]',function(){
     var block_id = $(this).parent().data('control');
     d_visual_designer.showEditLayout(block_id, '<?php echo $designer_id; ?>');
 });
+
 $(document).off('click','a[id=edit-layout]');
 $(document).on('click','a[id=edit-layout]',function(){
     var size = $(this).data('layout');
@@ -498,22 +516,12 @@ $('#<?php echo $designer_id; ?>').on('click','a[id=button_copy]',function(){
     var block_id = $(this).parent().data('control')
     d_visual_designer.cloneBlock(block_id, '<?php echo $designer_id; ?>');
 });
-$(document).off('click', '.popup.add_template > .popup-tabs:not(.templates) > .vd-nav > li > a');
-$(document).on('click', '.popup.add_template > .popup-tabs:not(.templates) > .vd-nav > li > a', function(){
-    var url = $(this).attr('href');
-    if(url == '#tab-get-template'){
-        $(this).closest('.popup-tabs').addClass('active');
-    }
-    else{
-        $(this).closest('.popup-tabs').removeClass('active');
-    } 
-});
 $(document).off('click', '.popup.add_block > .popup-tabs > .vd-nav > li > a');
 $(document).on('click', '.popup.add_block > .popup-tabs > .vd-nav > li > a', function(){
     d_visual_designer.search($(this).data('category'), '.popup > .popup-content .popup-new-block > .element', 'a', 'data-category');
 });
-$(document).off('click', '.popup.add_template > .popup-tabs.templates > .vd-nav > li > a');
-$(document).on('click', '.popup.add_template > .popup-tabs.templates > .vd-nav > li > a', function(){
+$(document).off('click', '.popup.add_template > .popup-tabs > .vd-nav > li > a');
+$(document).on('click', '.popup.add_template > .popup-tabs > .vd-nav > li > a', function(){
     d_visual_designer.search($(this).data('category'), '.popup > .popup-content .popup-new-template > .element', 'a', 'data-category');
 });
 $(document).off('keyup', '.popup.add_block > .popup-header input[name=search]');
@@ -550,7 +558,8 @@ $(document).on('click','a[id=save]',function(){
 });
 $(document).off('click','a[id=saveTemplate]');
 $(document).on('click','a[id=saveTemplate]',function(){
-    d_visual_designer.saveTemplate();
+    var designer_id = $(this).data('designer-id');
+    d_visual_designer.saveTemplate(designer_id);
 });
 
 $(document).off('click','#button_add');
@@ -570,6 +579,13 @@ $(document).off('click','#button_template');
 $(document).on('click','#button_template',function(){
     var designer_id = $(this).parents('.vd.content').attr('id');
     d_visual_designer.showAddTemplate(designer_id);
+    return false;
+});
+
+$(document).off('click','#button_save_template');
+$(document).on('click','#button_save_template',function(){
+    var designer_id = $(this).parents('.vd.content').attr('id');
+    d_visual_designer.showSaveTemplate(designer_id);
     return false;
 });
 
