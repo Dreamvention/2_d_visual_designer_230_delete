@@ -30,7 +30,7 @@ $_['text_success_update']          = 'Successfully updated!';
 $_['text_success_template_save']   = 'Successfully saved!';
 $_['text_success_clone_block']     = ' cloned.';
 $_['text_success_remove_block']    = ' deleted!';
-$_['text_welcome_header']          = 'You have a blank page <br> Start adding content or templates';
+$_['text_welcome_header']          = 'You have blank page <br> Start adding content or templates';
 $_['text_add_block']               = 'Add block';
 $_['text_add_text_block']          = 'Add Text block';
 $_['text_add_template']            = 'Add Template';
@@ -45,20 +45,20 @@ $_['text_repeat']                  = 'Repeat';
 $_['tab_save_block']               = 'Save Template';
 $_['tab_templates']                = 'Templates';
 $_['tab_all_blocks']               = 'All';
-$_['tab_category_content']         = 'Content';
-$_['tab_category_social']          = 'Social';
-$_['tab_category_structure']       = 'Structure';
 $_['tab_css']                      = 'CSS';
 
 //Button
 $_['button_add_block']             = 'Add New Block';
-$_['button_templates']             = 'Templates';
+$_['button_add_template']          = 'Add Template';
+$_['button_save_template']         = 'Save Template';
 $_['button_mobile']                = 'Mobile mode';
 $_['button_tablet']                = 'Tablet mode';
 $_['button_desktop']               = 'Desktop mode';
 $_['button_reload']                = 'Reload page';
 $_['button_save']                  = 'Save changes';
 $_['button_saved']                 = 'Saved';
+$_['button_publish']               = 'Publish';
+$_['button_backend_editor']        = 'Backend Editor';
 
 //help
 $_['help_add_child']               = 'Add %s';
@@ -84,9 +84,9 @@ $_['entry_border']                 = 'Border';
 $_['entry_image']                  = 'Background image';
 $_['entry_image_style']            = 'Style background image';
 $_['entry_size']                   = 'Size';
-$_['entry_category']			   = 'Tag of category';
-$_['entry_image_template']		   = 'Image of template';
-$_['entry_sort_order']			   = 'Sort order';
+$_['entry_category']               = 'Tag of category';
+$_['entry_image_template']         = 'Image of template';
+$_['entry_sort_order']             = 'Sort order';
 
 //error
 $_['error_name']                   = 'Template Name must be greater than 3 and less than 255 characters!';

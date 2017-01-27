@@ -498,21 +498,21 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             }
         }
 
-        if(!empty($setting_block['custom_template'])){
-            return $this->loadView('d_visual_designer_template/'.$setting_block['custom_template'], $data);
+        if(!empty($setting_block['custom_layout'])){
+            return $this->loadView('d_visual_designer_layout/'.$setting_block['custom_layout'], $data);
         }
         else{
             if($inner_blocks == 1){
-                return $this->loadView('d_visual_designer_template/medium', $data);
+                return $this->loadView('d_visual_designer_layout/medium', $data);
             }
             else if($inner_blocks == 2){
-                return $this->loadView('d_visual_designer_template/main', $data);
+                return $this->loadView('d_visual_designer_layout/main', $data);
             }
             elseif ($setting_block['child_blocks'] && $inner_blocks == 0) {
-                return $this->loadView('d_visual_designer_template/medium', $data);
+                return $this->loadView('d_visual_designer_layout/medium', $data);
             }
             else{
-                return $this->loadView('d_visual_designer_template/children', $data);
+                return $this->loadView('d_visual_designer_layout/children', $data);
             }
         }
     }
@@ -664,7 +664,40 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."visual_designer_route WHERE token = '".$token."'");
         return $query->row;
     }
-
+    
+    public function getConfigTemplates(){
+        
+        $dir = DIR_CONFIG.'d_visual_designer_template/';
+        $files = scandir($dir);
+        $template_data = array();
+        
+        foreach($files as $file){
+            if(strlen($file) > 1 && strpos( $file, '.php')){
+                $_ = array();
+                
+                $results = array();
+    
+                require($dir.$file);
+    
+                $results = array_merge($results, $_);
+                
+                $templates = $results['d_visual_designer_templates'];
+                foreach ($templates as $template) {
+                    $template_data[] = array(
+                         'template_id' => $template['template_id'],
+                         'content' => $template['content'],
+                         'config' => substr($file, 0, -4),
+                         'image' => $template['image'],
+                         'category' => $template['category'],
+                         'sort_order' => $template['sort_order'],
+                         'name' => $template['name']
+                    );
+                }    
+            }
+        }
+        return $template_data;
+    }
+    
     public function getTemplates($data=array()){
 
         $sql = "SELECT * FROM ".DB_PREFIX."visual_designer_template  t";
@@ -677,6 +710,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             foreach ($query->rows as $row) {
                 $template_data[] = array(
                     'template_id' => $row['template_id'],
+                    'config' => '',
                     'content' => $row['content'],
                     'image' => $row['image'],
                     'category' => $row['category'],
@@ -693,6 +727,24 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."visual_designer_template t WHERE t.template_id='".$template_id."'");
 
         return $query->row;
+    }
+    public function getConfigTemplate($template_id, $config){
+        $_ = array();
+        
+        $results = array();
+
+        require(DIR_CONFIG.'d_visual_designer_template/'.$config.'.php');
+
+        $results = array_merge($results, $_);
+        
+        $templates = $results['d_visual_designer_templates'];
+                
+        foreach ($templates as $template) {
+            if($template['template_id'] == $template_id){
+                return $template;
+            }
+        }
+        return array();
     }
 
     public function addTemplate($data){

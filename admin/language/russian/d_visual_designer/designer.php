@@ -45,17 +45,23 @@ $_['text_repeaе']                  = 'Repeat';
 $_['tab_save_block']               = 'Сохранить шаблон';
 $_['tab_templates']                = 'Шаблоны';
 $_['tab_all_blocks']               = 'Все';
+$_['tab_category_content']         = 'Содержимое';
+$_['tab_category_social']          = 'Социальные';
+$_['tab_category_structure']       = 'Структура';
 $_['tab_css']                      = 'CSS';
 
 //Button
 $_['button_add_block']             = 'Добавить новый блок';
-$_['button_templates']             = 'Шаблоны';
+$_['button_add_template']          = 'Выбрать шаблон';
+$_['button_save_template']         = 'Сохранить шаблон';
 $_['button_mobile']                = 'Mobile mode';
 $_['button_tablet']                = 'Tablet mode';
 $_['button_desktop']               = 'Desktop mode';
 $_['button_reload']                = 'Перезагрузить страницу';
 $_['button_save']                  = 'Сохранить';
 $_['button_saved']                 = 'Сохранено';
+$_['button_publish']               = 'Опубликовать';
+$_['button_backend_editor']        = 'Backend Редактор';
 
 //help
 $_['help_add_child']               = 'Добавить %s';
@@ -84,6 +90,7 @@ $_['entry_size']                   = 'Размер колонок';
 $_['entry_category']               = 'Тег категории';
 $_['entry_image_template']         = 'Изображение шаблона';
 $_['entry_sort_order']			   = 'Порядковый номер';
+
 
 //error
 $_['error_name']                   = 'Название Шаблона должно быть от 3 до 255 символов!';

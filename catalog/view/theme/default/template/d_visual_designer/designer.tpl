@@ -5,6 +5,9 @@
             <a id="vd-add-button" class="vd-button vd-add-block vd-btn-add"></a>
         </div>
         <div class="vd-welcome">
+            <div class="vd-welcome-brand">
+                <!-- <img src="http://localhost/wordpress44/wp-content/plugins/js_composer/assets/vc/logo/64x64.png" alt=""> -->
+            </div>
             <div class="vd-welcome-header">
                 <?php echo $text_welcome_header; ?>
             </div>
@@ -98,7 +101,7 @@
                 {{#templates}}
                 <div class="col-md-3 col-sm-6 col-xs-12 element">
                     <div class="template">
-                        <a id="add_template" data-id="{{template_id}}" name="type" data-category="{{category}}">
+                        <a id="add_template" data-id="{{template_id}}" data-config="{{config}}" name="type" data-category="{{category}}">
                             <img src="{{{image}}}"/>
                             <p class="title">{{{name}}}</p>
                         </a>
@@ -567,7 +570,8 @@ $('#<?php echo $designer_id; ?>').on('click','.block-content:empty',function(){
 $(document).off('click','#add_template');
 $(document).on('click','#add_template', function(){
     var template_id = $(this).data('id');
-    d_visual_designer.addTemplate(template_id, '<?php echo $designer_id; ?>');
+    var config = $(this).data('config');
+    d_visual_designer.addTemplate(template_id, config, '<?php echo $designer_id; ?>');
 });
 $(document).off('click','#add_block');
 $(document).on('click','#add_block', function(){

@@ -267,14 +267,18 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $this->load->model($this->codename.'/route');
 
             $data['button_add_block'] = $this->language->get('button_add_block');
-            $data['button_templates'] = $this->language->get('button_templates');
+            $data['button_add_template'] = $this->language->get('button_add_template');
+            $data['button_save_template'] = $this->language->get('button_save_template');
             $data['button_mobile'] = $this->language->get('button_mobile');
             $data['button_tablet'] = $this->language->get('button_tablet');
             $data['button_desktop'] = $this->language->get('button_desktop');
             $data['button_reload'] = $this->language->get('button_reload');
 
-            $data['text_backend_editor'] = $this->language->get('text_backend_editor');
-
+            $data['button_backend_editor'] = $this->language->get('button_backend_editor');
+            $data['button_publish'] = $this->language->get('button_publish');
+            $data['button_cancel'] = $this->language->get('button_cancel');
+            
+            $data['text_save_template'] = $this->language->get('text_save_template');
             $data['text_success_update'] = $this->language->get('text_success_update');
             $data['text_success_template_save'] = $this->language->get('text_success_template_save');
             $data['text_success_clone_block'] = $this->language->get('text_success_clone_block');

@@ -281,11 +281,13 @@ var d_visual_designer = {
             $('body').attr('style', 'width:'+body_width+'px; margin-left:auto');
             this.popup.addClass('stick-left'); 
             this.popup_setting.stick = true;
+            $('body').trigger('popup_left_active');
         }
         else{
             $('body').removeAttr('style');
             this.popup.removeClass('stick-left'); 
             this.popup_setting.stick = false;
+            $('body').trigger('popup_left_noactive');
         }
        
     },
@@ -294,6 +296,7 @@ var d_visual_designer = {
         if(this.popup != ''){
             if(this.popup.hasClass('stick-left')){
                 $('body').removeAttr('style');
+                $('body').trigger('popup_left_noactive');
             }
             this.popup.remove();
         }
@@ -633,14 +636,14 @@ var d_visual_designer = {
         });    
     },
     //Добавление шаблона
-    addTemplate:function(template_id, designer_id){
+    addTemplate:function(template_id, config, designer_id){
         var that = this;
         
         $.ajax({
             type: 'post',
             url: 'index.php?route=extension/module/d_visual_designer/getTemplate',
             dataType: 'json',
-            data:{'template_id':template_id},
+            data:{'template_id':template_id, 'config': config},
             success: function( json ) {
                 if(json['success']){
                     that.data[designer_id] = json['setting'];
