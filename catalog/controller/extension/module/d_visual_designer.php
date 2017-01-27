@@ -50,7 +50,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $edit_status = false;
         }
         
-        if(!empty($this->request->get['route']) && $this->request->get['route'] != $route_info['frontend_route']){
+        if(!empty($this->request->get['route']) && !empty($route_info['frontend_route']) && $this->request->get['route'] != $route_info['frontend_route']){
             $edit_status = false;
         }
         
