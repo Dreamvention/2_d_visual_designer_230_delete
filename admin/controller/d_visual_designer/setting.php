@@ -3,7 +3,6 @@ class ControllerDVisualDesignerSetting extends Controller {
     private $codename = 'd_visual_designer';
     private $route = 'd_visual_designer/setting';
     private $extension = '';
-    private $config_file = 'd_visual_designer';
     private $store_id = 0;
     private $error = array();
 
@@ -20,7 +19,6 @@ class ControllerDVisualDesignerSetting extends Controller {
             $this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
         }
 		$this->store_id = (isset($this->request->get['store_id'])) ? $this->request->get['store_id'] : 0;
-        
    }
 
     public function index(){
@@ -44,7 +42,6 @@ class ControllerDVisualDesignerSetting extends Controller {
         $this->document->addStyle('view/stylesheet/shopunity/bootstrap-switch/bootstrap-switch.css');
 
         $url_params = array();
-        $url = '';
 
         if(isset($this->response->get['store_id'])){
             $url_params['store_id'] = $this->store_id;
@@ -112,8 +109,7 @@ class ControllerDVisualDesignerSetting extends Controller {
 
         // Entry
         $data['entry_status'] = $this->language->get('entry_status');
-        $data['entry_config_files'] = $this->language->get('entry_config_files');
-
+    
         // Text
         $data['text_enabled'] = $this->language->get('text_enabled');
         $data['text_disabled'] = $this->language->get('text_disabled');
@@ -147,7 +143,6 @@ class ControllerDVisualDesignerSetting extends Controller {
         $data['text_no_results'] = $this->language->get('text_no_results');
 
         $data['text_templates'] = $this->language->get('text_templates');
-        $data['text_routes'] = $this->language->get('text_routes');
         $data['text_setting'] = $this->language->get('text_setting');
         $data['text_instructions'] = $this->language->get('text_instructions');
 
@@ -157,7 +152,6 @@ class ControllerDVisualDesignerSetting extends Controller {
 
 
         $data['href_templates'] = $this->url->link($this->codename.'/template','token='.$this->session->data['token'], 'SSL');
-        $data['href_routes'] = $this->url->link($this->codename.'/route','token='.$this->session->data['token'], 'SSL');
         $data['href_setting'] = $this->url->link($this->codename.'/setting','token='.$this->session->data['token'], 'SSL');
         $data['href_instruction'] = $this->url->link($this->codename.'/instruction','token='.$this->session->data['token'], 'SSL');
 

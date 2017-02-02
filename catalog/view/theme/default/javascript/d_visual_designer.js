@@ -271,7 +271,7 @@ var d_visual_designer = {
 
         this.popup.css({visibility:'visible', opacity:1});
     },
-    //Прикрепить окно к леому краю
+    //Прикрепить окно к левому краю
     stickPopup:function(){
         var that = this;
         if(!this.popup.hasClass('stick-left')){
@@ -343,7 +343,7 @@ var d_visual_designer = {
         
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getBlocks',
+            url: this.setting.url_designer+'/getBlocks',
             dataType: 'json',
             data: 'level='+level,
             success: function( json ) {
@@ -366,7 +366,7 @@ var d_visual_designer = {
         var that = this;
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getModule',
+            url: this.setting.url_designer+'/getModule',
             dataType: 'json',
             data: 'type='+type+'&parent='+target+'&level='+level,
             success: function( json ) {
@@ -403,7 +403,7 @@ var d_visual_designer = {
         var level = this.getLevelBlock(block_id,designer_id)+1;
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getChildBlock',
+            url: this.setting.url_designer+'/getChildBlock',
             dataType: 'json',
             data: 'type='+block_info['type']+'&parent='+block_id+'&level='+level,
             success: function( json ) {
@@ -440,7 +440,7 @@ var d_visual_designer = {
         
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getSettingModule',
+            url: this.setting.url_designer+'/getSettingModule',
             dataType: 'json',
             data: send_data,
             success: function( json ) {
@@ -580,7 +580,7 @@ var d_visual_designer = {
         
         $.ajax({
             type:'post',
-            url:'index.php?route=extension/module/d_visual_designer/editLayout',
+            url: this.setting.url_designer+'/editLayout',
             data:send_data,
             dataType:'json',
             success: function(json){
@@ -619,7 +619,7 @@ var d_visual_designer = {
         var that = this;
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getTemplates',
+            url: this.setting.url_designer+'/getTemplates',
             dataType: 'json',
             success: function( json ) {
                 if(json['success']){
@@ -641,7 +641,7 @@ var d_visual_designer = {
         
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getTemplate',
+            url: this.setting.url_designer+'/getTemplate',
             dataType: 'json',
             data:{'template_id':template_id, 'config': config},
             success: function( json ) {
@@ -666,7 +666,7 @@ var d_visual_designer = {
 
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/saveTemplate',
+            url: this.setting.url_designer+'/saveTemplate',
             dataType: 'json',
             data: send_data,
             success: function( json ) {
@@ -741,19 +741,24 @@ var d_visual_designer = {
         
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getContent',
+            url: this.setting.url_designer+'/getContent',
             dataType: 'json',
             data: setting,
             success: function( json ) {
-                if(json['success']){                
-                    that.popup.find('a#save').button('loading')
-                    that.popup.find('a#save').addClass('saved');
+                if(json['success']){
+                    if(that.popup !== ''){
+                        that.popup.find('a#save').button('loading');
+                        that.popup.find('a#save').addClass('saved');
+                    }
+
                     console.log('d_visual_designer:update_content_block');
                     that.settings[designer_id].form.find('#'+block_id).replaceWith(json['content']);
                     that.initSortable();
                     setTimeout(function(){
-                        that.popup.find('a#save').button('reset')
-                        that.popup.find('a#save').removeClass('saved');
+                        if(that.popup !== '') {
+                            that.popup.find('a#save').button('reset');
+                            that.popup.find('a#save').removeClass('saved');
+                        }
                         
                     },2000);
                 }
@@ -813,7 +818,7 @@ var d_visual_designer = {
         
         $.ajax({
             type: 'post',
-            url: 'index.php?route=extension/module/d_visual_designer/getContent',
+            url: this.setting.url_designer+'/getContent',
             dataType: 'json',
             data: setting,
             success: function( json ) {

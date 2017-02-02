@@ -146,7 +146,7 @@ class ModelDVisualDesignerTemplate extends Model {
         return array();
     }
        
-    public function getTotalTemplates($data = array()){
+    public function getTotalTemplates(){
         $query = $this->db->query("SELECT count(*) as total FROM ".DB_PREFIX."visual_designer_template t ");
         
         return $query->row['total'];

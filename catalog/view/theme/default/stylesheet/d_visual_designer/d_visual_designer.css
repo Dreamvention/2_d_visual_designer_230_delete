@@ -306,8 +306,8 @@
 @font-face {
   .vd, .block-container, #modal-image {
     font-family: 'Glyphicons Halflings';
-    src: url("../fonts/glyphicons-halflings-regular.eot");
-    src: url("../fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); } }
+    src: url("fonts/glyphicons-halflings-regular.eot");
+    src: url("fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("fonts/glyphicons-halflings-regular.woff") format("woff"), url("fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg"); } }
   .vd .glyphicon, .block-container .glyphicon, #modal-image .glyphicon {
     position: relative;
     top: 1px;
@@ -7386,6 +7386,8 @@
         max-width: calc(100% - 91px); }
     .vd-popup.stick-left > .popup-content {
       border-radius: 0 !important; }
+      .vd-popup.stick-left > .popup-content .form-group > .fg-setting > .fg-color {
+        width: 55%; }
     .vd-popup.stick-left > .popup-footer {
       border-radius: 0 !important; }
       .vd-popup.stick-left > .popup-footer > a {
@@ -7591,6 +7593,16 @@
     -webkit-box-flex: 1;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto; }
+    .vd-popup .popup-content .icons-selector {
+      width: 100%; }
+      .vd-popup .popup-content .icons-selector .selector-popup {
+        position: relative;
+        min-width: 100%;
+        max-height: 100%;
+        overflow: hidden; }
+        .vd-popup .popup-content .icons-selector .selector-popup > .fip-icons-container {
+          max-height: 300px;
+          overflow: auto; }
     .vd-popup .popup-content .form-group {
       margin: 0px 0px 20px 0px !important;
       font-family: Open Sans,Helvetica,Roboto,Arial,sans-serif; }
@@ -7680,26 +7692,30 @@
       padding: 5px; }
       .vd-popup .popup-content .popup-new-template > .element {
         margin: 0 !important;
-        padding: 5px !important;
+        padding: 30px !important;
         list-style: none;
         -webkit-transition: border-color .2s;
         transition: border-color .2s; }
         .vd-popup .popup-content .popup-new-template > .element:hover > .template > a {
           text-decoration: none; }
-          .vd-popup .popup-content .popup-new-template > .element:hover > .template > a > img {
-            border: 10px solid #98dfaa;
-            cursor: pointer; }
         .vd-popup .popup-content .popup-new-template > .element > .template {
           text-align: center; }
           .vd-popup .popup-content .popup-new-template > .element > .template > a {
             font-weight: 600;
             line-height: 14px; }
             .vd-popup .popup-content .popup-new-template > .element > .template > a > img {
-              border: 10px solid transparent;
-              border-radius: 5px; }
+              border-width: 1px;
+              border-color: #e2e1e1;
+              border-style: solid; }
+              .vd-popup .popup-content .popup-new-template > .element > .template > a > img:hover {
+                border-width: 1px;
+                border-color: #308cd6;
+                border-style: solid;
+                box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+                cursor: pointer; }
             .vd-popup .popup-content .popup-new-template > .element > .template > a > p.title {
+              padding-top: 20px;
               color: #000;
-              font-weight: bold;
               font-size: 16px; }
       .vd-popup .popup-content .popup-new-template > .title {
         margin: 0 1em 0 0;
@@ -8455,6 +8471,9 @@
     height: 100%;
     margin: 0; }
 
+@font-face {
+  font-family: 'Glyph';
+  src: url("fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("fonts/glyphicons-halflings-regular.woff") format("woff"); }
 #tab-description {
   overflow: visible; }
   #tab-description .vd div, #tab-description .vd p {
@@ -8496,6 +8515,8 @@
     margin-top: -20px;
     font-size: 14px;
     line-height: 40px; }
+.content.vd .glyphicon {
+  font-family: 'Glyph'; }
 .content.vd:empty {
   display: none; }
   .content.vd:empty + .vd-helper {
@@ -8682,7 +8703,7 @@
   .content.vd .block-section.accordion {
     display: block;
     margin-top: 0px;
-    margin-bottom: 2px;
+    margin-bottom: 2px !important;
     color: #333333;
     background: #ffffff; }
     .content.vd .block-section.accordion:not(.active) {

@@ -185,7 +185,6 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $data['cancel'] = $this->url->link('extension/extension', 'token=' . $this->session->data['token']."&type=module", 'SSL');
 
         $data['href_templates'] = $this->url->link($this->codename.'/template','token='.$this->session->data['token'], 'SSL');
-        $data['href_routes'] = $this->url->link($this->codename.'/route','token='.$this->session->data['token'], 'SSL');
         $data['href_setting'] = $this->url->link($this->codename.'/setting','token='.$this->session->data['token'], 'SSL');
         $data['href_instruction'] = $this->url->link($this->codename.'/instruction','token='.$this->session->data['token'], 'SSL');
 
@@ -199,7 +198,6 @@ class ControllerDVisualDesignerTemplate extends Controller {
 		$data['text_confirm'] = $this->language->get('text_confirm');
 
         $data['text_templates'] = $this->language->get('text_templates');
-        $data['text_routes'] = $this->language->get('text_routes');
         $data['text_setting'] = $this->language->get('text_setting');
         $data['text_instructions'] = $this->language->get('text_instructions');
 
@@ -499,10 +497,10 @@ class ControllerDVisualDesignerTemplate extends Controller {
             $this->load->model('tool/image');
             
             if(file_exists(DIR_IMAGE.$template['image'])){
-                $thumb = $this->model_tool_image->resize($template['image'], 156, 171);
+                $thumb = $this->model_tool_image->resize($template['image'], 160, 205);
             }
             else{
-                $thumb = $this->model_tool_image->resize('no_image.png', 156, 171);
+                $thumb = $this->model_tool_image->resize('no_image.png', 160, 205);
             }
 
             if(!empty($template['category']) && !in_array(ucfirst($template['category']), $json['categories'])){
@@ -600,54 +598,6 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $this->response->addHeader('Content-Type: application/json');
         $this->response->setOutput(json_encode($json));
     }
-
-    public function autocomplete() {
-		$json = array();
-
-		if (isset($this->request->get['filter_name'])) {
-			if (isset($this->request->get['filter_name'])) {
-				$filter_name = $this->request->get['filter_name'];
-			} else {
-				$filter_name = '';
-			}
-
-			$this->load->model('d_visual_designer/template');
-
-			$filter_data = array(
-				'filter_name'  => $filter_name,
-				'filter_email' => $filter_email,
-				'start'        => 0,
-				'limit'        => 5
-				);
-
-			$results = $this->{'model_module_'.$this->codename}->getSubscribers($filter_data);
-
-			foreach ($results as $result) {
-				$json[] = array(
-					'subscriber_id'       => $result['subscriber_id'],
-					'name'                => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8')),
-					'subscriber_group'    => $result['subscriber_group'],
-					'firstname'           => $result['firstname'],
-					'lastname'            => $result['lastname'],
-					'email'               => $result['email'],
-					'subscribed'          => $result['subscribed'],
-					'language_id'         => $result['language_id'],
-					'store_id'            => $result['store_id']
-					);
-			}
-		}
-
-		$sort_order = array();
-
-		foreach ($json as $key => $value) {
-			$sort_order[$key] = $value['name'];
-		}
-
-		array_multisort($sort_order, SORT_ASC, $json);
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
     public function getFileManager() {
         if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
             $data['base'] = HTTPS_CATALOG;

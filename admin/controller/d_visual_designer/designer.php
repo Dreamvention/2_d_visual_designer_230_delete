@@ -4,11 +4,19 @@ class ControllerDVisualDesignerDesigner extends Controller {
     public $route = 'd_visual_designer/designer';
     public $extension = '';
 
+    private $d_shopunity = '';
+
     private $scripts = array();
     private $styles = array();
-    private $error = array();
-    private $input = array();
 
+    private $error = array();
+
+    private $store_url = '';
+    
+    private $catalog_url = '';
+
+    private $store_id = '';
+    
     public function __construct($registry)
     {
         parent::__construct($registry);
@@ -19,72 +27,56 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
         $this->d_shopunity = (file_exists(DIR_SYSTEM.'mbooth/extension/d_shopunity.json'));
 
-        if($this->d_shopunity){
-            $this->load->model('d_shopunity/mbooth');
-            $this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
-        }
+	    if ($this->d_shopunity) {
+		    $this->load->model('d_shopunity/mbooth');
+		    $this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
+	    }
         
         $this->store_id = (isset($this->request->get['store_id'])) ? $this->request->get['store_id'] : 0;
-
+        
+        if($this->request->server['HTTPS']){
+            $this->store_url = HTTPS_SERVER;
+            $this->catalog_url = HTTPS_CATALOG;
+        }
+        else{
+            $this->store_url = HTTP_SERVER;
+            $this->catalog_url = HTTP_CATALOG;
+        }
+        
     }
 
     public function index(){
 
 		$json = array();
 
-		if(isset($this->request->post['description'])){
-			$description = $this->request->post['description'];
-		}
-		else {
-			$description = '';
-		}
+	    if (isset($this->request->post['description'])) {
+		    $description = $this->request->post['description'];
+	    }
 
 		if(isset($this->request->post['url'])){
 			$url = $this->request->post['url'];
 		}
-        else{
-            $url = '';
-        }
-
-        if(!empty($url)){
-            $this->load->model('d_visual_designer/route');
-
-            $url_info = parse_url(str_replace('&amp;', '&', $url));
-
-            $url_params = array();
-
-            parse_str($url_info['query'], $url_params);
-
-            $route_info = $this->model_d_visual_designer_route->checkPermission($url_params['route']);
-
-            if(!empty($route_info)){
-                $permission_status = true;
-            }
-            else{
-                $permission_status = false;
-            }
-
-            if(isset($url_params['route']) && $url_params['route'] == 'd_visual_designer/template/edit'){
-    			$permission_status = true;
-    		}
-
-    		if(isset($url_params['route']) && $url_params['route'] == 'd_visual_designer/template/add'){
-    			$permission_status = true;
-    		}
-        }
-        else{
-            $permission_status = false;
-        }
-
-        $status = $this->config->get($this->codename.'_status');
-
-		if($status && $permission_status){
+        
+		if($this->validate()){
 
             $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css';
 
-            //Fontawesome iconpocker
-            $this->styles[] = 'view/javascript/d_visual_designer/library/fontawesome-iconpicker.min.css';
-            $this->scripts[] = 'view/javascript/d_visual_designer/library/fontawesome-iconpicker.min.js';
+            //FontIconPicker
+            $this->scripts[] = 'view/javascript/d_visual_designer/library/fontIconPicker/iconset.js';
+            $this->scripts[] = 'view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.min.js';
+            $this->styles[] = 'view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.css';        
+            $this->styles[] = 'view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.grey.min.css';       
+
+            //Fonts icon
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/ionicons-1.5.2/css/ionicons.min.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/font-awesome-4.2.0/css/font-awesome.min.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/map-icons-2.1.0/css/map-icons.min.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/material-design-1.1.1/css/material-design-iconic-font.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/typicons-2.0.6/css/typicons.min.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/elusive-icons-2.0.0/css/elusive-icons.min.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/octicons-2.1.2/css/octicons.min.css';   
+            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/weather-icons-1.2.0/css/weather-icons.min.css';   
+            
             //Bootstrap colorpicker
             $this->styles[] = 'view/stylesheet/shopunity/bootstrap-colorpicker/bootstrap-colorpicker.min.css';
             $this->scripts[] = 'view/javascript/shopunity/bootstrap-colorpicker/bootstrap-colorpicker.min.js';
@@ -121,7 +113,6 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $data['text_search'] = $this->language->get('text_search');
             $data['text_layout'] = $this->language->get('text_layout');
             $data['text_set_custom'] = $this->language->get('text_set_custom');
-
 
             $data['entry_border_color'] = $this->language->get('entry_border_color');
             $data['entry_border_style'] = $this->language->get('entry_border_style');
@@ -166,10 +157,15 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
             $blocks = $this->{'model_'.$this->codename.'_designer'}->parseDescription($description);
 
-    		if($url_params['route'] == 'd_visual_designer/template/edit' || $url_params['route'] == 'd_visual_designer/template/add'){
-                $data['frontend_route'] = '';
-            }
-            elseif($route_info['frontend_status']){
+			$url_info = parse_url(str_replace('&amp;', '&', $url));
+
+			$url_params = array();
+
+			parse_str($url_info['query'], $url_params);
+
+			$route_info = $this->{'model_' . $this->codename . '_designer'}->getRouteByBackendRoute($url_params['route']);
+
+    		if($route_info['frontend_status']){
                 if(!empty($route_info['backend_param']) && !empty($url_params[$route_info['backend_param']])){
                     $params = '&'.$route_info['frontend_param'].'='.$url_params[$route_info['backend_param']];
                     $frontend_param = '&id='.$url_params[$route_info['backend_param']];
@@ -179,16 +175,12 @@ class ControllerDVisualDesignerDesigner extends Controller {
                     $frontend_param = '';
                 }
                 
-                if($this->request->server['HTTPS']){
-                    $frontend_url = htmlentities(urlencode(HTTPS_CATALOG.'index.php?route='.$route_info['frontend_route'].$params));
-                }
-                else{
-                    $frontend_url = htmlentities(urlencode(HTTP_CATALOG.'index.php?route='.$route_info['frontend_route'].$params));
-                }
+                $frontend_url = htmlentities(urlencode($this->catalog_url.'index.php?route='.$route_info['frontend_route'].$params));
+        
                 
-                $data['frontend_route'] = $this->url->link('d_visual_designer/designer/frontend','token='.$this->session->data['token'].'&url='.$frontend_url.'&route_id='.$route_info['route_id'].$frontend_param);
+                $data['frontend_route'] = $this->url->link('d_visual_designer/designer/frontend','token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$route_info['config_name'].$frontend_param);
             }
-
+            
             $this->load->model('localisation/language');
 
             $data['languages'] = $this->model_localisation_language->getLanguages();
@@ -205,7 +197,7 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
             $json['rows'] = json_encode($blocks['setting']);
 
-    		$data['base'] = $this->request->server['HTTPS'] ? HTTPS_SERVER : HTTP_SERVER;
+            $data['base'] = $this->store_url;
 
             $data['border_styles'] = array(
                 ''       => $this->language->get('text_default'),
@@ -226,15 +218,11 @@ class ControllerDVisualDesignerDesigner extends Controller {
                 'repeat' => $this->language->get('text_repeat')
             );
 
-    		$this->load->model('d_visual_designer/template');
-
-            $this->load->model('tool/image');
+    	    $this->load->model('tool/image');
 
             $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 
-    		$data['templates'] = $this->model_d_visual_designer_template->getTemplates();
-
-            $data['scripts'] = $this->scripts;
+    	    $data['scripts'] = $this->scripts;
             $data['styles'] = $this->styles;
 
 			$json['content'] = $this->load->view('d_visual_designer/designer.tpl', $data);
@@ -254,17 +242,15 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $url = html_entity_decode($this->request->get['url']);
         }
 
-        if(!empty($this->request->get['route_id'])){
-            $route_id = html_entity_decode($this->request->get['route_id']);
+        if(!empty($this->request->get['route_config'])){
+            $route_config = html_entity_decode($this->request->get['route_config']);
         }
 
         if(!empty($this->request->get['id'])){
             $id = html_entity_decode($this->request->get['id']);
         }
 
-        if(!empty($url)&& !empty($route_id)){
-
-            $this->load->model($this->codename.'/route');
+        if(!empty($url)&& !empty($route_config)){
 
             $data['button_add_block'] = $this->language->get('button_add_block');
             $data['button_add_template'] = $this->language->get('button_add_template');
@@ -285,7 +271,8 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $data['text_success_remove_block'] = $this->language->get('text_success_remove_block');
 
             $data['url'] = $url;
-            $route_info = $this->{'model_'.$this->codename.'_route'}->getRoute($route_id);
+            
+            $route_info = $this->{'model_'.$this->codename.'_designer'}->getRoute($route_config);
 
             if(!empty($route_info['backend_param'])&!empty($id)){
                 $param = $route_info['backend_param'].'='.$id;
@@ -297,7 +284,7 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $data['backend_url'] = $this->url->link($route_info['backend_route'], $param.'&token='.$this->session->data['token']);
             $data['direction'] = $this->language->get('direction');
             $data['lang'] = $this->language->get('code');
-            $data['base'] = $this->request->server['HTTPS'] ? HTTPS_SERVER : HTTP_SERVER;
+            $data['base'] = $this->store_url;
             $data['text_frontend_title'] = $this->language->get('text_frontend_title');
             $this->response->setOutput($this->load->view('d_visual_designer/frontend_editor.tpl',$data));
         }
@@ -500,13 +487,6 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $level = $this->request->post['level'];
         }
 
-        if(isset($this->request->post['setting'])){
-            $setting = $this->request->post['setting'];
-        }
-        else{
-            $setting = array();
-        }
-
         if(isset($this->request->post['blocks'])){
             $blocks = $this->request->post['blocks'];
         }
@@ -525,14 +505,17 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
         if(isset($type)&isset($parent)&isset($level)){
 
+            $setting = $this->{'model_'.$this->codename.'_designer'}->getSettingBlock($type);
+
             $block_info = array(
                 'type' => $type,
                 'parent' => $parent,
-                'setting' => $setting,
+                'setting' => isset($setting['setting'])?$setting['setting']:array(),
                 'block_id' => $block_id
             );
             
             $result = $this->{'model_'.$this->codename.'_designer'}->getFullContent($block_info, $level);
+
             $json['content'] = $result['content'];
             $json['setting'] = json_encode($result['setting']);
             $json['target']  = $block_id;
@@ -572,5 +555,37 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $json['error'] = 'error';
         }
         $this->response->setOutput(json_encode($json));
+    }
+
+    public function validate(){
+        
+        $this->error = array();
+        
+	    $status = $this->config->get($this->codename . '_status');
+        
+	    if(!$status) {
+	        $this->error['status'] = $this->language->get('error_status');
+	    }
+        
+        if(!isset($this->request->post['description'])){
+            $this->error['description'] = $this->language->get('error_description');
+        }
+        
+	    if(empty($this->request->post['url'])) {
+	        $this->error['url'] = $this->language->get('error_url');
+	    }
+		else {
+			$url_info = parse_url(str_replace('&amp;', '&', $this->request->post['url']));
+			$url_params = array();
+
+			parse_str($url_info['query'], $url_params);
+
+			$route_info = $this->{'model_' . $this->codename . '_designer'}->getRouteByBackendRoute($url_params['route']);
+
+			if(empty($route_info)) {
+				$this->error['config'] = $this->language->get('error_config');
+			}
+	    }
+	    return !$this->error;
     }
 }

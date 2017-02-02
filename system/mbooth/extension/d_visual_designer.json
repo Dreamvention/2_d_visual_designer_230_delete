@@ -29,15 +29,23 @@
     },
     "required": {
         "d_shopunity": ">= 3.0.0",
-        "d_elfinder": ">=1.0.0"
+        "d_elfinder": ">= 1.0.0"
     },
     "files": [
         "system/mbooth/extension/d_visual_designer.json",
         "system/mbooth/install/d_visual_designer.xml",
-        "system/mbooth/install/d_visual_designer.sql",
         "system/config/d_visual_designer.php",
 
         "system/config/d_visual_designer_template/default.php",
+        
+        "system/config/d_visual_designer_route/add_category.php",
+        "system/config/d_visual_designer_route/add_information.php",
+        "system/config/d_visual_designer_route/add_product.php",
+        "system/config/d_visual_designer_route/add_template.php",
+        "system/config/d_visual_designer_route/edit_category.php",
+        "system/config/d_visual_designer_route/edit_information.php",
+        "system/config/d_visual_designer_route/edit_product.php",
+        "system/config/d_visual_designer_route/edit_template.php",
         
         "system/config/d_visual_designer/column.php",
         "system/config/d_visual_designer/row.php",

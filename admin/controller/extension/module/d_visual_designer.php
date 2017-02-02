@@ -16,23 +16,13 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
 		parent::__construct($registry);
 		$this->load->model($this->route);
 
-		$this->d_shopunity = (file_exists(DIR_SYSTEM.'mbooth/extension/d_shopunity.json'));
-		
-		if($this->d_shopunity){
-			$this->load->model('d_shopunity/mbooth');
-			$this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
+		$this->d_shopunity = (file_exists(DIR_SYSTEM.'mbooth/extension/d_shopunity.json'));	
 		}
-		
-		
-		
-		$this->store_id = (isset($this->request->get['store_id'])) ? $this->request->get['store_id'] : 0;
-	}
 
 	public function index(){
 
 		if(!$this->d_shopunity){
-		   $this->required();
-		   return false;
+			$this->response->redirect($this->url->link($this->route.'/required', 'codename=d_shopunity&token='.$this->session->data['token'], 'SSL'));
 		}
 
 		$this->load->model('d_shopunity/mbooth');
@@ -56,6 +46,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
 	}
 
 	public function install() {
+		
 			if($this->d_shopunity){
 				$this->load->model('d_shopunity/ocmod');
 				$this->model_d_shopunity_ocmod->setOcmod('d_visual_designer.xml', 1);
@@ -69,8 +60,6 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
 			
 			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/designer');
 			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/designer');
-			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/route');
-			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/route');
 			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/setting');
 			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/setting');
 			$this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/template');
@@ -87,7 +76,6 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
 			$this->load->model('d_shopunity/ocmod');
 			$this->model_d_shopunity_ocmod->setOcmod('d_visual_designer.xml', 0);
 			$this->model_d_shopunity_ocmod->refreshCache();
-
 		}
 
 		$this->{'model_extension_module_'.$this->codename}->dropDatabase();

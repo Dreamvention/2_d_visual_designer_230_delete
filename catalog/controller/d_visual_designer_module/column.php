@@ -39,24 +39,40 @@ class ControllerDVisualDesignerModuleColumn extends Controller {
     }
 	public function setting($setting){
 		
-        $data['entry_size'] = $this->language->get('entry_size');
-		
-		$data['setting'] = $this->model_extension_module_d_visual_designer->getSetting($setting, $this->codename);
-
-		$data['sizes'] = array(
-			'1' => '1/12',
-			'2' => '2/12',
-			'3' => '3/12',
-			'4' => '4/12',
-			'5' => '5/12',
-			'6' => '6/12',
-			'7' => '7/12',
-			'8' => '8/12',
-			'9' => '9/12',
-			'10' => '10/12',
-			'11' => '11/12',
-			'12' => '12/12',
-		);
+		$data['entry_size'] = $this->language->get('entry_size');
+ 		$data['entry_float'] = $this->language->get('entry_float');
+ 		$data['entry_align'] = $this->language->get('entry_align');
+ 		$data['text_enabled'] = $this->language->get('text_enabled');
+ 		$data['text_yes'] = $this->language->get('text_yes');
+ 		$data['text_no'] = $this->language->get('text_no');
+ 		
+ 		$data['setting'] = $this->model_extension_module_d_visual_designer->getSetting($setting, $this->codename);
+ 
+ 		$data['sizes'] = array(
+ 			'1' => '1/12',
+ 			'2' => '2/12',
+ 			'3' => '3/12',
+ 			'4' => '4/12',
+ 			'5' => '5/12',
+ 			'6' => '6/12',
+ 			'7' => '7/12',
+ 			'8' => '8/12',
+ 			'9' => '9/12',
+ 			'10' => '10/12',
+ 			'11' => '11/12',
+ 			'12' => '12/12',
+ 		);
+ 
+ 		$data['floats'] = array(
+ 		    '' => $this->language->get('text_none'),
+             'left' => $this->language->get('text_left'),
+             'right' => $this->language->get('text_right')
+         );
+ 		$data['aligns'] = array(
+             'left' => $this->language->get('text_left'),
+             'center' => $this->language->get('text_center'),
+             'right' => $this->language->get('text_right')
+         );
 
 		if(VERSION>='2.2.0.0') {
 			return $this->load->view($this->route.'_setting', $data);
