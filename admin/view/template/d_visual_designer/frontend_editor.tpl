@@ -17,7 +17,6 @@
         $(document).ready(function(){
             $('iframe').load(function(){
                 $('iframe').contents().find('body').get(0).onsave_content_success = function() {
-                    $('a[id=button-save]').empty();
                     $('a[id=button-save]').button('reset');
                     $('span.notify').html('<?php echo $text_success_update; ?>');
                     $('span.notify').fadeIn('slow');
