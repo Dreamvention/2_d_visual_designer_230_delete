@@ -239,16 +239,15 @@ class ControllerDVisualDesignerTemplate extends Controller {
 			);
 
 		$template_total = $this->{'model_'.$this->codename.'_template'}->getTotalTemplates($filter_data);
-
+        
 		$results = $this->{'model_'.$this->codename.'_template'}->getTemplates($filter_data);
-
+        
 		foreach ($results as $result) {
-
 			$data['templates'][] = array(
 				'template_id' => $result['template_id'],
 				'name'   => $result['name'],
 				'sort_order'   => $result['sort_order'],
-				'edit'       => $this->url->link($this->route.'/edit', 'token=' . $this->session->data['token'] . '&template_id=' . $result['template_id'] . $url, 'SSL')
+				'edit'       => $this->url->link($this->route.'/edit', 'token=' . $this->session->data['token'] . '&config='.$result['config'].'&template_id=' . $result['template_id'] . $url, 'SSL')
 				);
 		}
 
@@ -385,9 +384,14 @@ class ControllerDVisualDesignerTemplate extends Controller {
 		}
 
 		$data['cancel'] = $this->url->link($this->route, 'token=' . $this->session->data['token'] . $url, 'SSL');
-
-    	if (!empty($this->request->get['template_id'])) {
+        
+        $data['config'] = false;
+        
+    	if (!empty($this->request->get['template_id'])&&empty($this->request->get['config'])) {
             $template_info = $this->{'model_'.$this->codename.'_template'}->getTemplate($this->request->get['template_id']);
+        }elseif (isset($this->request->get['template_id'])&&!empty($this->request->get['config'])) {
+            $template_info = $this->{'model_'.$this->codename.'_template'}->getConfigTemplate($this->request->get['template_id'], $this->request->get['config']);
+            $data['config'] = true;
         }
 
 		if (isset($this->request->post['name'])) {
@@ -485,9 +489,6 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $json = array();
 
         $templates = $this->model_d_visual_designer_template->getTemplates();
-        $templates_config = $this->model_d_visual_designer_template->getConfigTemplates();
-
-        $templates = array_merge($templates, $templates_config);
 
         $json['templates'] = array();
         $json['categories'] = array();

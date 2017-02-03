@@ -505,9 +505,6 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         $json = array();
 
         $templates = $this->model_extension_module_d_visual_designer->getTemplates();
-        $templates_config = $this->model_extension_module_d_visual_designer->getConfigTemplates();
-
-        $templates = array_merge($templates, $templates_config);
         
         $json['templates'] = array();
         $json['categories'] = array();
