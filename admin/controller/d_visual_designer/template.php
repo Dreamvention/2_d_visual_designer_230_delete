@@ -246,6 +246,7 @@ class ControllerDVisualDesignerTemplate extends Controller {
 			$data['templates'][] = array(
 				'template_id' => $result['template_id'],
 				'name'   => $result['name'],
+                'config' => $result['config'],
 				'sort_order'   => $result['sort_order'],
 				'edit'       => $this->url->link($this->route.'/edit', 'token=' . $this->session->data['token'] . '&config='.$result['config'].'&template_id=' . $result['template_id'] . $url, 'SSL')
 				);
