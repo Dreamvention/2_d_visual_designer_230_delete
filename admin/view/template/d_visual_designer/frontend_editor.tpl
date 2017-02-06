@@ -123,20 +123,16 @@
     </script>
 </head>
 <body>
-    <div class="">
+    <div class="vd-navbar-container">
         <span class="notify"></span>
             <div class="vd-navbar left-bar">
                 <a id="button-add" class="vd-btn vd-btn-add-block" data-toggle="tooltip" data-placement="bottom" title="<?php echo $button_add_block;?>"></a>
                 <a id="button-add-template" class="vd-btn vd-btn-add-template" data-toggle="tooltip" data-placement="bottom" title="<?php echo $button_add_template;?>"></a>
                 <a id="button-save-template" class=" vd-btn vd-btn-save-template" data-toggle="tooltip" data-placement="bottom" title="<?php echo $button_save_template;?>"></a>
-                <div class="vd-dropdown">
-                    <a class="vd-btn vd-btn-desktop" id="switch-view" data-mode="desktop"></a>
-                    <ul class="vd-dropdown-list">
-                        <li><a id="mobile-size" class="vd-btn vd-btn-mobile" data-mode="mobile" data-toggle="tooltip" data-placement="right" title="<?php echo $button_mobile;?>"></a></li>
-                        <li><a id="tablet-size" class="vd-btn vd-btn-tablet" data-mode="tablet" data-toggle="tooltip" data-placement="right" title="<?php echo $button_tablet;?>"></a></li>
-                        <li><a id="desctop-size" class="vd-btn vd-btn-desktop" data-mode="desktop" data-toggle="tooltip" data-placement="right" title="<?php echo $button_desktop;?>"></a></li>
-                    </ul>
-                </div>
+               <a id="desctop-size" class="vd-btn vd-btn-desktop" data-mode="desktop" data-toggle="tooltip" data-placement="right" title="<?php echo $button_desktop;?>"></a>
+                <a id="tablet-size" class="vd-btn vd-btn-tablet" data-mode="tablet" data-toggle="tooltip" data-placement="right" title="<?php echo $button_tablet;?>"></a>
+                <a id="mobile-size" class="vd-btn vd-btn-mobile" data-mode="mobile" data-toggle="tooltip" data-placement="right" title="<?php echo $button_mobile;?>"></a>
+                
                 
                 
                 
@@ -146,7 +142,7 @@
                 <a id="button-save" data-loading-text="Loading..."><?php echo $button_publish; ?></a>
                 <a id="button-close"><?php echo $button_cancel; ?></a>
             </div>
-        <iframe src="<?php echo $url.'&edit'; ?>" onload="resize_iframe()" frameborder="0" border="0"/>
     </div>
+    <iframe src="<?php echo $url.'&edit'; ?>" onload="resize_iframe()" frameborder="0" border="0"/>
 </body>
 </html>

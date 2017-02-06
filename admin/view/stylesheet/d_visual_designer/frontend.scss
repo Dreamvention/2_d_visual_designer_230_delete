@@ -1,4 +1,4 @@
-@import "loader.scss";
+@import "loader.css";
 
 html,body{
     overflow: hidden;
@@ -8,7 +8,7 @@ html,body{
 span.notify{
     position: absolute;
     z-index: 123;
-    top: 0px;
+    top: 60px;
     left: 0;
 
     display: none;
@@ -24,18 +24,26 @@ span.notify{
 
     line-height: 30px;
 }
+.vd-navbar-container{
+    position:relative;
+    height:60px;
+    background-color:#1F7DC7;
+    box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
+}
 .vd-navbar{
     &.left-bar{
-        position: fixed;
-        left: 5%;
-        top: 5%;
-        background-color: rgb(255, 255, 255);
-        box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
+        float:left;
+        
         border-radius: 3px;
         > a{
+            margin-right:1px;
             &:first-child{
+                background-color:#F5C000;
                 border-top-left-radius:3px;
                 border-bottom-left-radius:3px;
+                &:hover{
+                    background-color:#F5C000;
+                }
             }    
         }
         .vd-dropdown{
@@ -59,8 +67,8 @@ span.notify{
         .vd-btn{
             display: inline-block;
             cursor: pointer;
-            width:40px;
-            height:40px;
+            width:60px;
+            height:60px;
             background-color: #308cd6;
             
             float:left;
@@ -72,19 +80,17 @@ span.notify{
     }
     
     &.right-bar{
-        position: fixed;
-        top: 5%;
-        right: 5%;
+        float:right;
         background-color: rgb(255, 255, 255);
         box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
         border-radius: 3px;
         > a{
             display: block;
             float:left;
-            height: 40px;
+            height: 60px;
             cursor: pointer;
             color:#fff;
-            line-height: 30px;
+            line-height: 50px;
             padding: 5px 13px;
             font-size: 13px;
             font-weight: bold;

@@ -1,4 +1,4 @@
-@import "loader.scss";
+@import "loader.css";
 @import "control.scss";
 @import "component.scss";
 
@@ -125,25 +125,46 @@
 
         border: 0;
         border-bottom: 1px solid #f5f5f5;
-        background-color: #fcfcfc;
+        background-color: #1F7DC7;
 
         & a:hover {
             background-color: #f5f5f5;
         }
 
         & a {
-            display: flex;
-            float: left;
-            flex-direction: row;
+             display: inline-block;
+            cursor: pointer;
+            width:60px;
+            height:60px;
+            background-color: #308cd6;
+            border: none;
+            float:left;
+            margin-right:1px;
 
-            width: 61px;
-            height: 56px;
-            margin: 0;
+            &#button_add{
+                background-image:url('../../image/d_visual_designer/add-block.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+            }
 
-            border: 0;
+            &#button_template{
+               background-image:url('../../image/d_visual_designer/template-add.svg');
+               background-repeat: no-repeat;
+               background-position: center;
+            }
 
-            justify-content: center;
-            align-items: center;
+            &#button_save_template{
+               background-image:url('../../image/d_visual_designer/template-save.svg');
+               background-repeat: no-repeat;
+               background-position: center;
+            }
+            &#button_full_screen{
+
+            }
+            
+            &:hover{
+                background-color: #56a6e6;
+            }
 
             & > i {
                 font-size: 35px;
