@@ -366,10 +366,12 @@ var d_visual_designer = {
     fullscreen:function(designer_id){
         if(this.setting.form.find('#'+designer_id).hasClass('fullscreen')){
             this.setting.form.find('#'+designer_id).removeClass('fullscreen');
+            this.setting.form.find('#'+designer_id).find('#d_visual_designer_nav').find('#button_full_screen').removeClass('active');
             $('body').removeAttr('style');
         }
         else{
             this.setting.form.find('#'+designer_id).addClass('fullscreen');
+             this.setting.form.find('#'+designer_id).find('#d_visual_designer_nav').find('#button_full_screen').addClass('active');
             $('body').attr('style','overflow:hidden');
         }
     },

@@ -124,8 +124,8 @@
         margin: 0;
 
         border: 0;
-        border-bottom: 1px solid #f5f5f5;
         background-color: #1F7DC7;
+
 
         & a:hover {
             background-color: #f5f5f5;
@@ -140,6 +140,15 @@
             border: none;
             float:left;
             margin-right:1px;
+            border-radius:0px;
+            box-shadow: none;
+
+            &#button_add{
+                background-color:#F5C000;
+                &:hover{
+                    background-color:#f7cd32;
+                }
+            }    
 
             &#button_add{
                 background-image:url('../../image/d_visual_designer/add-block.svg');
@@ -159,7 +168,14 @@
                background-position: center;
             }
             &#button_full_screen{
-
+               background-image:url('../../image/d_visual_designer/resize-full.svg');
+               background-repeat: no-repeat;
+               background-position: center;
+               &.active{
+                background-image:url('../../image/d_visual_designer/resize-small.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+               }
             }
             
             &:hover{

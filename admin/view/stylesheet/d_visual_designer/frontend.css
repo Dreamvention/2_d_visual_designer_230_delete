@@ -29,11 +29,9 @@ span.notify {
   .vd-navbar.left-bar > a {
     margin-right: 1px; }
     .vd-navbar.left-bar > a:first-child {
-      background-color: #F5C000;
-      border-top-left-radius: 3px;
-      border-bottom-left-radius: 3px; }
+      background-color: #F5C000; }
       .vd-navbar.left-bar > a:first-child:hover {
-        background-color: #F5C000; }
+        background-color: #f7cd32; }
   .vd-navbar.left-bar .vd-dropdown > a {
     border-top-right-radius: 3px; }
   .vd-navbar.left-bar .vd-dropdown:not(:hover) > a {

@@ -440,7 +440,6 @@
     min-height: 55px;
     margin: 0;
     border: 0;
-    border-bottom: 1px solid #f5f5f5;
     background-color: #1F7DC7; }
     .content #d_visual_designer_nav a:hover {
       background-color: #f5f5f5; }
@@ -452,7 +451,13 @@
       background-color: #308cd6;
       border: none;
       float: left;
-      margin-right: 1px; }
+      margin-right: 1px;
+      border-radius: 0px;
+      box-shadow: none; }
+      .content #d_visual_designer_nav a#button_add {
+        background-color: #F5C000; }
+        .content #d_visual_designer_nav a#button_add:hover {
+          background-color: #f7cd32; }
       .content #d_visual_designer_nav a#button_add {
         background-image: url("../../image/d_visual_designer/add-block.svg");
         background-repeat: no-repeat;
@@ -465,6 +470,14 @@
         background-image: url("../../image/d_visual_designer/template-save.svg");
         background-repeat: no-repeat;
         background-position: center; }
+      .content #d_visual_designer_nav a#button_full_screen {
+        background-image: url("../../image/d_visual_designer/resize-full.svg");
+        background-repeat: no-repeat;
+        background-position: center; }
+        .content #d_visual_designer_nav a#button_full_screen.active {
+          background-image: url("../../image/d_visual_designer/resize-small.svg");
+          background-repeat: no-repeat;
+          background-position: center; }
       .content #d_visual_designer_nav a:hover {
         background-color: #56a6e6; }
       .content #d_visual_designer_nav a > i {
