@@ -21,7 +21,26 @@ span.notify {
   position: relative;
   height: 60px;
   background-color: #1F7DC7;
-  box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2); }
+  box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
+  z-index: 3; }
+
+[id=visual-designer-preloader] {
+  background: #000;
+  bottom: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+  filter: alpha(opacity=50);
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1; }
+
+[id=visual-designer-preloader-icon] {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -32px 0 0 -32px;
+  z-index: 2; }
 
 .vd-navbar.left-bar {
   float: left;

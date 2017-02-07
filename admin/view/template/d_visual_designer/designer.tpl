@@ -14,7 +14,6 @@
     <?php } ?>
 </div>
 <div class="content vd" id="<?php echo $designer_id; ?>" style="display:none">
-    <div class="title"><?php echo $text_designer; ?></div>
     <div class="row" id="d_visual_designer_nav">
         <div class="pull-left">
             <a id="button_add" class="btn btn-default"></a>

@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -154,6 +154,10 @@
         "image/catalog/d_visual_designer"
     ],
     "changelog": [
+        {
+            "version":"2.0.5",
+            "change":"1. Added loader on frontend editor. 2.Fix Styles."
+        },   
         {
             "version":"2.0.4",
             "change":"1. Divided adding and saving a template. \n\r2. Redesign save template. \n\r3.Added categories of blocks. \n\r4.Added categories of templates \n\r4.Fix bugs."

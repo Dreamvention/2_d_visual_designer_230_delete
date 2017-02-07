@@ -29,7 +29,27 @@ span.notify{
     height:60px;
     background-color:#1F7DC7;
     box-shadow: 0.707px 0.707px 3px 0px rgba(0, 0, 0, 0.2);
+    z-index: 3;
 }
+[id=visual-designer-preloader]{
+    background: #000;
+    bottom: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+[id=visual-designer-preloader-icon]{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -32px 0 0 -32px;
+    z-index: 2;
+}
+
 .vd-navbar{
     &.left-bar{
         float:left;
@@ -160,52 +180,6 @@ span.notify{
         background-repeat: no-repeat;
         background-position: center;
     }
-    // > div{
-    //     display: flex;
-    // 
-    //     height: 60px;
-    // 
-    //     align-items: center;
-    //     > button{
-    //         &:hover, &:active, &:focus, &:active:hover, &:active:focus{
-    //         }
-    //     }
-    //     > a{
-    //         display: flex;
-    //         float: left;
-    //         flex-direction: row;
-    // 
-    //         width: 61px;
-    //         height: 60px;
-    //         margin: 0;
-    // 
-    //         border: 0;
-    //         border-right: 1px solid #469EE8;
-    //         background-color: #308CD7;
-    // 
-    //         justify-content: center;
-    //         align-items: center;
-    //         &:first{
-    //             border-left:1px solid #308CD7;
-    //         }
-    //         &:hover{
-    //             cursor:pointer;
-    // 
-    //             background-color: #56a6e6;
-    //         }
-    //         &#button-close{
-    //             background: url('../../image/d_visual_designer/cross.svg') no-repeat center;
-    //             &:hover{
-    //                 cursor:pointer;
-    // 
-    //                 background-color: #56a6e6;
-    //             }
-    //         }
-    //         > i{
-    //             color: #fff;
-    //         }
-    //     }
-    // }
 }
 
 iframe{
