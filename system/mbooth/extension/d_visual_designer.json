@@ -156,7 +156,7 @@
     "changelog": [
         {
             "version":"2.0.5",
-            "change":"1. Added loader on frontend editor. 2.Fix Styles."
+            "change":"1. Added loader on frontend editor. \n\r2.Fix Styles."
         },   
         {
             "version":"2.0.4",
