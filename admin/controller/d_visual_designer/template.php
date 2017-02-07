@@ -606,10 +606,10 @@ class ControllerDVisualDesignerTemplate extends Controller {
         } else {
             $data['base'] = HTTP_CATALOG;
         }
-        $this->load->model('module/'.$this->codename);
+        $this->load->model('extension/module/'.$this->codename);
         $this->load->model('user/user_group');
-        $this->model_user_user_group->addPermission($this->{'model_module_'.$this->codename}->getGroupId(), 'access', 'common/d_elfinder');
-        $this->model_user_user_group->addPermission($this->{'model_module_'.$this->codename}->getGroupId(), 'modify', 'common/d_elfinder'); 
+        $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', 'common/d_elfinder');
+        $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', 'common/d_elfinder'); 
         
         $data['route'] = 'common/d_elfinder';
         
