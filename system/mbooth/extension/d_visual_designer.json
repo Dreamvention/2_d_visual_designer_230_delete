@@ -152,7 +152,7 @@
     "changelog": [
         {
             "version":"2.0.5",
-            "change":"1. Added loader on frontend editor. \n\r2.Fix Styles."
+            "change":"1. Added loader on frontend editor. \n\r2.Fix Styles. \n\r3.Add image to template list"
         },   
         {
             "version":"2.0.4",
