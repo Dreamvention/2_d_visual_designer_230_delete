@@ -90,3 +90,4 @@ $_['entry_sort_order']             = 'Sort order';
 
 //error
 $_['error_name']                   = 'Template Name must be greater than 3 and less than 255 characters!';
+$_['error_permission']             = 'Warning: You do not have permission to modify!';

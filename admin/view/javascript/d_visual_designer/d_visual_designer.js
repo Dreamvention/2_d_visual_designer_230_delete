@@ -110,8 +110,7 @@ var d_visual_designer = {
                 }
             });	
         });
-        this.initAlertClose();
-        
+        this.initAlertClose();    
     },
     //Инициализация шаблонов
     initTemplate:function(template){

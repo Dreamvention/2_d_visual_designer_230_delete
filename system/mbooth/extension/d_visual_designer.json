@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -28,7 +28,7 @@
         "url": "https://dreamvention.com/support"
     },
     "required": {
-        "d_shopunity": ">= 3.0.0",
+        "d_shopunity": ">= 3.0.41",
         "d_elfinder": ">= 1.0.0"
     },
     "files": [
@@ -150,6 +150,10 @@
         "catalog/view/javascript/d_visual_designer"
     ],
     "changelog": [
+        {
+            "version":"2.0.6",
+            "change":"1. Added permission on frontend editor. \n\r2.Fix Bugs."
+        },   
         {
             "version":"2.0.5",
             "change":"1. Added loader on frontend editor. \n\r2.Fix Styles. \n\r3.Add image to template list"
