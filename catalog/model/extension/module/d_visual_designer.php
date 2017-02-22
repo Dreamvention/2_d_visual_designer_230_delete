@@ -407,6 +407,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         else{
             $data['size'] = '12';
         }
+
         if(!empty($setting['offset']) && is_numeric($setting['offset'])){
             $data['offset'] = $setting['offset'];
         }
@@ -920,9 +921,20 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         }
     }
     public function getSetting($setting, $type){
+
+        $this->config->load('d_visual_designer');
+
+        $setting_main = $this->config->get('d_visual_designer_default_block_setting');
+
         $setting_default = $this->getSettingBlock($type);
 
-        $result = $setting_default['setting'];
+        $result = $setting_main;
+
+        if(!empty($setting_default)){
+            foreach ($setting_default as $key => $value) {
+                $result[$key] = $value;
+            }
+        }
 
         if(!empty($setting)){
             foreach ($setting as $key => $value) {

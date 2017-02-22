@@ -193,9 +193,10 @@ class ModelDVisualDesignerDesigner extends Model {
         }
 
         $tag = $m[2];
-        $attr = $this->shortcode_parse_atts( $m[3] );
 
         $type=str_replace('vd_','',$tag);
+
+        $attr = $this->getSetting($this->shortcode_parse_atts( $m[3]), $type);
 
         if ( !empty( $m[5] ) ) {
             $current_block = $type.'_'.$this->getRandomString();
@@ -530,13 +531,25 @@ class ModelDVisualDesignerDesigner extends Model {
     }
 
     public function getSetting($setting, $type){
+
+        $this->config->load('d_visual_designer');
+
+        $setting_main = $this->config->get('d_visual_designer_default_block_setting');
+        
         $setting_default = $this->getSettingBlock($type);
 
-        $result = $setting_default['setting'];
-        if(!empty($setting)){
-            foreach ($setting as $key => $value){
+        $result = $setting_main;
+
+        if(!empty($setting_default)){
+            foreach ($setting_default as $key => $value) {
                 $result[$key] = $value;
-            }  
+            }
+        }
+
+        if(!empty($setting)){
+            foreach ($setting as $key => $value) {
+                $result[$key] = $value;
+            }
         }
 
         return $result;
