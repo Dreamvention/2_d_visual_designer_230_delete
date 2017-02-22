@@ -29,6 +29,7 @@ $_['button_remove']    = true;
 //Настройки по умолчанию
 $_['setting']          = array(
     'size'    => 12,
+    'offset'    => 0,
     'float'   => '',
     'align'   => 'center'
 );

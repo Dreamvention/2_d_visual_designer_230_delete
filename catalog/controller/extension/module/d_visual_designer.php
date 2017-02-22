@@ -132,6 +132,9 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $data['text_top'] = $this->language->get('text_top');
             $data['text_bottom'] = $this->language->get('text_bottom');
 
+            $data['text_horizontal'] = $this->language->get('text_horizontal');
+            $data['text_vertical'] = $this->language->get('text_vertical');
+
             $data['entry_border_color'] = $this->language->get('entry_border_color');
             $data['entry_border_style'] = $this->language->get('entry_border_style');
             $data['entry_border_radius'] = $this->language->get('entry_border_radius');
@@ -146,6 +149,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $data['entry_border'] = $this->language->get('entry_border');
             $data['entry_name'] = $this->language->get('entry_name');
             $data['entry_image_style'] = $this->language->get('entry_image_style');
+            $data['entry_image_position'] = $this->language->get('entry_image_position');
             $data['entry_category'] = $this->language->get('entry_category');
             $data['entry_image_template'] = $this->language->get('entry_image_template');
             $data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -198,6 +202,18 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $this->load->model('tool/image');
 
             $data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+
+            $data['image_horizontal_positions'] = array(
+                'left' => $this->language->get('text_position_left'),
+                'center' => $this->language->get('text_position_center'),
+                'right' => $this->language->get('text_position_right')
+            );
+
+            $data['image_vertical_positions'] = array(
+                'top' => $this->language->get('text_position_top'),
+                'center' => $this->language->get('text_position_center'),
+                'bottom' => $this->language->get('text_position_bottom')
+            );
 
             $data['styles'] = array(
                 'dotted' => $this->language->get('text_dotted'),
