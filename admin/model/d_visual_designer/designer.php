@@ -64,50 +64,38 @@ class ModelDVisualDesignerDesigner extends Model {
         $text = preg_replace("/[\x{00a0}\x{200b}]+/u", " ", $text);
 
         if ( preg_match_all($pattern, $text, $match, PREG_SET_ORDER) ) {
+            $params = '';
             foreach ($match as $m) {
                 if (!empty($m[1])) {
-                    $atts[strtolower($m[1])] = stripcslashes($m[2]);
+                    $params .= strtolower($m[1]).'='.stripcslashes($m[2]).'&';
                 } elseif (!empty($m[3])) {
-                    $res = $this->parseName(($m[3]),($m[4]),$parse_name);
-                    $atts = array_merge_recursive($atts,$res);
-                } elseif (!empty($m[5])) {
-                    $m[6] = preg_replace('/^"/','',$m[6]);
-                    $m[6] = preg_replace('/$"/','',$m[6]);
-                    $atts[strtolower($m[5])] = stripcslashes($m[6]);
-                } elseif (isset($m[7]) and strlen($m[7])) {
-                    $atts[] = stripcslashes($m[7]);
-                } elseif (isset($m[8])) {
-                    $atts[] = stripcslashes($m[8]);
+                    $params .= $this->parseName($m[3], $m[4], $parse_name);
                 }
             }
+            parse_str($params, $atts);
         } else {
             $atts = ltrim($text);
         }
         return $atts;
+        
     }
 
     public function parseName($name,$value,$parse_name){
-        $pos = strpos($name, '::');
+         $pos = strpos($name, '::');
         if($pos === false){
-            $value = $this->unescape($value);
 
-            return array($name => $value);
+            $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+            $value = $this->unescape($value);
         }
         else{
             $name = str_replace('::','[',$name);
             $name = str_replace(':','][',$name);
             $name .= ']';
-            
-            $value = $this->unescape($value);
 
-            if($parse_name){
-                parse_str($name.'='.$value,$res);
-            }
-            else{
-                $res = array($name => $value);
-            }
-            return $res;
+            $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
+            $value = $this->unescape($value);
         }
+        return $name.'='.$value.'&';
     }
 
     public function getRandomString(){
@@ -540,8 +528,8 @@ class ModelDVisualDesignerDesigner extends Model {
 
         $result = $setting_main;
 
-        if(!empty($setting_default)){
-            foreach ($setting_default as $key => $value) {
+        if(!empty($setting_default['setting'])){
+            foreach ($setting_default['setting'] as $key => $value) {
                 $result[$key] = $value;
             }
         }

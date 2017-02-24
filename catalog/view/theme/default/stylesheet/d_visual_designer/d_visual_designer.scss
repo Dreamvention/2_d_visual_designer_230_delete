@@ -10,7 +10,7 @@
 #tab-description {
     overflow: visible;
     .vd {
-        div,
+        div:not(.form-group),
         p {
             margin-bottom: 0;
         }

@@ -717,7 +717,17 @@ $(document).on('click', 'a[data-toggle=\'image\']', function(e){
         $(element).popover('hide', function() {
             $('.popover').remove();
         });
+        $('.block-container').hover(function(){
+            console.log('hover');
+            var block_id = $(this).data('id');
+
+            $('.control[data-control='+block_id+'] a').effect('bounce');
+        },function(){
+            
+        });
     });
+
+
 
     $('#button-clear').on('click', function() {
         $(element).find('img').attr('src', $(element).find('img').attr('data-placeholder'));

@@ -8481,7 +8481,7 @@
   src: url("fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("fonts/glyphicons-halflings-regular.woff") format("woff"); }
 #tab-description {
   overflow: visible; }
-  #tab-description .vd div,
+  #tab-description .vd div:not(.form-group),
   #tab-description .vd p {
     margin-bottom: 0; }
 
