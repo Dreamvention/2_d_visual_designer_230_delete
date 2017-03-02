@@ -30,7 +30,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
     }
 
     public function index($setting) {
-    
+
         if(!empty($setting['config'])){
             $route_info = $this->{'model_extension_module_'.$this->codename}->getRoute($setting['config']);
         }
@@ -62,7 +62,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         $this->document->addStyle('catalog/view/javascript/d_visual_designer/library/icon-fonts/weather-icons-1.2.0/css/weather-icons.min.css');   
         
         $this->document->addStyle('catalog/view/javascript/d_visual_designer/library/owl-carousel/owl.transitions.css');
-                
+
         if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/stylesheet/d_visual_designer/animate.css')) {
             $this->document->addStyle('catalog/view/theme/' . $this->theme . '/stylesheet/d_visual_designer/animate.css');
         } else {
@@ -126,7 +126,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $data['text_layout'] = $this->language->get('text_layout');
             $data['entry_size'] = $this->language->get('entry_size');
             $data['text_set_custom'] = $this->language->get('text_set_custom');
-        
+
             $data['text_left'] = $this->language->get('text_left');
             $data['text_right'] = $this->language->get('text_right');
             $data['text_top'] = $this->language->get('text_top');
@@ -207,13 +207,13 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'left' => $this->language->get('text_position_left'),
                 'center' => $this->language->get('text_position_center'),
                 'right' => $this->language->get('text_position_right')
-            );
+                );
 
             $data['image_vertical_positions'] = array(
                 'top' => $this->language->get('text_position_top'),
                 'center' => $this->language->get('text_position_center'),
                 'bottom' => $this->language->get('text_position_bottom')
-            );
+                );
 
             $data['styles'] = array(
                 'dotted' => $this->language->get('text_dotted'),
@@ -224,14 +224,14 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'ridge'  => $this->language->get('text_ridge'),
                 'inset'  => $this->language->get('text_inset'),
                 'outset' => $this->language->get('text_outset')
-            );
+                );
 
             $data['image_styles'] = array(
                 'cover' => $this->language->get('text_cover'),
                 'contain' => $this->language->get('text_contain'),
                 'no-repeat'  => $this->language->get('text_no_repeat'),
                 'repeat' => $this->language->get('text_repeat')
-            );
+                );
 
             return $this->load->view('d_visual_designer/designer', $data);
         }
@@ -242,10 +242,10 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             } else {
                 $this->document->addStyle('catalog/view/theme/default/stylesheet/d_visual_designer/frontend.css');
             }
-                            
-                $frontend_url = htmlentities(urlencode($this->store_url.'index.php?route='.$route_info['frontend_route'].'&'.$route_info['frontend_param'].'='.$setting['id']));
-                $edit_url = $this->store_url.'admin/index.php?route=d_visual_designer/designer/frontend&token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$setting['config'].'&id='.$setting['id'];
-           
+
+            $frontend_url = htmlentities(urlencode($this->store_url.'index.php?route='.$route_info['frontend_route'].'&'.$route_info['frontend_param'].'='.$setting['id']));
+            $edit_url = $this->store_url.'admin/index.php?route=d_visual_designer/designer/frontend&token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$setting['config'].'&id='.$setting['id'];
+
             $setting['content'] = '<div class="btn-group-xs btn-edit" ><a class="btn btn-default " href="'.$edit_url.'" target="_blank"><i class="fa fa-pencil"></i> '.$this->language->get('text_edit').'</a><br/><br/></div>'.$setting['content'];
             return $setting['content'];
         }
@@ -335,7 +335,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                             'category' => ucfirst($setting['category']),
                             'description' => $this->language->get('text_description'),
                             'image' => $image
-                        );
+                            );
                     }
                 }
 
@@ -396,7 +396,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'setting' => $setting_layout,
                 'items' => $items,
                 'parent' => $parent
-            );
+                );
 
             $json['items'] = $this->load->controller('d_visual_designer_module/'.$type.'/layout',$block_data);
             $json['success'] = 'success';
@@ -429,7 +429,9 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
 
             $content = $this->{'model_extension_module_'.$this->codename}->getContent($setting_block['child'], $setting_child_block, $key, $level, 1, 1);
 
-            $setting = array($key => array('type'=> $setting_block['child'], 'parent' => $parent, 'setting' => $setting_child_block['setting'], 'child' => true));
+            $setting = $this->{'model_extension_module_'.$this->codename}->getSetting(array(), $setting_block['child']);
+
+            $setting = array($key => array('type'=> $setting_block['child'], 'parent' => $parent, 'setting' => $setting, 'child' => true));
 
             $content = str_replace('{{{inner-block}}}','',$content);
             $json['content'] = $content;
@@ -467,16 +469,16 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
 
         if(isset($type)&isset($parent)&isset($level)){
 
-            $setting = $this->{'model_extension_module_'.$this->codename}->getSettingBlock($type);
+            $setting = $this->{'model_extension_module_'.$this->codename}->getSetting(array(), $type);
 
             $block_info = array(
                 'type' => $type,
                 'parent' => $parent,
-                'setting' => isset($setting['setting'])?$setting['setting']:array(),
+                'setting' => $setting,
                 'block_id' => $block_id
-            );
+                );
             $result = $this->{'model_extension_module_'.$this->codename}->getFullContent($block_info, $level);
-   
+
             $json['content'] = $result['content'];
             $json['target'] = $block_id;
             $json['setting'] = json_encode($result['setting']);
@@ -545,7 +547,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'image' => $thumb,
                 'category' => ucfirst($template['category']),
                 'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
-            );
+                );
         }
 
         $json['success'] = 'success';
@@ -606,8 +608,8 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         $this->user = new Cart\User($this->registry);
         
         if (!$this->user->hasPermission('modify', 'catalog/product')) {
-			$permission = false;
-		}
+            $permission = false;
+        }
         else{
             $permission = true;
         }
@@ -635,12 +637,12 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         if(!empty($this->request->get['id'])){
             $category_id = $this->request->get['id'];
         }
-        
+
         $this->user = new Cart\User($this->registry);
-        
+
         if (!$this->user->hasPermission('modify', 'catalog/category')) {
-		    $permission = false;
-		}
+            $permission = false;
+        }
         else{
             $permission = true;
         }
@@ -668,12 +670,12 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         if(!empty($this->request->get['id'])){
             $information_id = $this->request->get['id'];
         }
-        
+
         $this->user = new Cart\User($this->registry);
-        
+
         if (!$this->user->hasPermission('modify', 'catalog/information')) {
-		          $permission = false;
-		}
+            $permission = false;
+        }
         else{
             $permission = true;
         }
@@ -699,7 +701,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         if(isset($this->request->post['content'])){
             $content = $this->request->post['content'];
         }
-        
+
         if(isset($this->request->post['name'])){
             $name = $this->request->post['name'];
         } 
@@ -707,7 +709,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         if(isset($this->request->post['image'])){
             $image = $this->request->post['image'];
         } 
-        
+
         if(isset($this->request->post['category'])){
             $category = $this->request->post['category'];
         }  
@@ -724,7 +726,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'category' => $category,
                 'content' => $content,
                 'sort_order' => $sort_order
-            );
+                );
 
             $this->{'model_extension_module_'.$this->codename}->addTemplate($template_info);
             $json['success'] = 'success';
@@ -741,7 +743,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         if ((utf8_strlen($this->request->post['name']) < 1) || (utf8_strlen($this->request->post['name']) > 255)) {
             $this->error['name'] = $this->language->get('error_template_name');
         }
-        
+
         return !$this->error;
     }
 

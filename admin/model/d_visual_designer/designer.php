@@ -81,7 +81,7 @@ class ModelDVisualDesignerDesigner extends Model {
     }
 
     public function parseName($name,$value,$parse_name){
-         $pos = strpos($name, '::');
+        $pos = strpos($name, '::');
         if($pos === false){
 
             $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
@@ -169,7 +169,7 @@ class ModelDVisualDesignerDesigner extends Model {
             'type' => $type,
             'content' => $m[5],
             'block_id' => $block_id
-        );
+            );
 
         $this->settingChild[] = $attr;
     }
@@ -188,7 +188,7 @@ class ModelDVisualDesignerDesigner extends Model {
 
         if ( !empty( $m[5] ) ) {
             $current_block = $type.'_'.$this->getRandomString();
-            
+
             if(!isset($this->sort_orders[$this->level])){
                 $this->sort_orders[$this->level] = 0;
             }
@@ -219,7 +219,7 @@ class ModelDVisualDesignerDesigner extends Model {
                 'parent' => $parent_id,
                 'sort_order' => $this->sort_orders[$this->level],
                 'type' => $type
-            );
+                );
 
             if($parent_id != ''){
                 $setting_parent = $this->getSettingBlock($this->settingJS[$parent_id]['type']);
@@ -265,7 +265,7 @@ class ModelDVisualDesignerDesigner extends Model {
                 'sort_order' => $this->sort_order++,
                 'parent' => $this->parent,
                 'type' => $type
-            );
+                );
 
             if($this->parent != ''){
                 $setting_parent = $this->getSettingBlock($this->settingJS[$this->parent]['type']);
@@ -403,7 +403,7 @@ class ModelDVisualDesignerDesigner extends Model {
                 $result = $this->getContentBySetting($blocks, $child_id);
                 $content_child .= $result;
                 if(!empty($blocks['items'][$child_id]['setting'])){
-                     $setting_block[$child_id] = $blocks['items'][$child_id]['setting'];
+                    $setting_block[$child_id] = $blocks['items'][$child_id]['setting'];
                 }
                 else{
                     $setting_block[$child_id] = array();
@@ -433,7 +433,7 @@ class ModelDVisualDesignerDesigner extends Model {
             }
 
             $content = $this->getContent($block_info['type'], $block_setting, $block_info['block_id'], $block_info['level'],
-            $setting_block['child_blocks']?1:0);
+                $setting_block['child_blocks']?1:0);
             $content = str_replace('{{{inner-block}}}', '', $content);
         }
 
@@ -452,9 +452,9 @@ class ModelDVisualDesignerDesigner extends Model {
             $child_block =array(
                 'type' => 'row',
                 'parent'=> '',
-                'setting' => $setting_main_block['setting'],
+                'setting' => $this->getSetting(array(), 'row'),
                 'block_id' => 'row_'.$this->getRandomString()
-            );
+                );
             $result_main = $this->getFullContent($child_block, ($level), $settingJS);
 
             $settingJS = $result_main['setting'];
@@ -471,16 +471,16 @@ class ModelDVisualDesignerDesigner extends Model {
                 'type' => $block_info['type'],
                 'parent' => $block_info['parent'],
                 'setting' => $block_info['setting']
-            );
+                );
             $this->parent = $block_info['block_id'];
             $setting_child_block = $this->getSettingBlock($setting_block['child']);
 
             $child_block =array(
                 'type' => $setting_block['child'],
                 'parent'=> $block_info['block_id'],
-                'setting' => $setting_child_block['setting'],
+                'setting' => $this->getSetting(array(), $setting_block['child']),
                 'block_id' => $setting_block['child'].'_'.$this->getRandomString()
-            );
+                );
             $this->parent = $block_info['block_id'];
 
             $result = $this->getFullContent($child_block, ($level+1), $settingJS);
@@ -488,7 +488,7 @@ class ModelDVisualDesignerDesigner extends Model {
             $content_child = $result['content'];
             $settingJS = $settingJS+$result['setting'];
             $block_info['setting']['setting_child'] = $result['setting_child'];
-            
+
             $content_main = $this->getContent($block_info['type'], $block_info['setting'], $block_info['block_id'], $level, ($level == 0)?2:1, 1);
             $content = str_replace('{{{inner-block}}}', $content_child, $content_main);
         }
@@ -497,7 +497,7 @@ class ModelDVisualDesignerDesigner extends Model {
                 'type' => $block_info['type'],
                 'parent' => $block_info['parent'],
                 'setting' => $block_info['setting']
-            );
+                );
             $settingChild = $block_info['setting'];
             if(!empty($settingJS[$block_info['parent']])){
                 $setting_parent = $this->getSettingBlock($settingJS[$block_info['parent']]['type']);
@@ -523,7 +523,7 @@ class ModelDVisualDesignerDesigner extends Model {
         $this->config->load('d_visual_designer');
 
         $setting_main = $this->config->get('d_visual_designer_default_block_setting');
-        
+
         $setting_default = $this->getSettingBlock($type);
 
         $result = $setting_main;
@@ -542,7 +542,7 @@ class ModelDVisualDesignerDesigner extends Model {
 
         return $result;
     }
-    
+
     public function getBlocks(){
         $dir = DIR_APPLICATION.'controller/d_visual_designer_module';
         $files = scandir($dir);
@@ -570,7 +570,7 @@ class ModelDVisualDesignerDesigner extends Model {
 
         return $results;
     }
-    
+
     public function getRouteByBackendRoute($backend_route){
         $routes = $this->getRoutes();
         foreach ($routes as $config => $route) {
@@ -581,36 +581,36 @@ class ModelDVisualDesignerDesigner extends Model {
         }
         return array();
     }
-    
+
     public function getRoutes(){
         $dir = DIR_CONFIG.'d_visual_designer_route/*.php';
-        
+
         $files = glob($dir);
 
         $route_data = array();
-        
+
         foreach($files as $file){
-    
-                $name = basename($file, '.php');
-                $route_info = $this->getRoute($name);
-                $route_data[$name] = $route_info;
+
+            $name = basename($file, '.php');
+            $route_info = $this->getRoute($name);
+            $route_data[$name] = $route_info;
 
         }
 
         return $route_data;
     }
-        
+
     public function getRoute($name){
-    
+
         $results = array();
 
         $file = DIR_CONFIG.'d_visual_designer_route/'.$name.'.php';
-        
+
         if (file_exists($file)) {
             $_ = array();
 
             require($file);
-            
+
             $results = array_merge($results, $_);
         }
 

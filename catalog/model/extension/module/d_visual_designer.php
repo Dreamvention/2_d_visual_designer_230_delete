@@ -24,9 +24,9 @@ class ModelExtensionModuleDVisualDesigner extends Model {
     
     private $error = array();
 
-	private $sort = 'name';
+    private $sort = 'name';
 
-	private $order = 'ASC';
+    private $order = 'ASC';
 
     public function parseDescription($data){
         $this->setting = array();
@@ -55,7 +55,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             'id' => $data['id'],
             'config' => $data['config'],
             'description' => $data['content']
-        );
+            );
 
         $content = $this->load->controller('extension/module/d_visual_designer', $data);
 
@@ -214,7 +214,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
     }
 
     public function parseName($name,$value,$parse_name){
-         $pos = strpos($name, '::');
+        $pos = strpos($name, '::');
         if($pos === false){
 
             $value = html_entity_decode($value, ENT_QUOTES, 'UTF-8');
@@ -263,16 +263,16 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         $attr = $this->getSetting($this->shortcode_parse_atts( $m[3]), $type);
 
         if ( !empty( $m[5] ) ) {
-            
+
             $current_block = $type.'_'.$this->getRandomString();
-            
+
             if(!isset($this->sort_orders[$this->level])){
                 $this->sort_orders[$this->level] = 0;
             }
             else{
                 $this->sort_orders[$this->level]++;
             }
-                        
+
             $attr_tmp = $attr;
 
             $attr_tmp['setting_child'] = $this->getChildSetting($m[5], $type);
@@ -296,7 +296,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 'parent' => $parent_id,
                 'sort_order' => $this->sort_orders[$this->level],
                 'type' => $type
-            );
+                );
 
             if($parent_id != ''){
                 $setting_parent = $this->getSettingBlock($this->settingJS[$parent_id]['type']);
@@ -343,7 +343,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 'sort_order' => $this->sort_order++,
                 'parent' => $this->parent,
                 'type' => $type
-            );
+                );
 
             if($this->parent != ''){
                 $setting_parent = $this->getSettingBlock($this->settingJS[$this->parent]['type']);
@@ -410,7 +410,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         else{
             $data['level'] = 0;
         }
-        
+
         if($this->validateEdit($this->config_name)){
             $data['permission'] = true;
         }
@@ -460,7 +460,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 
     public function loadView($route, $data){
         $route = rtrim($route, ".tpl");
-        
+
         return $this->load->view($route, $data);
     }
 
@@ -471,7 +471,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         $this->level--;
         return $content;
     }
-    
+
     public function validateEdit($config_name, $edit = true){
 
         $this->error = array();
@@ -493,7 +493,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             'extension/module/d_visual_designer/getContent',
             'extension/module/d_visual_designer/getChildBlock'
             );
-        
+
         if(isset($this->request->get['route'])){
             $route = $this->request->get['route'];
         }
@@ -524,7 +524,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         }
         return !$this->error;
     }
-    
+
     public function getSettingBlock($type){
 
         $results = array();
@@ -588,9 +588,9 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             $child_block =array(
                 'type' => 'row',
                 'parent'=> '',
-                'setting' => $setting_main_block['setting'],
+                'setting' => $this->getSetting(array(), 'row'),
                 'block_id' => 'row_'.$this->getRandomString()
-            );
+                );
             $result_main = $this->getFullContent($child_block, ($level), $settingJS);
 
             $content_child = $result_main['content'];
@@ -610,16 +610,16 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 'type' => $block_info['type'],
                 'parent' => $block_info['parent'],
                 'setting' => $block_info['setting']
-            );
+                );
             $this->parent = $block_info['block_id'];
             $setting_child_block = $this->getSettingBlock($setting_block['child']);
 
             $child_block =array(
                 'type' => $setting_block['child'],
                 'parent'=> $block_info['block_id'],
-                'setting' => $setting_child_block['setting'],
+                'setting' => $this->getSetting(array(), $setting_block['child']),
                 'block_id' => $setting_block['child'].'_'.$this->getRandomString()
-            );
+                );
             $this->parent = $block_info['block_id'];
 
             $result = $this->getFullContent($child_block, ($level+1), $settingJS);
@@ -635,7 +635,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 'type' => $block_info['type'],
                 'parent' => $block_info['parent'],
                 'setting' => $block_info['setting']
-            );
+                );
             $settingChild = $block_info['setting'];
             if(!empty($settingJS[$block_info['parent']])){
                 $setting_parent = $this->getSettingBlock($settingJS[$block_info['parent']]['type']);
@@ -666,44 +666,44 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         }
         return array();
     }
-    
+
     public function getRoutes(){
         $dir = DIR_CONFIG.'d_visual_designer_route/*.php';
-        
+
         $files = glob($dir);
-    
+
         $route_data = array();
-        
+
         foreach($files as $file){
-    
-                $name = basename($file, '.php');
-                $route_info = $this->getRoute($name);
-                $route_data[$name] = $route_info;
-    
+
+            $name = basename($file, '.php');
+            $route_info = $this->getRoute($name);
+            $route_data[$name] = $route_info;
+
         }
-    
+
         return $route_data;
     }
-        
+
     public function getRoute($name){
-    
+
         $results = array();
-    
+
         $file = DIR_CONFIG.'d_visual_designer_route/'.$name.'.php';
-        
+
         if (file_exists($file)) {
             $_ = array();
-    
+
             require($file);
-            
+
             $results = array_merge($results, $_);
         }
-    
+
         return $results;
     }
-    
+
     public function getConfigTemplates(){
-        
+
         $dir = DIR_CONFIG.'d_visual_designer_template/';
         if(is_dir($dir)){
             $files = scandir($dir);
@@ -712,103 +712,103 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             $files = array();
         }
         $template_data = array();
-        
+
         foreach($files as $file){
             if(strlen($file) > 1 && strpos( $file, '.php')){
                 $_ = array();
-                
+
                 $results = array();
-    
+
                 require($dir.$file);
-    
+
                 $results = array_merge($results, $_);
-                
+
                 $templates = $results['d_visual_designer_templates'];
                 foreach ($templates as $template) {
                     $template_data[] = array(
-                         'template_id' => $template['template_id'],
-                         'content' => $template['content'],
-                         'config' => substr($file, 0, -4),
-                         'image' => $template['image'],
-                         'category' => $template['category'],
-                         'sort_order' => $template['sort_order'],
-                         'name' => $template['name']
-                    );
+                     'template_id' => $template['template_id'],
+                     'content' => $template['content'],
+                     'config' => substr($file, 0, -4),
+                     'image' => $template['image'],
+                     'category' => $template['category'],
+                     'sort_order' => $template['sort_order'],
+                     'name' => $template['name']
+                     );
                 }    
             }
         }
         return $template_data;
     }
-    
+
     public function getTemplates(){
-	    $sql = "SELECT * FROM ".DB_PREFIX."visual_designer_template  t ";
+        $sql = "SELECT * FROM ".DB_PREFIX."visual_designer_template  t ";
 
-	    $query = $this->db->query($sql);
+        $query = $this->db->query($sql);
 
-	    $template_data = array();
+        $template_data = array();
 
-	    if($query->num_rows){
-		    foreach ($query->rows as $row) {
-			    $template_data[] = array(
-				    'template_id' => $row['template_id'],
-				    'content' => $row['content'],
-				    'sort_order' => $row['sort_order'],
-				    'name' => $row['name'],
-				    'config' => '',
-				    'image' => $row['image'],
-				    'category' => $row['category']
-			    );
-		    }
-	    }
+        if($query->num_rows){
+            foreach ($query->rows as $row) {
+                $template_data[] = array(
+                    'template_id' => $row['template_id'],
+                    'content' => $row['content'],
+                    'sort_order' => $row['sort_order'],
+                    'name' => $row['name'],
+                    'config' => '',
+                    'image' => $row['image'],
+                    'category' => $row['category']
+                    );
+            }
+        }
 
-	    $templates_config = $this->getConfigTemplates();
+        $templates_config = $this->getConfigTemplates();
 
-	    $template_data = array_merge($template_data, $templates_config);
+        $template_data = array_merge($template_data, $templates_config);
 
-	    $sort_data = array(
-		    'name',
-		    'sort_order'
-	    );
+        $sort_data = array(
+          'name',
+          'sort_order'
+          );
 
-	    if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-		    $this->sort = $data['sort'];
-	    }
+        if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+            $this->sort = $data['sort'];
+        }
 
 
-	    if (isset($data['order']) && ($data['order'] == 'DESC')) {
-		    $this->order = "DESC";
-	    } else {
-		    $this->order = "ASC";
-	    }
+        if (isset($data['order']) && ($data['order'] == 'DESC')) {
+            $this->order = "DESC";
+        } else {
+            $this->order = "ASC";
+        }
 
-	    uasort($template_data, 'ModelExtensionModuleDVisualDesigner::sort');
+        uasort($template_data, 'ModelExtensionModuleDVisualDesigner::sort');
 
-	    if (isset($data['start']) || isset($data['limit'])) {
-		    if ($data['start'] < 0) {
-			    $data['start'] = 0;
-		    }
+        if (isset($data['start']) || isset($data['limit'])) {
+            if ($data['start'] < 0) {
+                $data['start'] = 0;
+            }
 
-		    if ($data['limit'] < 1) {
-			    $data['limit'] = 20;
-		    }
-		    $template_data = array_slice($template_data, $data['start'], $data['limit']);
-	    }
+            if ($data['limit'] < 1) {
+                $data['limit'] = 20;
+            }
+            $template_data = array_slice($template_data, $data['start'], $data['limit']);
+        }
 
-	    return $template_data;
+        return $template_data;
     }
 
-	public function sort($a, $b){
-		if($a[$this->sort] < $b[$this->sort]){
-			return $this->order=='ASC'?-1:1;
-		}
-		else{
-			return $this->order=='ASC'?1:-1;
-		}
+    public function sort($a, $b){
+        if($a[$this->sort] < $b[$this->sort]){
+            return $this->order=='ASC'?-1:1;
+        }
+        else{
+            return $this->order=='ASC'?1:-1;
+        }
 
-		if($a[$this->sort] == $b[$this->sort]){
-			return 0;
-		}
-	}
+        if($a[$this->sort] == $b[$this->sort]){
+            return 0;
+        }
+    }
 
     public function getTemplate($template_id){
         $query = $this->db->query("SELECT * FROM ".DB_PREFIX."visual_designer_template t WHERE t.template_id='".$template_id."'");
@@ -817,15 +817,15 @@ class ModelExtensionModuleDVisualDesigner extends Model {
     }
     public function getConfigTemplate($template_id, $config){
         $_ = array();
-        
+
         $results = array();
 
         require(DIR_CONFIG.'d_visual_designer_template/'.$config.'.php');
 
         $results = array_merge($results, $_);
-        
+
         $templates = $results['d_visual_designer_templates'];
-                
+
         foreach ($templates as $template) {
             if($template['template_id'] == $template_id){
                 return $template;
@@ -841,7 +841,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             category='".$data['category']."', 
             name='".$data['name']."', 
             sort_order='".$data['sort_order']."
-        '");
+            '");
 
         $template_id = $this->db->getLastId();
 
@@ -863,7 +863,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 
                 if(count($implode) > 0){
                     $this->db->query("UPDATE " . DB_PREFIX . "product_description SET ".implode(',', $implode)."
-                    WHERE product_id = '".$product_id."' AND language_id='".$language_id."'");
+                        WHERE product_id = '".$product_id."' AND language_id='".$language_id."'");
                 }
             }
         }
@@ -883,12 +883,12 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 
                 if(count($implode) > 0){
                     $this->db->query("UPDATE " . DB_PREFIX . "category_description SET ".implode(',', $implode)."
-                    WHERE category_id = '".$category_id."' AND language_id='".$language_id."'");
+                        WHERE category_id = '".$category_id."' AND language_id='".$language_id."'");
                 }
             }
         }
     }
-    
+
     public function editInformation($information_id, $data){
         if(!empty($data['information_description'])){
             foreach ($data['information_description'] as $language_id => $value) {
@@ -904,7 +904,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 
                 if(count($implode) > 0){
                     $this->db->query("UPDATE " . DB_PREFIX . "information_description SET ".implode(',', $implode)."
-                    WHERE information_id = '".$information_id."' AND language_id='".$language_id."'");
+                        WHERE information_id = '".$information_id."' AND language_id='".$language_id."'");
                 }
             }
         }
