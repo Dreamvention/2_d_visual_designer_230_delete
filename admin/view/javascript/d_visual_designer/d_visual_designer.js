@@ -441,8 +441,9 @@ var d_visual_designer = {
                     }
                     that.editBlock(block.attr('id'), designer_id);
                 }
-                that.updateValue();
                 that.initSortable();
+                that.updateSortOrderRow(designer_id);
+                that.updateValue();
                 that.closePopup();
                 that.setting.stateEdit = true;
             }

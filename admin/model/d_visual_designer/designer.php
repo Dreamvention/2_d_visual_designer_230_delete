@@ -452,6 +452,7 @@ class ModelDVisualDesignerDesigner extends Model {
             $child_block =array(
                 'type' => 'row',
                 'parent'=> '',
+                'sort_order' => 0,
                 'setting' => $this->getSetting(array(), 'row'),
                 'block_id' => 'row_'.$this->getRandomString()
                 );
@@ -470,6 +471,7 @@ class ModelDVisualDesignerDesigner extends Model {
             $settingJS[$block_info['block_id']] = array(
                 'type' => $block_info['type'],
                 'parent' => $block_info['parent'],
+                'sort_order' => 0,
                 'setting' => $block_info['setting']
                 );
             $this->parent = $block_info['block_id'];
@@ -478,6 +480,7 @@ class ModelDVisualDesignerDesigner extends Model {
             $child_block =array(
                 'type' => $setting_block['child'],
                 'parent'=> $block_info['block_id'],
+                'sort_order' => 0,
                 'setting' => $this->getSetting(array(), $setting_block['child']),
                 'block_id' => $setting_block['child'].'_'.$this->getRandomString()
                 );
@@ -496,6 +499,7 @@ class ModelDVisualDesignerDesigner extends Model {
             $settingJS[$block_info['block_id']] = array(
                 'type' => $block_info['type'],
                 'parent' => $block_info['parent'],
+                'sort_order' => 0,
                 'setting' => $block_info['setting']
                 );
             $settingChild = $block_info['setting'];

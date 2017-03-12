@@ -475,7 +475,8 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'type' => $type,
                 'parent' => $parent,
                 'setting' => $setting,
-                'block_id' => $block_id
+                'block_id' => $block_id,
+                'sort_order' => 0
                 );
             $result = $this->{'model_extension_module_'.$this->codename}->getFullContent($block_info, $level);
 

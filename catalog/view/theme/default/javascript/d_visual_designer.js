@@ -385,6 +385,7 @@ var d_visual_designer = {
                     that.setting.stateEdit = true;
 
                 }
+                that.updateSortOrderRow(designer_id);
                 that.initSortable();
                 that.closePopup();
             }
