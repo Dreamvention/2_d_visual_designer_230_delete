@@ -8,7 +8,7 @@
         <operation>
             <search><![CDATA[   protected function getForm() {]]></search>
             <add  position="after"><![CDATA[
-                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
+                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
             ]]></add>
         </operation>
     </file>
@@ -30,7 +30,7 @@
         <operation>
             <search><![CDATA[   protected function getForm() {]]></search>
             <add position="after"><![CDATA[
-            $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
+            $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
             ]]></add>
         </operation>
     </file>
@@ -53,7 +53,7 @@
         <operation>
             <search><![CDATA[   protected function getForm() {]]></search>
             <add position="after"><![CDATA[
-                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js');
+                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
             ]]></add>
         </operation>
     </file>

@@ -72,15 +72,15 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         if($this->{'model_extension_module_'.$this->codename}->validateEdit($setting['config'])){
 
             if (file_exists(DIR_TEMPLATE . $this->theme . '/stylesheet/d_visual_designer/d_visual_designer.css')) {
-                $this->document->addStyle('catalog/view/theme/' . $this->theme . '/stylesheet/d_visual_designer/d_visual_designer.css');
+                $this->document->addStyle('catalog/view/theme/' . $this->theme . '/stylesheet/d_visual_designer/d_visual_designer.css?'.rand(5,10));
             } else {
-                $this->document->addStyle('catalog/view/theme/default/stylesheet/d_visual_designer/d_visual_designer.css');
+                $this->document->addStyle('catalog/view/theme/default/stylesheet/d_visual_designer/d_visual_designer.css?'.rand(5,10));
             }
 
             if (file_exists(DIR_TEMPLATE . $this->theme . '/javascript/d_visual_designer.js')) {
-                $this->document->addScript('catalog/view/theme/' . $this->theme . '/javascript/d_visual_designer.js');
+                $this->document->addScript('catalog/view/theme/' . $this->theme . '/javascript/d_visual_designer.js?'.rand(5,10));
             } else {
-                $this->document->addScript('catalog/view/theme/default/javascript/d_visual_designer.js');
+                $this->document->addScript('catalog/view/theme/default/javascript/d_visual_designer.js?'.rand(5,10));
             }
 
             //bootstrap-switch

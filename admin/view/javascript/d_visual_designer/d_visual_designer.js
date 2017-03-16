@@ -909,7 +909,9 @@ var d_visual_designer = {
                 result += shortcode;
             } else {
                 var childBlock = this.getText(designer_id, key);
+                childBlock = childBlock.replace('$','$$$$');
                 parentBlock = shortcode.replace('][', ']' + childBlock + '[');
+                parentBlock = parentBlock.replace('$$','$');
                 result += parentBlock;
             }
         }
@@ -938,18 +940,18 @@ var d_visual_designer = {
             if (obj.hasOwnProperty(key))
                 sortable.push([key, obj[key]]);
 
-        sortable.sort(function(a, b) {
-            return a[1]['sort_order'] - b[1]['sort_order'];
-        });
+            sortable.sort(function(a, b) {
+                return a[1]['sort_order'] - b[1]['sort_order'];
+            });
 
-        var result = {};
+            var result = {};
 
-        for (key in sortable) {
-            result[sortable[key][0]] = sortable[key][1];
-        }
+            for (key in sortable) {
+                result[sortable[key][0]] = sortable[key][1];
+            }
 
-        return result;
-    },
+            return result;
+        },
     //Возвращает блоки с указаным родителем
     getBlockByParent: function(designer_id, parent) {
         var results = {};
