@@ -909,9 +909,8 @@ var d_visual_designer = {
                 result += shortcode;
             } else {
                 var childBlock = this.getText(designer_id, key);
-                childBlock = childBlock.replace('$','$$$$');
+                childBlock = childBlock.replace(/\$/g,'$$$$');
                 parentBlock = shortcode.replace('][', ']' + childBlock + '[');
-                parentBlock = parentBlock.replace('$$','$');
                 result += parentBlock;
             }
         }
