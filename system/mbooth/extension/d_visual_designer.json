@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.0.7",
+    "version": "2.0.8",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -150,6 +150,10 @@
         "catalog/view/javascript/d_visual_designer"
     ],
     "changelog": [
+        {
+            "version":"2.0.8",
+            "change":"1.Fix bugs."
+        },
         {
             "version":"2.0.7",
             "change":"1. Added offset column. \n\r2.Fix bugs."
