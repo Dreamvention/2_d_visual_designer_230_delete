@@ -38,6 +38,8 @@ var d_visual_designer = {
         edit_block: '',
         //Шаблон добавления нового шаблона
         add_template: '',
+        //Code View
+        codeview:'',
         //Шаблон Лоадера
         loader: '<div id="visual-designer-loader" class="la-ball-scale-ripple-multiple la-dark la-2x"><div></div><div></div><div></div></div>'
     },
@@ -316,6 +318,41 @@ var d_visual_designer = {
         this.setting.form.find('#' + designer_id).attr('style', 'display:none;');
         this.setting.form.find('#' + designer_id).parents('.form-group').find('.note-editor').css('display', 'block');
     },
+    updateDesigner:function(designer_id, content, callback=null){
+        var that = this;
+        this.setText(designer_id, content);
+        var element = this.setting.form.find('.vd.content#'+designer_id);
+        var send_data = {
+            'description': content
+        }
+        $.ajax({
+            url: 'index.php?route=d_visual_designer/designer/updateDesigner&token='+getURLVar('token'),
+            dataType: 'json',
+            data: send_data,
+            type: 'post',
+            success: function(json) {
+                if (json['success']) {
+                    that.data[designer_id] = JSON.parse(json['rows']);
+
+                    if (that.data[designer_id].length == 0) {
+                        that.data[designer_id] = {};
+                    }
+                    that.setting.form.find('.vd.content#'+designer_id).find('.vd.container-fluid').html(json['content']);
+
+                    that.initSortable();
+                    if(callback!=null){
+                        callback(true);
+                    }
+                }
+                if (json['error']) {
+                    console.log(json['error']);
+                    if(callback!=null){
+                        callback(false);
+                    }
+                }
+            }
+        });
+    },
     //Синхронизация изменений с полем ввода
     updateValue: function(callback = null) {
         var that = this;
@@ -367,6 +404,27 @@ var d_visual_designer = {
             this.setting.form.find('#' + designer_id).find('#d_visual_designer_nav').find('#button_full_screen').addClass('active');
             $('body').attr('style', 'overflow:hidden');
         }
+    },
+    //Открыть окно редактора описания
+    codeview:function(designer_id){
+        var data = {
+            content: this.getText(designer_id),
+            designer_id:designer_id
+        };
+        var content = that.templateСompile(that.template.codeview, data);
+        that.setting.form.append(content);
+        that.setting.form.append(that.template.popup_overlay);
+        that.initPopup();
+    },
+
+    saveCodeview:function(designer_id){
+        var that = this;
+        content = this.setting.form.find('.vd-popup').find('textarea[name=codeview]').val();
+        this.updateDesigner(designer_id, content, function(status){
+            that.setting.form.find('.vd-popup').remove();
+            that.setting.form.find('.vd-popup-overlay').remove();
+        });
+        
     },
     //Вызов окна добавления блока
     showAddBlock: function(designer_id, target = '') {
@@ -893,6 +951,16 @@ var d_visual_designer = {
     //Задание параметра для блока
     setValue: function(block_id, designer_id, name, value) {
         this.data[designer_id][block_id]['setting'][name] = value;
+    },
+    //Задать новый текст
+    setText:function(designer_id, content){
+        var element = this.setting.form.find('.vd.content#'+designer_id).parent().find('.d_visual_designer');
+
+        $(element).get(0).innerText = content;
+
+        if ($(element).hasClass('summernote')) {
+            $(element).summernote('code', $(element).get(0).innerText)
+        }
     },
     //Получение текста из формы
     getText: function(designer_id, parent = "") {;

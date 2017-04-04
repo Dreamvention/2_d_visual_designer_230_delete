@@ -293,7 +293,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" {{#ifCond design_background_image_style 'parallax'}} style="display:none;" {{/ifCond}}>
                         <label class="control-label"><?php echo $entry_image_position; ?></label>
                         <div class="fg-setting">
                             <div class="wrap-setting wrap-50">
@@ -671,6 +671,16 @@ $(document).on('change', 'input.pixels-procent', function(){
     }
     else if(!er2.test(value)){
         $(this).val('');
+    }
+});
+$(document).off('change', 'select[name=design_background_image_style]');
+$(document).on('change', 'select[name=design_background_image_style]', function(){
+    var style = $(this).val();
+    if(style!= 'parallax'){
+        $('select[name=design_background_image_position_horizontal]').closest('.form-group').show();
+    }
+    else{
+        $('select[name=design_background_image_position_horizontal]').closest('.form-group').hide();
     }
 });
 $(document).on('click', 'a[data-toggle=\'image\']', function(e){

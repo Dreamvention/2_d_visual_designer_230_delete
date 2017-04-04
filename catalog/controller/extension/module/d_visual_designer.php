@@ -230,7 +230,8 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'cover' => $this->language->get('text_cover'),
                 'contain' => $this->language->get('text_contain'),
                 'no-repeat'  => $this->language->get('text_no_repeat'),
-                'repeat' => $this->language->get('text_repeat')
+                'repeat' => $this->language->get('text_repeat'),
+                'parallax' => $this->language->get('text_parallax')
                 );
 
             return $this->load->view('d_visual_designer/designer', $data);

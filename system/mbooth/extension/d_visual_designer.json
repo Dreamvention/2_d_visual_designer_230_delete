@@ -151,6 +151,10 @@
     ],
     "changelog": [
         {
+            "version":"2.1.0",
+            "change":"1.Add parallax. \r\n2.Add Code View. \r\n3.Fix bugs."
+        },
+        {
             "version":"2.0.9",
             "change":"1.Fix bugs."
         },

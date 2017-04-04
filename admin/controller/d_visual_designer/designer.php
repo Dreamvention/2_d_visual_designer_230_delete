@@ -101,6 +101,7 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $data['text_add_block'] = $this->language->get('text_add_block');
             $data['text_edit_block'] = $this->language->get('text_edit_block');
             $data['text_add_template'] = $this->language->get('text_add_template');
+            $data['text_codeview'] = $this->language->get('text_codeview');
             $data['text_classic_mode'] = $this->language->get('text_classic_mode');
             $data['text_backend_editor'] = $this->language->get('text_backend_editor');
             $data['text_frontend_editor'] = $this->language->get('text_frontend_editor');
@@ -219,7 +220,8 @@ class ControllerDVisualDesignerDesigner extends Controller {
                 'cover' => $this->language->get('text_cover'),
                 'contain' => $this->language->get('text_contain'),
                 'no-repeat'  => $this->language->get('text_no_repeat'),
-                'repeat' => $this->language->get('text_repeat')
+                'repeat' => $this->language->get('text_repeat'),
+                'parallax' => $this->language->get('text_parallax')
                 );
 
             $data['image_horizontal_positions'] = array(
@@ -240,7 +242,6 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
             $data['scripts'] = $this->scripts;
             $data['styles'] = $this->styles;
-
             $json['content'] = $this->load->view('d_visual_designer/designer.tpl', $data);
 
             $json['success'] = 'success';
@@ -305,6 +306,28 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $data['text_frontend_title'] = $this->language->get('text_frontend_title');
             $this->response->setOutput($this->load->view('d_visual_designer/frontend_editor.tpl',$data));
         }
+    }
+
+    public function updateDesigner(){
+        $json = array();
+        
+        if(isset($this->request->post['description'])){
+            $description = $this->request->post['description'];
+        }
+
+        if(isset($description)){
+            $blocks = $this->{'model_'.$this->codename.'_designer'}->parseDescription($description);
+            $json['content'] = $blocks['content'];
+            $json['rows'] = json_encode($blocks['setting']);
+            $json['success'] = 'success';
+        }
+        else{
+            $json['error'] = 'error';
+        }
+
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 
     public function getSettingModule(){
