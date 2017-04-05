@@ -49,6 +49,7 @@ var d_visual_designer = {
         this.settings[setting.form.attr('id')] = $.extend({}, this.setting, setting);
 
         that.initSortable();
+        that.initHover(setting.form.attr('id'));
         that.initPartial();
         that.initAlertClose();
     },
@@ -135,6 +136,26 @@ var d_visual_designer = {
                 that.updateSortOrderRow($(this).parents('.vd.content').attr('id'));
             }
         });
+    },
+    //Инициализация события Hover
+    initHover:function(designer_id){
+        this.settings[designer_id].form.find('.block-container').off( "mouseenter mouseleave" );
+        this.settings[designer_id].form.find('.block-container').hover(function(){
+            if($(this).hasClass('block-child')){
+                var margin_left = (-1)*($(this).children('.control').width()/2);
+                var margin_top = (-1)*($(this).children('.control').height()/2);
+                $(this).children('.control').css({
+                    'margin-left': margin_left,
+                    'margin-top': margin_top
+                })
+            }
+            $(this).removeClass('deactive-control');
+            $(this).addClass('active-control');
+        }, function(){
+            $(this).addClass('deactive-control');
+            $(this).removeClass('active-control');
+        });
+        console.log('initHover');
     },
     //Инициализация оповещения при закрытии
     initAlertClose: function() {
@@ -387,6 +408,7 @@ var d_visual_designer = {
                 }
                 that.updateSortOrderRow(designer_id);
                 that.initSortable();
+                that.initHover(designer_id);
                 that.closePopup();
             }
         });
@@ -639,6 +661,7 @@ var d_visual_designer = {
                     that.data[designer_id] = json['setting'];
                     that.settings[designer_id].form.find('.vd').html(json['content']);
                     that.initSortable();
+                    that.initHover(designer_id);
                     that.closePopup();
                     that.setting.stateEdit = true;
                 }
@@ -743,6 +766,7 @@ var d_visual_designer = {
                     console.log('d_visual_designer:update_content_block');
                     that.settings[designer_id].form.find('#' + block_id).replaceWith(json['content']);
                     that.initSortable();
+                    that.initHover(designer_id);
                     setTimeout(function() {
                         if (that.popup !== '') {
                             that.popup.find('a#save').button('reset');
@@ -815,6 +839,7 @@ var d_visual_designer = {
                     Object.assign(that.data[designer_id], that.tmpSetting['items']);
                     that.settings[designer_id].form.find('#' + block_id).after(json['content']);
                     that.initSortable();
+                    that.initHover(designer_id);
                     var trigger_data = {
                         'title': that.settings[designer_id].form.find('#' + new_block_id).data('title')
                     };

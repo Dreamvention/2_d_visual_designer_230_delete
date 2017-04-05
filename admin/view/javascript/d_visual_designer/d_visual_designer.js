@@ -94,6 +94,7 @@ var d_visual_designer = {
                         }, 1000)
 
                         that.initSortable();
+                        that.initHover(designer_id);
                         that.initPartial();
                     }
                     if (json['error']) {
@@ -197,6 +198,26 @@ var d_visual_designer = {
                 d_visual_designer.updateValue();
             }
         });
+    },
+    //Инициализация события Hover
+    initHover:function(designer_id){
+        this.setting.form.find('.vd.content#'+designer_id).find('.block-container').off( "mouseenter mouseleave" );
+        this.setting.form.find('.vd.content#'+designer_id).find('.block-container').hover(function(){
+            if($(this).hasClass('block-child')){
+                var margin_left = (-1)*($(this).children('.control').width()/2);
+                var margin_top = (-1)*($(this).children('.control').height()/2);
+                $(this).children('.control').css({
+                    'margin-left': margin_left,
+                    'margin-top': margin_top
+                })
+            }
+            $(this).removeClass('deactive-control');
+            $(this).addClass('active-control');
+        }, function(){
+            $(this).addClass('deactive-control');
+            $(this).removeClass('active-control');
+        });
+        console.log('initHover');
     },
     //Инициализация оповещения при закрытии
     initAlertClose: function() {
@@ -340,6 +361,7 @@ var d_visual_designer = {
                     that.setting.form.find('.vd.content#'+designer_id).find('.vd.container-fluid').html(json['content']);
 
                     that.initSortable();
+                    that.initHover(designer_id);
                     if(callback!=null){
                         callback(true);
                     }
@@ -368,7 +390,6 @@ var d_visual_designer = {
             if ($(element).hasClass('summernote')) {
                 $(element).summernote('code', $(element).get(0).innerText)
             }
-
 
         }).promise().done(function() {
             if (callback != null) {
@@ -500,6 +521,7 @@ var d_visual_designer = {
                     that.editBlock(block.attr('id'), designer_id);
                 }
                 that.initSortable();
+                that.initHover(designer_id);
                 that.updateSortOrderRow(designer_id);
                 that.updateValue();
                 that.closePopup();
@@ -692,6 +714,7 @@ var d_visual_designer = {
                     that.data[designer_id] = json['setting'];
                     that.closePopup();
                     that.initSortable();
+                    that.initHover(designer_id);
                     that.setting.stateEdit = true;
                 }
             }
@@ -791,6 +814,7 @@ var d_visual_designer = {
                     console.log('d_visual_designer:update_content_block');
                     that.setting.form.find('#' + block_id).replaceWith(json['content']);
                     that.initSortable();
+                    that.initHover(designer_id);
                 }
             }
         });
@@ -885,6 +909,7 @@ var d_visual_designer = {
                     Object.assign(that.data[designer_id], that.tmpSetting['items']);
                     that.setting.form.find('#' + block_id).after(json['content']);
                     that.initSortable();
+                    that.initHover(designer_id);
                     that.setting.stateEdit = true;
                 }
             }

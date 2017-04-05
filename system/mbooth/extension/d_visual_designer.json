@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.0.9",
+    "version": "2.1.0",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -152,7 +152,7 @@
     "changelog": [
         {
             "version":"2.1.0",
-            "change":"1.Add parallax. \r\n2.Add Code View. \r\n3.Fix bugs."
+            "change":"1.Added parallax. \r\n2.Added Code Viewer. \r\n3.Fix bugs. \r\n4.Added animate for control button."
         },
         {
             "version":"2.0.9",

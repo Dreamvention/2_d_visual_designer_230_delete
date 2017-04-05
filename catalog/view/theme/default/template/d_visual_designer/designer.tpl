@@ -621,12 +621,6 @@ $('#<?php echo $designer_id; ?>').on('click','#button_remove',function(){
     var block_id = $(this).parent().data('control');
     d_visual_designer.removeBlock(block_id, '<?php echo $designer_id; ?>');
 });
-$('#<?php echo $designer_id; ?>').on('mouseover', '.block-container', function(){
-    $(this).addClass('active-control');
-});
-$('#<?php echo $designer_id; ?>').on('mouseout', '.block-container', function(){
-    $(this).removeClass('active-control');
-});
 $('#<?php echo $designer_id; ?>').on('mouseover', '.block-button', function(){
     $(this).closest('.block-container').addClass('active-border');
 });
