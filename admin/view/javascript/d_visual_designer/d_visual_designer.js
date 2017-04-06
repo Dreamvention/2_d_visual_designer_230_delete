@@ -1101,15 +1101,10 @@ var d_visual_designer = {
                     name = key2.replace(/\]\[/g, ':');
                     name = name.replace(/\[/g, '::');
                     name = name.replace(/\]/g, '');
-                    if (array_values[key2].length > 0) {
-                        shortcode += ' ' + name + '=\'' + this.escape(array_values[key2]) + '\'' + ' ';
-                    }
+                    shortcode += ' ' + name + '=\'' + this.escape(array_values[key2]) + '\'' + ' ';
                 }
             } else {
-                if (value.length > 0) {
-                    shortcode += ' ' + name + '=\'' + this.escape(value) + '\'' + ' ';
-                }
-
+                shortcode += ' ' + name + '=\'' + this.escape(value) + '\'' + ' ';
             }
 
 
