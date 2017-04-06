@@ -402,7 +402,7 @@ var d_visual_designer = {
                 $(element).summernote('code', content)
             }
 
-            if(CKEDITOR != undefined){
+            if(typeof CKEDITOR != undefined){
                 CKEDITOR.instances[$(element).attr('id')].setData(content);
             }
 
