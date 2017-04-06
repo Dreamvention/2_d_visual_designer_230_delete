@@ -65,7 +65,9 @@ var d_visual_designer = {
                     $(element).closest('div').append(that.template.loader);
                     if ($(element).next().hasClass('note-editor')) {
                         $(element).next().fadeTo('slow', 0.5);
-                    } else {
+                    }else if ($(element).next().hasClass('cke')) {
+                        $(element).next().fadeTo('slow', 0.5);
+                    }  else {
                         $(element).fadeTo('slow', 0.5);
                     }
                 },
@@ -87,6 +89,8 @@ var d_visual_designer = {
                             $(element).closest('div').find('div#visual-designer-loader').remove();
                             if ($(element).next().hasClass('note-editor')) {
                                 $(element).next().fadeTo('slow', 1);
+                            } else if ($(element).next().hasClass('cke')) {
+                                $(element).next().fadeTo('slow', 1);
                             } else {
                                 $(element).fadeTo('slow', 1);
                             }
@@ -99,7 +103,10 @@ var d_visual_designer = {
                     }
                     if (json['error']) {
                         $(element).closest('div').find('div#visual-designer-loader').remove();
+
                         if ($(element).next().hasClass('note-editor')) {
+                            $(element).next().fadeTo('slow', 1);
+                        } else if ($(element).next().hasClass('cke')) {
                             $(element).next().fadeTo('slow', 1);
                         } else {
                             $(element).fadeTo('slow', 1);
@@ -332,12 +339,14 @@ var d_visual_designer = {
         this.setting.form.find('#' + designer_id).prev().removeAttr('style');
         this.setting.form.find('#' + designer_id).removeAttr('style');
         this.setting.form.find('#' + designer_id).parents('.form-group').find('.note-editor').css('display', 'none');
+        this.setting.form.find('#' + designer_id).parents('.form-group').find('.cke').css('display', 'none');
     },
     //Выключение дизайнера
     disable: function(element) {
         var designer_id = $(element).data('id');
         this.setting.form.find('#' + designer_id).attr('style', 'display:none;');
         this.setting.form.find('#' + designer_id).parents('.form-group').find('.note-editor').css('display', 'block');
+        this.setting.form.find('#' + designer_id).parents('.form-group').find('.cke').css('display', 'block');
     },
     updateDesigner:function(designer_id, content, callback=null){
         var that = this;
@@ -385,17 +394,24 @@ var d_visual_designer = {
             var designer_id = $(element).parents('.form-group').find('.vd.content').attr('id');
             // $(element).get(0).innerText = that.getText(setting);
 
-            $(element).get(0).innerText = that.getText(designer_id);
+            var content = that.getText(designer_id);
+
+            $(element).get(0).innerText = content;
 
             if ($(element).hasClass('summernote')) {
-                $(element).summernote('code', $(element).get(0).innerText)
+                $(element).summernote('code', content)
+            }
+
+            if(CKEDITOR != undefined){
+                CKEDITOR.instances[$(element).attr('id')].setData(content);
             }
 
         }).promise().done(function() {
-            if (callback != null) {
-                callback();
-            }
-        });
+           if (callback != null) {
+            callback();
+        }
+    });
+
     },
     //Компиляция шаблона
     templateСompile: function(template, data) {
