@@ -1,3 +1,10 @@
+<?php foreach ($styles as $style) { ?>
+<link href="<?php echo $style; ?>" rel="stylesheet" />
+<?php } ?>
+
+<?php foreach ($scripts as $script) { ?>
+<script type="text/javascript" src="<?php echo $script; ?>"></script>
+<?php } ?>
 <form id="form-vd-<?php echo $designer_id; ?>">
     <div class="content vd" id="<?php echo $designer_id; ?>">
         <div class="vd" id="sortable"><?php echo $content; ?></div>

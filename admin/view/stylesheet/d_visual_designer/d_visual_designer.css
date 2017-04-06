@@ -616,9 +616,9 @@
         -moz-animation: bounce-bottom 0.9s  both;
         animation: bounce-bottom 0.9s  both; }
       .content .vd .block-parent.deactive-control > .control {
-        -webkit-animation: slide-out-bottom 0.2s 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-        -moz-animation: slide-out-bottom 0.2s 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-        animation: slide-out-bottom 0.2s 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both; }
+        -webkit-animation: slide-out-bottom 0.25s 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        -moz-animation: slide-out-bottom 0.25s 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        animation: slide-out-bottom 0.25s 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both; }
       .content .vd .block-parent > .block-content {
         padding: 0px; }
     .content .vd .block-inner {
@@ -643,9 +643,9 @@
         display: -ms-flexbox;
         display: flex; }
       .content .vd .block-inner.deactive-control > .control {
-        -webkit-animation: slide-out-bottom 0.2s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-        -moz-animation: slide-out-bottom 0.2s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-        animation: slide-out-bottom 0.2s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53) both; }
+        -webkit-animation: slide-out-bottom 0.25s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        -moz-animation: slide-out-bottom 0.25s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        animation: slide-out-bottom 0.25s 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53) both; }
       .content .vd .block-inner > .block-button {
         text-align: center; }
         .content .vd .block-inner > .block-button > a {
@@ -764,8 +764,8 @@
         -moz-animation: bounce-bottom 0.9s 0.36s both;
         animation: bounce-bottom 0.9s 0.36s both; }
       .content .vd .block-child.deactive-control > .control {
-        -webkit-animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
-        -moz-animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        -webkit-animation: slide-out-bottom 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        -moz-animation: slide-out-bottom 0.25s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
         animation: slide-out-bottom 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53) both; }
       .content .vd .block-child:hover {
         background: rgba(0, 255, 0, 0.1); }

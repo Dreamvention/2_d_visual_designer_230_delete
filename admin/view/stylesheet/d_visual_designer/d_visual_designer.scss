@@ -312,9 +312,9 @@
             }
             &.deactive-control{
                 > .control{
-                    -webkit-animation: slide-out-bottom 0.2s 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                    -moz-animation: slide-out-bottom 0.2s 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                    animation: slide-out-bottom 0.2s 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    -webkit-animation: slide-out-bottom 0.25s 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    -moz-animation: slide-out-bottom 0.25s 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    animation: slide-out-bottom 0.25s 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
                 }
             }
             &>.block-content {
@@ -352,9 +352,9 @@
             }
             &.deactive-control{
                 > .control{
-                    -webkit-animation: slide-out-bottom 0.2s 0.15s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                    -moz-animation: slide-out-bottom 0.2s 0.15s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                    animation: slide-out-bottom 0.2s 0.15s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    -webkit-animation: slide-out-bottom 0.25s 0.15s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    -moz-animation: slide-out-bottom 0.25s 0.15s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    animation: slide-out-bottom 0.25s 0.15s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
                 }
             }
             // padding: 0 15px;
@@ -517,8 +517,8 @@
             }
             &.deactive-control{
                 > .control{
-                    -webkit-animation: slide-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-                    -moz-animation: slide-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    -webkit-animation: slide-out-bottom 0.25s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+                    -moz-animation: slide-out-bottom 0.25s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
                     animation: slide-out-bottom 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
                 }
             }

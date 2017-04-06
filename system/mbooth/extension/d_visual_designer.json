@@ -20,8 +20,7 @@
         "url": "https://shopunity.net/licenses/commercial"
     },
     "install": {
-        "url": "extension/module/install&extension=d_visual_designer",
-        "xml": "system/mbooth/install/d_visual_designer.xml"
+        "url": "extension/module/install&extension=d_visual_designer"
     },
     "support": {
         "email": "support@dreamvention.com",
@@ -29,6 +28,7 @@
     },
     "required": {
         "d_shopunity": ">= 3.0.41",
+        "d_event_manager": ">= 1.1.2",
         "d_elfinder": ">= 1.0.0"
     },
     "files": [
@@ -50,6 +50,7 @@
         "system/config/d_visual_designer/text.php",
 
         "admin/controller/extension/module/d_visual_designer.php",
+        "admin/controller/event/d_visual_designer.php",
         "admin/language/en-gb/extension/module/d_visual_designer.php",
         "admin/language/english/extension/module/d_visual_designer.php",
         "admin/language/ru-ru/extension/module/d_visual_designer.php",
@@ -64,6 +65,7 @@
         "catalog/view/theme/default/template/d_visual_designer/filemanager.tpl",
         
         "catalog/controller/extension/module/d_visual_designer.php",
+        "catalog/controller/event/d_visual_designer.php",
         "catalog/language/en-gb/extension/module/d_visual_designer.php",
         "catalog/language/english/extension/module/d_visual_designer.php",
         "catalog/language/ru-ru/extension/module/d_visual_designer.php",
@@ -152,7 +154,7 @@
     "changelog": [
         {
             "version":"2.1.0",
-            "change":"1.Added parallax. \r\n2.Added Code Viewer. \r\n3.Fix bugs. \r\n4.Added animate for control button."
+            "change":"1.Added parallax. \r\n2.Added Code Viewer. \r\n3.Fix bugs. \r\n4.Added animate for control button. \r\n5.OCMOD replaced to Events \r\n6.Added the ability to disable the Visual Designer separately on the pages of goods, categories, information. \r\n7.Added the ability to restrict access to Visual Designer for selected users or groups of users."
         },
         {
             "version":"2.0.9",

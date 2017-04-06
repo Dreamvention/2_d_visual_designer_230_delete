@@ -59,7 +59,7 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
         if($this->validate()){
 
-            $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css';
+            $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css?'.rand();
 
             //FontIconPicker
             $this->scripts[] = 'view/javascript/d_visual_designer/library/fontIconPicker/iconset.js';
@@ -617,6 +617,24 @@ class ControllerDVisualDesignerDesigner extends Controller {
         if(empty($this->request->post['url'])) {
             $this->error['url'] = $this->language->get('error_url');
         }
+
+        if(!empty($setting['d_visual_designer_setting']['limit_access_user'])){
+            if(!empty($setting['d_visual_designer_setting']['access_user']) && !in_array($this->user->getId(), $setting['d_visual_designer_setting']['access_user'])){
+                $this->error['warning'] = $this->language->get('error_permission');
+            }
+            elseif($setting['d_visual_designer_setting']['access_user']){
+                $this->error['warning'] = $this->language->get('error_permission');
+            }
+        }
+        if(!empty($setting['d_visual_designer_setting']['limit_access_user_group'])){
+            if(!empty($setting['d_visual_designer_setting']['access_user_group']) && !in_array($this->user->getGroupId(), $setting['d_visual_designer_setting']['access_user_group'])){
+                $this->error['warning'] = $this->language->get('error_permission');
+            }
+            elseif(empty($setting['d_visual_designer_setting']['access_user_group'])){
+                $this->error['warning'] = $this->language->get('error_permission');
+            }
+        }
+
         else {
             $url_info = parse_url(str_replace('&amp;', '&', $this->request->post['url']));
             $url_params = array();

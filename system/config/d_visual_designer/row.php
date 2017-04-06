@@ -34,6 +34,7 @@ $_['button_remove']    = true;
 $_['setting'] = array(
     'row_stretch' => '',
     'background_video' => 0,
-    'link' => 'https://vimeo.com/51589652',
+    'link' => '',
+    // 'link' => 'https://vimeo.com/51589652',
     // 'link' => 'https://www.youtube.com/watch?v=lMJXxhRFO1k',
 );

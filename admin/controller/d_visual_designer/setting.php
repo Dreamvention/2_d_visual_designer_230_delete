@@ -30,6 +30,11 @@ class ControllerDVisualDesignerSetting extends Controller
 
         //save post
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            $this->uninstallEvents();
+
+            if(!empty($this->request->post[$this->codename.'_status'])){
+                $this->installEvents($this->request->post[$this->codename.'_setting']['use']);
+            }
             $this->model_setting_setting->editSetting($this->codename, $this->request->post, $this->store_id);
             $this->session->data['success'] = $this->language->get('text_success');
             
@@ -56,17 +61,17 @@ class ControllerDVisualDesignerSetting extends Controller
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('text_home'),
             'href' => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL')
-        );
+            );
         
         $data['breadcrumbs'][] = array(
             'text'      => $this->language->get('text_module'),
             'href'      => $this->url->link('extension/extension', 'token=' . $this->session->data['token'].'&type=module', 'SSL')
-        );
+            );
 
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title_main'),
             'href' => $this->url->link($this->route, 'token=' . $this->session->data['token'] . $url, 'SSL')
-        );
+            );
 
         // Notification
         foreach ($this->error as $key => $error) {
@@ -96,8 +101,9 @@ class ControllerDVisualDesignerSetting extends Controller
         $data['text_yes'] = $this->language->get('text_yes');
         $data['text_no'] = $this->language->get('text_no');
         $data['text_confirm'] = $this->language->get('text_confirm');
-
-       
+        $data['text_product'] = $this->language->get('text_product');
+        $data['text_category'] = $this->language->get('text_category');
+        $data['text_information'] = $this->language->get('text_information');
 
         $data['button_add'] = $this->language->get('button_add');
         $data['button_delete'] = $this->language->get('button_delete');
@@ -107,15 +113,21 @@ class ControllerDVisualDesignerSetting extends Controller
         $data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
         $data['button_cancel'] = $this->language->get('button_cancel');
         $data['button_remove'] = $this->language->get('button_remove');
-  
+
         // Entry
-         $data['entry_status'] = $this->language->get('entry_status');
+        $data['entry_status'] = $this->language->get('entry_status');
         $data['entry_save_change'] = $this->language->get('entry_save_change');
-     
+        $data['entry_use_designer'] = $this->language->get('entry_use_designer');
+        $data['entry_access'] = $this->language->get('entry_access');
+        $data['entry_limit_access_user'] = $this->language->get('entry_limit_access_user');
+        $data['entry_limit_access_user_group'] = $this->language->get('entry_limit_access_user_group');
+        $data['entry_user'] = $this->language->get('entry_user');
+        $data['entry_user_group'] = $this->language->get('entry_user_group');
+
         // Text
         $data['text_enabled'] = $this->language->get('text_enabled');
         $data['text_disabled'] = $this->language->get('text_disabled');
-    
+
         //column
         $data['column_action'] = $this->language->get('column_action');
         $data['column_status'] = $this->language->get('column_status');
@@ -162,9 +174,30 @@ class ControllerDVisualDesignerSetting extends Controller
         } else {
             $data[$this->codename.'_status'] = $this->config->get($this->codename.'_status');
         }
-        
+
         //get setting
         $data['setting'] = $this->model_d_shopunity_setting->getSetting($this->codename);
+
+        $this->load->model('user/user');
+
+        $data['users'] = array();
+
+        if(!empty($data['setting']['access_user'])){
+            foreach ($data['setting']['access_user'] as $user_id) {
+                $user_info = $this->model_user_user->getUser($user_id);
+                $data['users'][$user_info['user_id']] = $user_info['username'];
+            }
+        }
+
+        $this->load->model('user/user_group');
+
+        $data['user_groups'] = array();
+        if(!empty($data['setting']['access_user_group'])){
+            foreach ($data['setting']['access_user_group'] as $user_group_id) {
+                $user_group_info = $this->model_user_user_group->getUserGroup($user_group_id);
+                $data['user_groups'][$user_group_id] = $user_group_info['name'];
+            }
+        }
 
         $this->load->model('setting/store');
 
@@ -173,6 +206,55 @@ class ControllerDVisualDesignerSetting extends Controller
         $data['footer'] = $this->load->controller('common/footer');
         
         $this->response->setOutput($this->load->view('d_visual_designer/setting.tpl', $data));
+    }
+
+    public function installEvents($status){
+        $this->load->model('module/d_event_manager');
+
+        //Products
+        if(!empty($status['product'])){
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/controller/catalog/product/add/before', 'event/'.$this->codename.'/controller_before');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/controller/catalog/product/edit/before', 'event/'.$this->codename.'/controller_before');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'event/'.$this->codename.'/view_product_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/product/before', 'event/'.$this->codename.'/view_product_before');
+            if(VERSION>='2.3.0.0')
+            {
+                $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/extension/module/featured/before', 'event/'.$this->codename.'/view_module_feautured_before');
+            }
+            else
+            {
+                $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/module/featured/before', 'event/'.$this->codename.'/view_module_feautured_before');
+            }
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/model/catalog/product/getProducts/after', 'event/'.$this->codename.'/model_getProducts_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/model/catalog/product/getProductSpecials/after', 'event/'.$this->codename.'/model_getProducts_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/model/catalog/product/getBestSellerProducts/after', 'event/'.$this->codename.'/model_getProducts_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/model/catalog/product/getProductRelated/after', 'event/'.$this->codename.'/model_getProducts_after');
+        }
+
+        //Categories
+        if(!empty($status['category'])){
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/controller/catalog/category/add/before', 'event/'.$this->codename.'/controller_before');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/controller/catalog/category/edit/before', 'event/'.$this->codename.'/controller_before');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'event/'.$this->codename.'/view_category_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/category/before', 'event/'.$this->codename.'/view_category_before');
+        }
+
+        if(!empty($status['information'])){
+            //Informations
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/controller/catalog/information/add/before', 'event/'.$this->codename.'/controller_before');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/controller/catalog/information/edit/before', 'event/'.$this->codename.'/controller_before');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'event/'.$this->codename.'/view_information_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/model/catalog/information/getInformation/after', 'event/'.$this->codename.'/model_getInformation_after');
+            $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/controller/information/information/agree/after', 'event/'.$this->codename.'/controller_information_information_agree_after');
+        }
+
+        $this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/tool/image/resize/before', 'event/'.$this->codename.'/model_imageResize_before');
+        $this->model_module_d_event_manager->addEvent($this->codename, 'catalog/model/tool/image/resize/before', 'event/'.$this->codename.'/model_imageResize_before');
+
+    }
+    public function uninstallEvents(){
+        $this->load->model('module/d_event_manager');
+        $this->model_module_d_event_manager->deleteEvent($this->codename);
     }
 
     private function validate($permission = 'modify')
@@ -185,5 +267,72 @@ class ControllerDVisualDesignerSetting extends Controller
         }
 
         return true;
+    }
+    public function autocompleteUser() {
+        $json = array();
+
+        if (isset($this->request->get['filter_name'])) {
+            $this->load->model('user/user');
+
+            $filter_data = array(
+                'filter_name' => $this->request->get['filter_name'],
+                'start'       => 0,
+                'limit'       => 5
+                );
+
+            $results = $this->model_user_user->getUsers($filter_data);
+
+            foreach ($results as $result) {
+                $json[] = array(
+                    'user_id' => $result['user_id'],
+                    'username' => strip_tags(html_entity_decode($result['username'], ENT_QUOTES, 'UTF-8'))
+                    );
+            }
+        }
+
+        $sort_order = array();
+
+        foreach ($json as $key => $value) {
+            $sort_order[$key] = $value['username'];
+        }
+
+        array_multisort($sort_order, SORT_ASC, $json);
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
+    }
+
+    public function autocompleteUserGroup() {
+        $json = array();
+
+        if (isset($this->request->get['filter_name'])) {
+            $this->load->model('user/user_group');
+
+            $filter_data = array(
+                'filter_name' => $this->request->get['filter_name'],
+                'start'       => 0,
+                'limit'       => 5
+                );
+
+            $results = $this->model_user_user_group->getUserGroups($filter_data);
+
+            foreach ($results as $result) {
+                $json[] = array(
+                    'user_group_id' => $result['user_group_id'],
+                    'name' => strip_tags(html_entity_decode($result['name'], ENT_QUOTES, 'UTF-8'))
+                    );
+            }
+        }
+
+        $sort_order = array();
+
+        foreach ($json as $key => $value) {
+            $sort_order[$key] = $value['name'];
+        }
+
+        array_multisort($sort_order, SORT_ASC, $json);
+
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode($json));
     }
 }

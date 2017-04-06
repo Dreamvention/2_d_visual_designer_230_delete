@@ -51,16 +51,12 @@ class ControllerExtensionModuleDVisualDesigner extends Controller
     public function install()
     {
         if ($this->d_shopunity) {
-            $this->load->model('d_shopunity/ocmod');
-            $this->model_d_shopunity_ocmod->setOcmod('d_visual_designer.xml', 1);
-            $this->model_d_shopunity_ocmod->refreshCache();
-                
             $this->load->model('d_shopunity/mbooth');
             $this->model_d_shopunity_mbooth->installDependencies($this->codename);
         }
-            
+
         $this->load->model('user/user_group');
-            
+
         $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/designer');
         $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/designer');
         $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/setting');
@@ -69,7 +65,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller
         $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/template');
         $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'access', $this->codename.'/instruction');
         $this->model_user_user_group->addPermission($this->{'model_extension_module_'.$this->codename}->getGroupId(), 'modify', $this->codename.'/instruction');
-            
+
         $this->{'model_extension_module_'.$this->codename}->createDatabase();
 
         $this->{'model_extension_module_'.$this->codename}->increaseFields();
@@ -77,12 +73,6 @@ class ControllerExtensionModuleDVisualDesigner extends Controller
 
     public function uninstall()
     {
-        if ($this->d_shopunity) {
-            $this->load->model('d_shopunity/ocmod');
-            $this->model_d_shopunity_ocmod->setOcmod('d_visual_designer.xml', 0);
-            $this->model_d_shopunity_ocmod->refreshCache();
-        }
-
         $this->{'model_extension_module_'.$this->codename}->dropDatabase();
     }
 }

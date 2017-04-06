@@ -482,6 +482,10 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 
         $this->error = array();
 
+        $this->load->model('setting/setting');
+
+        $setting = $this->model_setting_setting->getSetting('d_visual_designer');
+
         if(VERSION >= '2.2.0.0'){
             $this->user = new Cart\User($this->registry);
         }
@@ -491,6 +495,24 @@ class ModelExtensionModuleDVisualDesigner extends Model {
 
         if (!$this->user->isLogged()) {
             $this->error['warning'] = $this->language->get('error_permission');
+        }
+        else{
+            if(!empty($setting['d_visual_designer_setting']['limit_access_user'])){
+                if(!empty($setting['d_visual_designer_setting']['access_user']) && !in_array($this->user->getId(), $setting['d_visual_designer_setting']['access_user'])){
+                    $this->error['warning'] = $this->language->get('error_permission');
+                }
+                elseif($setting['d_visual_designer_setting']['access_user']){
+                    $this->error['warning'] = $this->language->get('error_permission');
+                }
+            }
+            if(!empty($setting['d_visual_designer_setting']['limit_access_user_group'])){
+                if(!empty($setting['d_visual_designer_setting']['access_user_group']) && !in_array($this->user->getGroupId(), $setting['d_visual_designer_setting']['access_user_group'])){
+                    $this->error['warning'] = $this->language->get('error_permission');
+                }
+                elseif(empty($setting['d_visual_designer_setting']['access_user_group'])){
+                    $this->error['warning'] = $this->language->get('error_permission');
+                }
+            }
         }
 
         $routes = array(
@@ -520,10 +542,6 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 $this->error['route'] = $this->language->get('error_frontend_route');
             }
         }
-
-        $this->load->model('setting/setting');
-
-        $setting = $this->model_setting_setting->getSetting('d_visual_designer');
 
         if(!$setting['d_visual_designer_status']){
             $this->error['status'] = $this->language->get('error_status');
@@ -736,14 +754,14 @@ class ModelExtensionModuleDVisualDesigner extends Model {
                 $templates = $results['d_visual_designer_templates'];
                 foreach ($templates as $template) {
                     $template_data[] = array(
-                     'template_id' => $template['template_id'],
-                     'content' => $template['content'],
-                     'config' => substr($file, 0, -4),
-                     'image' => $template['image'],
-                     'category' => $template['category'],
-                     'sort_order' => $template['sort_order'],
-                     'name' => $template['name']
-                     );
+                       'template_id' => $template['template_id'],
+                       'content' => $template['content'],
+                       'config' => substr($file, 0, -4),
+                       'image' => $template['image'],
+                       'category' => $template['category'],
+                       'sort_order' => $template['sort_order'],
+                       'name' => $template['name']
+                       );
                 }    
             }
         }
