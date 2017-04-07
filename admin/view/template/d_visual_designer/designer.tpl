@@ -112,7 +112,7 @@
         </div>
         <div class="popup-content">
             <div class="popup-codeview">
-                <textarea name="codeview" class="text-codeview">{{content}}</textarea>
+                <textarea name="codeview" class="text-codeview form-control">{{content}}</textarea>
             </div>
         </div>
         <div class="popup-footer">
