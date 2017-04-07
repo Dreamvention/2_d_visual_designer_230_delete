@@ -88,7 +88,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-12 element">
                     <div class="block">
                         <a id="add_block" name="type" data-title="{{{title}}}" data-type="{{{type}}}" data-category="{{category}}">
-                            <span><img src="{{{image}}}" class="image" style="    transform: scale(1.5);"></span>
+                            <span><img src="{{{image}}}" class="image"></span>
                             {{{title}}}
                             <i class="description">
                                 {{{description}}}

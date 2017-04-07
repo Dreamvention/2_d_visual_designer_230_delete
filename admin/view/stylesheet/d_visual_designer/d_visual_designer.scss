@@ -645,20 +645,21 @@
         padding: 0px;
         float: left;
         overflow: hidden;
-        height: 75px;
+        height: 100px;
         list-style: none;
         -webkit-transition: border-color .2s;
         transition: border-color .2s;
         .block {
             display: table;
             width: 100%;
-            height: 69px;
+            height: 94px;
             border: 0;
             background: #fff;
+            border-radius: 5px;
             a {
                 position: relative;
                 display: table-cell;
-                padding: 2px 4px 2px 57px;
+                padding: 2px 20px 2px 93px;
                 vertical-align: middle;
                 white-space: normal;
                 text-decoration: none;
@@ -669,13 +670,13 @@
                 >span {
                     position: absolute;
                     top: 50%;
-                    left: 10px;
+                    left: 20px;
                     display: block;
                     display: -webkit-box;
                     display: -ms-flexbox;
                     display: flex;
-                    width: 40px;
-                    height: 40px;
+                    width: 54px;
+                    height: 54px;
                     -webkit-transform: translateY(-50%);
                     transform: translateY(-50%);
                     -webkit-box-align: center;
@@ -684,6 +685,10 @@
                     -webkit-box-pack: center;
                     -ms-flex-pack: center;
                     justify-content: center;
+                    > img{
+                        width: 54px;
+                        height: 54px;
+                    }
                 }
                 .description {
                     position: relative;
