@@ -17,7 +17,7 @@ class ControllerEventDVisualDesigner extends Controller
     {
         if(!empty($data['description'])){
             $designer_data = array(
-                'config' => 'edit_product',
+                'config' => 'product',
                 'content' => $data['description'],
                 'field_name' => 'product_description['.(int)$this->config->get('config_language_id').'][description]',
                 'id' => $data['product_id']
@@ -36,7 +36,7 @@ class ControllerEventDVisualDesigner extends Controller
 
         if (!empty($data['description'])) {
             $designer_data = array(
-                'config' => 'edit_category',
+                'config' => 'category',
                 'content' => $data['description'],
                 'field_name' => 'category_description['.(int)$this->config->get('config_language_id').'][description]',
                 'id' => $category_id
@@ -70,19 +70,13 @@ class ControllerEventDVisualDesigner extends Controller
     {
         if(!empty($output)&&!empty($data[0])){
             $designer_data = array(
-                'config' => 'edit_information',
+                'config' => 'information',
                 'content' => $output['description'],
                 'field_name' => 'information_description['.(int)$this->config->get('config_language_id').'][description]',
                 'id' => $data[0]
                 );
             $output['description'] = $this->{'model_extension_module_'.$this->codename}->parseDescription($designer_data);
         }
-    }
-
-    public function controller_information_information_agree_after(&$route, &$data, &$output){
-        echo "<pre>"; print_r($route); echo "</pre>";
-        echo "<pre>"; print_r($data); echo "</pre>";
-        echo "<pre>"; print_r($output); echo "</pre>";
     }
 
     public function model_imageResize_before(&$route, &$data, &$output)

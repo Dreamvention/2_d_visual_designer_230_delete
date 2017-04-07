@@ -37,14 +37,10 @@
         "system/mbooth/install/d_visual_designer.xml",
         "system/config/d_visual_designer.php",
         
-        "system/config/d_visual_designer_route/add_category.php",
-        "system/config/d_visual_designer_route/add_information.php",
-        "system/config/d_visual_designer_route/add_product.php",
-        "system/config/d_visual_designer_route/add_template.php",
-        "system/config/d_visual_designer_route/edit_category.php",
-        "system/config/d_visual_designer_route/edit_information.php",
-        "system/config/d_visual_designer_route/edit_product.php",
-        "system/config/d_visual_designer_route/edit_template.php",
+        "system/config/d_visual_designer_route/category.php",
+        "system/config/d_visual_designer_route/information.php",
+        "system/config/d_visual_designer_route/product.php",
+        "system/config/d_visual_designer_route/template.php",
         
         "system/config/d_visual_designer/column.php",
         "system/config/d_visual_designer/row.php",
@@ -57,6 +53,9 @@
         "admin/language/ru-ru/extension/module/d_visual_designer.php",
         "admin/language/russian/extension/module/d_visual_designer.php",
         "admin/model/extension/module/d_visual_designer.php",
+        "admin/view/javascript/d_visual_designer/d_visual_designer.js",
+        "admin/view/javascript/d_visual_designer/vd-libraries.min.js",
+        "admin/view/javascript/d_visual_designer/vd-libraries.min.css",
         
         "catalog/controller/common/filemanager.php",
         "catalog/language/en-gb/common/filemanager.php",
@@ -73,6 +72,10 @@
         "catalog/language/russian/extension/module/d_visual_designer.php",
         "catalog/model/extension/module/d_visual_designer.php",
         "catalog/view/theme/default/javascript/d_visual_designer.js",
+        "catalog/view/javascript/d_visual_designer/vd-basic-libraries.min.js",
+        "catalog/view/javascript/d_visual_designer/vd-secondary-libraries.min.js",
+        "catalog/view/stylesheet/d_visual_designer/vd-basic-libraries.min.css",
+        "catalog/view/stylesheet/d_visual_designer/vd-secondary-libraries.min.css",
 
         "admin/view/template/d_visual_designer_layout/main.tpl",
         "admin/view/template/d_visual_designer_layout/medium.tpl",
@@ -144,13 +147,19 @@
         "admin/model/d_visual_designer",
         "admin/view/template/d_visual_designer",
         "admin/view/stylesheet/d_visual_designer",
-        "admin/view/javascript/d_visual_designer",
         "admin/view/image/d_visual_designer",
+        "admin/view/javascript/d_visual_designer/library/bootstrap-colorpicker/img",
+        "admin/view/javascript/d_visual_designer/library/icon-fonts/fonts",
+        "admin/view/javascript/d_visual_designer/library/fontIconPicker/fonts",
+        "admin/view/javascript/d_visual_designer/library/summernote/font",
 
         "catalog/view/theme/default/template/d_visual_designer",
         "catalog/view/theme/default/stylesheet/d_visual_designer",
         "catalog/view/theme/default/image/d_visual_designer",
-        "catalog/view/javascript/d_visual_designer"
+        "catalog/view/stylesheet/d_visual_designer/bootstrap-colorpicker/img",
+        "catalog/view/stylesheet/d_visual_designer/icon-fonts/fonts",
+        "catalog/view/stylesheet/d_visual_designer/fontIconPicker/fonts",
+        "catalog/view/stylesheet/d_visual_designer/summernote/font"
     ],
     "changelog": [
         {

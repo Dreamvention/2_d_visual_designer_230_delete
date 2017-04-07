@@ -59,38 +59,9 @@ class ControllerDVisualDesignerDesigner extends Controller {
 
         if($this->validate()){
 
-            $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css?'.rand();
-
-            //FontIconPicker
-            $this->scripts[] = 'view/javascript/d_visual_designer/library/fontIconPicker/iconset.js';
-            $this->scripts[] = 'view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.min.js';
-            $this->styles[] = 'view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.css';        
-            $this->styles[] = 'view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.grey.min.css';       
-
-            //Fonts icon
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/ionicons-1.5.2/css/ionicons.min.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/font-awesome-4.2.0/css/font-awesome.min.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/map-icons-2.1.0/css/map-icons.min.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/material-design-1.1.1/css/material-design-iconic-font.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/typicons-2.0.6/css/typicons.min.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/elusive-icons-2.0.0/css/elusive-icons.min.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/octicons-2.1.2/css/octicons.min.css';   
-            $this->styles[] = 'view/javascript/d_visual_designer/library/icon-fonts/weather-icons-1.2.0/css/weather-icons.min.css';   
-
-            //Bootstrap colorpicker
-            $this->styles[] = 'view/stylesheet/shopunity/bootstrap-colorpicker/bootstrap-colorpicker.min.css';
-            $this->scripts[] = 'view/javascript/shopunity/bootstrap-colorpicker/bootstrap-colorpicker.min.js';
-            //Bootstrap Switch
-            $this->styles[] = 'view/stylesheet/shopunity/bootstrap-switch/bootstrap-switch.min.css';
-            $this->scripts[] = 'view/javascript/shopunity/bootstrap-switch/bootstrap-switch.min.js';
-
-            $this->scripts[] = 'view/javascript/d_visual_designer/library/handlebars-v4.0.5.js';
-            $this->scripts[] = 'view/javascript/d_visual_designer/library/jquery-ui.js';
-            $this->scripts[] = 'view/javascript/d_visual_designer/library/jquery.serializejson.js';
-
-            //summernote
-            $this->styles[] = 'view/javascript/summernote/summernote.css';
-            $this->scripts[] = 'view/javascript/summernote/summernote.js';
+            $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css?'.$this->extension['version'];
+            $this->styles[] = 'view/javascript/d_visual_designer/vd-libraries.min.css';
+            $this->scripts[] = 'view/javascript/d_visual_designer/vd-libraries.min.js';
 
             //button
             $data['button_add'] = $this->language->get('button_add');
@@ -174,16 +145,9 @@ class ControllerDVisualDesignerDesigner extends Controller {
                 if(!empty($route_info['backend_param']) && !empty($url_params[$route_info['backend_param']])){
                     $params = '&'.$route_info['frontend_param'].'='.$url_params[$route_info['backend_param']];
                     $frontend_param = '&id='.$url_params[$route_info['backend_param']];
+                    $frontend_url = htmlentities(urlencode($this->catalog_url.'index.php?route='.$route_info['frontend_route'].$params));
+                    $data['frontend_route'] = $this->url->link('d_visual_designer/designer/frontend','token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$route_info['config_name'].$frontend_param);
                 }
-                else{
-                    $params = '';
-                    $frontend_param = '';
-                }
-
-                $frontend_url = htmlentities(urlencode($this->catalog_url.'index.php?route='.$route_info['frontend_route'].$params));
-
-
-                $data['frontend_route'] = $this->url->link('d_visual_designer/designer/frontend','token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$route_info['config_name'].$frontend_param);
             }
 
             $this->load->model('localisation/language');

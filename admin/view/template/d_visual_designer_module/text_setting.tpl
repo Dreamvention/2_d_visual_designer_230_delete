@@ -19,6 +19,22 @@
             ['table', ['table']],
             ['height', ['height']],
             ['view', ['fullscreen', 'codeview', 'help']]
-        ]
+        ],
+        onChange: function(contents, $editable) {
+            <?php if(VERSION >= '2.2.0.0') { ?>
+                $(this).val(contents);
+            <?php } else { ?>
+                $editable.parents('.form-group').find('textarea[name=\'text\']').text(contents);
+            <?php } ?>
+        },
+        callbacks : {
+            onChange: function(contents, $editable) {
+                <?php if(VERSION >= '2.2.0.0') { ?>
+                    $(this).val(contents);
+                <?php } else { ?>
+                    $editable.parents('.form-group').find('textarea[name=\'text\']').text(contents);
+                <?php } ?>
+            }
+        }
     });
-</script>
+        </script>

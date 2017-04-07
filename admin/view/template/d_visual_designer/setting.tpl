@@ -69,15 +69,27 @@
                             <input type="checkbox" class="switcher" data-label-text="<?php echo $text_enabled; ?>" id="input_save_change" name="<?php echo $id;?>_setting[save_change]" <?php echo ($setting['save_change'])? 'checked="checked"':'';?> value="1" />
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label"><?php echo $entry_use_designer; ?></label>
                         <div class="col-sm-10">
-                            <input type="hidden" name="<?php echo $id;?>_setting[use][product]" value="0" />
-                            <input type="checkbox" class="switcher" data-label-text="<?php echo $text_product; ?>" name="<?php echo $id;?>_setting[use][product]" <?php echo ($setting['use']['product'])? 'checked="checked"':'';?> value="1" />
-                            <input type="hidden" name="<?php echo $id;?>_setting[use][category]" value="0" />
-                            <input type="checkbox" class="switcher" data-label-text="<?php echo $text_category; ?>" name="<?php echo $id;?>_setting[use][category]" <?php echo ($setting['use']['category'])? 'checked="checked"':'';?> value="1" />
-                            <input type="hidden" name="<?php echo $id;?>_setting[use][information]" value="0" />
-                            <input type="checkbox" class="switcher" data-label-text="<?php echo $text_information; ?>"name="<?php echo $id;?>_setting[use][information]" <?php echo ($setting['use']['information'])? 'checked="checked"':'';?> value="1" />
+                            <div class="well well-sm" style="height: 150px; overflow: auto;">
+                                <?php foreach ($routes as $key => $value) { ?>
+                                <div class="checkbox">
+                                    <label>
+                                        <?php if (in_array($key, $setting['use'])) { ?>
+                                        <input type="checkbox" name="<?php echo $id;?>_setting[use][]" value="<?php echo $key; ?>" checked="checked" />
+                                        <?php echo $value; ?>
+                                        <?php } else { ?>
+                                        <input type="checkbox" name="<?php echo $id;?>_setting[use][]" value="<?php echo $key; ?>" />
+                                        <?php echo $value; ?>
+                                        <?php } ?>
+                                    </label>
+                                </div>
+                                <?php } ?>
+                            </div>
+                            <a onclick="$(this).parent().find(':checkbox').prop('checked', true);" style="cursor:pointer;"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').prop('checked', false);" style="cursor:pointer;"><?php echo $text_unselect_all; ?></a>
+                            <br/>
                         </div>
                     </div>
 
@@ -112,7 +124,7 @@
                     </div>
 
                     <div class="form-group" id="user_groups">
-                    <label class="col-sm-2 control-label" for="input-user-group"><?php echo $entry_user_group; ?></label>
+                        <label class="col-sm-2 control-label" for="input-user-group"><?php echo $entry_user_group; ?></label>
                         <div class="col-sm-10">
                             <input type="text" name="user_group" value="" placeholder="<?php echo $entry_user_group; ?>" id="input-user-group" class="form-control" />
                             <div id="access-user-group" class="well well-sm" style="height: 150px; overflow: auto;">

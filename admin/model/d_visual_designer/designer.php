@@ -580,11 +580,25 @@ class ModelDVisualDesignerDesigner extends Model {
     }
 
     public function getRouteByBackendRoute($backend_route){
-        $routes = $this->getRoutes();
-        foreach ($routes as $config => $route) {
-            if($route['backend_route'] == $backend_route){
-                $route['config_name'] = $config;
-                return $route;
+        $this->load->model('setting/setting');
+        $setting = $this->model_setting_setting->getSetting('d_visual_designer');
+        if(isset($setting['d_visual_designer_setting']['use'])){
+            $routes = $setting['d_visual_designer_setting']['use'];
+        }
+        else{
+            $routes = array();
+        }
+        foreach ($routes as $route) {
+            $route_info = $this->getRoute($route);
+            if(isset($route_info['backend_route_regex'])){
+                $pattern = $route_info['backend_route_regex'];
+            }
+            else{
+                $pattern = $route_info['backend_route'];
+            }
+            if (preg_match('/^' . str_replace(array('\*', '\?'), array('.*', '.'), preg_quote($pattern, '/')) . '/', $backend_route)) {
+                $route_info['config_name'] = $route;
+                return $route_info;
             }
         }
         return array();

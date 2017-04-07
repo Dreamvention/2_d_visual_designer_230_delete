@@ -528,7 +528,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         else{
             $route = '';
         }
-
+        
         if(!in_array($route, $routes)){
             if($edit&&!isset($this->request->get['edit'])){
                 $this->error['warning'] = $this->language->get('error_permission');
@@ -546,6 +546,7 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         if(!$setting['d_visual_designer_status']){
             $this->error['status'] = $this->language->get('error_status');
         }
+        FB::log($this->error);
         return !$this->error;
     }
 

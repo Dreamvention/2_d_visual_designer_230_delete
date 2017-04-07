@@ -43,35 +43,8 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
         }
         
         //sharrre
-        $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/sharrre/jquery.sharrre.min.js';
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/sharrre/style.css';
-        //magnific-popup
-        $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/magnific/jquery.magnific-popup.min.js';
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/magnific/magnific-popup.css';
-        //chart
-        $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/chart/Chart.min.js';
-        $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/pie-chart.js';
-        $this->scripts[] = 'https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.2.0/circle-progress.js';
-        //Carousel
-        $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/owl-carousel/owl.carousel.min.js';
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/owl-carousel/owl.carousel.css';
-        //Fonts icon
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/ionicons-1.5.2/css/ionicons.min.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/font-awesome-4.2.0/css/font-awesome.min.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/map-icons-2.1.0/css/map-icons.min.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/material-design-1.1.1/css/material-design-iconic-font.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/typicons-2.0.6/css/typicons.min.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/elusive-icons-2.0.0/css/elusive-icons.min.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/octicons-2.1.2/css/octicons.min.css';   
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/icon-fonts/weather-icons-1.2.0/css/weather-icons.min.css';   
-        
-        $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/owl-carousel/owl.transitions.css';
-
-        if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/stylesheet/d_visual_designer/animate.css')) {
-            $this->styles[] = 'catalog/view/theme/' . $this->theme . '/stylesheet/d_visual_designer/animate.css';
-        } else {
-            $this->styles[] = 'catalog/view/theme/default/stylesheet/d_visual_designer/animate.css';
-        }
+        $this->scripts[] = 'catalog/view/javascript/d_visual_designer/vd-basic-libraries.min.js';
+        $this->styles[] = 'catalog/view/stylesheet/d_visual_designer/vd-basic-libraries.min.css';
         
         if($this->{'model_extension_module_'.$this->codename}->validateEdit($setting['config'])){
 
@@ -87,27 +60,8 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 $this->scripts[] = 'catalog/view/theme/default/javascript/d_visual_designer.js?'.rand(5,10);
             }
 
-            //bootstrap-switch
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/bootstrap-switch/bootstrap-switch.js';
-            $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/bootstrap-switch/bootstrap-switch.min.css';
-
-            //Font Icon Picker
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/fontIconPicker/iconset.js';
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.min.js';
-            $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.css';        
-            $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/fontIconPicker/jquery.fonticonpicker.grey.min.css'; 
-
-             //bootstrap-colorpicker
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/bootstrap-colorpicker/bootstrap-colorpicker.min.js';
-            $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/bootstrap-colorpicker/bootstrap-colorpicker.min.css';
-
-            //summernote
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/summernote/summernote.min.js';
-            $this->styles[] = 'catalog/view/javascript/d_visual_designer/library/summernote/summernote.css';
-
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/jquery-ui.js';
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/handlebars-v4.0.5.js';
-            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/library/jquery.serializejson.js';
+            $this->scripts[] = 'catalog/view/javascript/d_visual_designer/vd-secondary-libraries.min.js';
+            $this->styles[] = 'catalog/view/stylesheet/d_visual_designer/vd-secondary-libraries.min.css';
 
             //button
             $data['button_add'] = $this->language->get('button_add');
