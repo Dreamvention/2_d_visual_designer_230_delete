@@ -34,7 +34,6 @@
     },
     "files": [
         "system/mbooth/extension/d_visual_designer.json",
-        "system/mbooth/install/d_visual_designer.xml",
         "system/config/d_visual_designer.php",
         
         "system/config/d_visual_designer_route/category.php",
