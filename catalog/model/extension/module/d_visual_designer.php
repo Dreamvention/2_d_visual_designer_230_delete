@@ -546,7 +546,6 @@ class ModelExtensionModuleDVisualDesigner extends Model {
         if(!$setting['d_visual_designer_status']){
             $this->error['status'] = $this->language->get('error_status');
         }
-        FB::log($this->error);
         return !$this->error;
     }
 
