@@ -618,7 +618,7 @@ class ModelDVisualDesignerDesigner extends Model {
             $route_data[$name] = $route_info;
 
         }
-
+        arsort($route_data);
         return $route_data;
     }
 

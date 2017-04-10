@@ -148,6 +148,10 @@ class ControllerDVisualDesignerDesigner extends Controller {
                     $frontend_url = htmlentities(urlencode($this->catalog_url.'index.php?route='.$route_info['frontend_route'].$params));
                     $data['frontend_route'] = $this->url->link('d_visual_designer/designer/frontend','token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$route_info['config_name'].$frontend_param);
                 }
+                if(!isset($route_info['backend_param'])){
+                    $frontend_url = htmlentities(urlencode($this->catalog_url.'index.php?route='.$route_info['frontend_route']));
+                    $data['frontend_route'] = $this->url->link('d_visual_designer/designer/frontend','token='.$this->session->data['token'].'&url='.$frontend_url.'&route_config='.$route_info['config_name'].$frontend_param);
+                }
             }
 
             $this->load->model('localisation/language');

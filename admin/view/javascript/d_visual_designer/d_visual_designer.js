@@ -371,6 +371,7 @@ var d_visual_designer = {
 
                     that.initSortable();
                     that.initHover(designer_id);
+                    that.setting.stateEdit = true;
                     if(callback!=null){
                         callback(true);
                     }
