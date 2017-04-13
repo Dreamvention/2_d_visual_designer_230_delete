@@ -778,6 +778,8 @@
         .content .vd .block-child > .block-content > h4.block-title {
           font-weight: 600; }
           .content .vd .block-child > .block-content > h4.block-title > img {
+            width: 54px;
+            height: 54px;
             float: left;
             padding-right: 10px; }
         .content .vd .block-child > .block-content > .container-child {
