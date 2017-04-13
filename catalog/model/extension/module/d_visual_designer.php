@@ -158,7 +158,6 @@ class ModelExtensionModuleDVisualDesigner extends Model {
             $pattern .= '|vd_'.$block;
         }
         $pattern .=")(?![\\w-])([^\\]\\/]*(?:\\/(?!\\])[^\\]\\/]*)*?)(?:(\\/)\\]|\\](?:([^\\[]*+(?:\[(?!\\/\\2\])[^\\[]*+)*+)\[\\/\\2\])?)(\\]?)";
-
         return $pattern;
     }
 
