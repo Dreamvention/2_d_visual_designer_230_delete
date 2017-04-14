@@ -44,6 +44,7 @@
         "system/config/d_visual_designer/column.php",
         "system/config/d_visual_designer/row.php",
         "system/config/d_visual_designer/text.php",
+        "system/config/d_visual_designer/image.php",
 
         "admin/controller/extension/module/d_visual_designer.php",
         "admin/controller/event/d_visual_designer.php",
