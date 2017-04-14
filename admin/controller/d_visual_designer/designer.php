@@ -58,8 +58,8 @@ class ControllerDVisualDesignerDesigner extends Controller {
         }
 
         if($this->validate()){
-
-            $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css?'.$this->extension['version'];
+            $this->styles[] = 'view/stylesheet/d_visual_designer/d_visual_designer.css?'.rand();
+            
             $this->styles[] = 'view/javascript/d_visual_designer/vd-libraries.min.css';
             $this->scripts[] = 'view/javascript/d_visual_designer/vd-libraries.min.js';
 

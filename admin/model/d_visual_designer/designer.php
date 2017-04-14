@@ -653,4 +653,25 @@ class ModelDVisualDesignerDesigner extends Model {
         }
         return $results;
     }
+
+    public function addScript(){
+        if(!empty($setting)){
+            if(!empty($setting['limit_access_user'])){
+                if(!empty($setting['access_user']) && in_array($this->user->getId(), $setting['access_user'])){
+                    $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
+                }
+            }
+            elseif(!empty($setting['limit_access_user_group'])){
+                if(!empty($setting['access_user_group']) && in_array($this->user->getGroupId(), $setting['access_user_group'])){
+                    $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
+                }
+            }
+            else{
+                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
+            }
+        }
+        else{
+            $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
+        }
+    }
 }

@@ -1,28 +1,25 @@
 <?php
 class ControllerEventDVisualDesigner extends Controller {
 
-    public $codename = 'd_visual_designer';
+    private $codename = 'd_visual_designer';
+    private $route = 'extension/module/d_visual_designer';
+    private $extension = '';
+
+    public function __construct($registry)
+    {
+        parent::__construct($registry);
+        $this->load->model($this->route);
+
+        $this->d_shopunity = (file_exists(DIR_SYSTEM.'mbooth/extension/d_shopunity.json'));
+        if ($this->d_shopunity) {
+            $this->load->model('d_shopunity/mbooth');
+            $this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
+        }
+    }
 
     public function controller_before(&$route, &$data){
-        $setting = $this->config->get($this->codename.'_setting');
-        if(!empty($setting)){
-            if(!empty($setting['limit_access_user'])){
-                if(!empty($setting['access_user']) && in_array($this->user->getId(), $setting['access_user'])){
-                    $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
-                }
-            }
-            elseif(!empty($setting['limit_access_user_group'])){
-                if(!empty($setting['access_user_group']) && in_array($this->user->getGroupId(), $setting['access_user_group'])){
-                    $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
-                }
-            }
-            else{
-                $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
-            }
-        }
-        else{
-            $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
-        }
+        $this->load->model('d_visual_designer/designer');
+        $this->model_d_visual_designer_designer->addScript();
     }
 
     public function view_product_after(&$route, &$data, &$output){
