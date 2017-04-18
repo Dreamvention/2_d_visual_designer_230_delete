@@ -181,7 +181,7 @@
                         </script>
                     </div>
                     <?php } ?>
-                    <?php if($notify&&$landing_notify) { ?>
+                    <?php if($notify&&!$module_notify&&$landing_notify) { ?>
                     <div class="col-md-3">
                         <div class="d_shopunity_widget_2"></div>
                         <script src="view/javascript/d_shopunity/d_shopunity_widget.js" type="text/javascript"></script>
