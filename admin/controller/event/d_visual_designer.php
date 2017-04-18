@@ -9,17 +9,13 @@ class ControllerEventDVisualDesigner extends Controller {
     {
         parent::__construct($registry);
         $this->load->model($this->route);
+        $this->load->model($this->codename.'/designer');
 
         $this->d_shopunity = (file_exists(DIR_SYSTEM.'mbooth/extension/d_shopunity.json'));
         if ($this->d_shopunity) {
             $this->load->model('d_shopunity/mbooth');
             $this->extension = $this->model_d_shopunity_mbooth->getExtension($this->codename);
         }
-    }
-
-    public function controller_before(&$route, &$data){
-        $this->load->model('d_visual_designer/designer');
-        $this->model_d_visual_designer_designer->addScript();
     }
 
     public function view_product_after(&$route, &$data, &$output){
@@ -33,6 +29,10 @@ class ControllerEventDVisualDesigner extends Controller {
 
         foreach ($languages as $language) {
             $html_dom->find('textarea[name^="product_description['.$language['language_id'].'][description]"]', 0)->class .=' d_visual_designer';
+        }
+
+        if($this->{'model_'.$this->codename.'_designer'}->checkPermission()){
+            $html_dom->find('head', 0)->innertext  .= '<script src="view/javascript/d_visual_designer/d_visual_designer.js?'.$this->extension['version'].'" type="text/javascript"></script>';
         }
 
         $output = (string)$html_dom;
@@ -50,6 +50,10 @@ class ControllerEventDVisualDesigner extends Controller {
             $html_dom->find('textarea[name^="category_description['.$language['language_id'].'][description]"]', 0)->class .=' d_visual_designer';
         }
 
+        if($this->{'model_'.$this->codename.'_designer'}->checkPermission()){
+            $html_dom->find('head', 0)->innertext  .= '<script src="view/javascript/d_visual_designer/d_visual_designer.js?'.$this->extension['version'].'" type="text/javascript"></script>';
+        }
+
         $output = (string)$html_dom;
     }
 
@@ -63,6 +67,10 @@ class ControllerEventDVisualDesigner extends Controller {
 
         foreach ($languages as $language) {
             $html_dom->find('textarea[name^="information_description['.$language['language_id'].'][description]"]', 0)->class .=' d_visual_designer';
+        }
+
+        if($this->{'model_'.$this->codename.'_designer'}->checkPermission()){
+            $html_dom->find('head', 0)->innertext  .= '<script src="view/javascript/d_visual_designer/d_visual_designer.js?'.$this->extension['version'].'" type="text/javascript"></script>';
         }
 
         $output = (string)$html_dom;

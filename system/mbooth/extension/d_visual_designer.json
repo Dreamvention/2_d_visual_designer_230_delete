@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -27,7 +27,7 @@
         "url": "https://dreamvention.com/support"
     },
     "required": {
-        "d_shopunity": ">= 3.0.41",
+        "d_shopunity": ">= 3.0.51",
         "d_event_manager": ">= 1.1.2",
         "d_simple_html_dom": ">= 1.0.4",
         "d_elfinder": ">= 1.0.0"
@@ -177,6 +177,10 @@
         "catalog/view/stylesheet/d_visual_designer/summernote/font"
     ],
     "changelog": [
+        {
+            "version":"2.1.1",
+            "change":"1.Added notification for free version."
+        },
         {
             "version":"2.1.0",
             "change":"1.Added parallax. \r\n2.Added Code Viewer. \r\n3.Fix bugs. \r\n4.Added animate for control button. \r\n5.OCMOD replaced to Events \r\n6.Added the ability to disable the Visual Designer separately on the pages of goods, categories, information. \r\n7.Added the ability to restrict access to Visual Designer for selected users or groups of users."

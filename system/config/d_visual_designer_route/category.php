@@ -17,8 +17,6 @@ $_['frontend_param']      = 'path';
 $_['edit_url']            = 'index.php?route=extension/module/d_visual_designer/saveCategory';
 //События необходимые для работы данного route
 $_['events']              = array(
-    'admin/controller/catalog/category/add/before' => 'event/d_visual_designer/controller_before',
-    'admin/controller/catalog/category/edit/before' => 'event/d_visual_designer/controller_before',
     'admin/view/catalog/category_form/after' => 'event/d_visual_designer/view_category_after',
     'catalog/view/product/category/before' => 'event/d_visual_designer/view_category_before'
 );

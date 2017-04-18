@@ -124,6 +124,9 @@ class ControllerDVisualDesignerDesigner extends Controller {
             $data['text_horizontal'] = $this->language->get('text_horizontal');
             $data['text_vertical'] = $this->language->get('text_vertical');
 
+            $data['text_complete_version'] = $this->language->get('text_complete_version');
+            $data['text_complete_version_template'] = $this->language->get('text_complete_version_template');
+
             $data['error_name'] = $this->language->get('error_name');
 
             //error
@@ -428,6 +431,8 @@ class ControllerDVisualDesignerDesigner extends Controller {
             }
 
             usort($json['blocks'], 'ControllerDVisualDesignerDesigner::sort_block');
+
+            $json['notify'] = $this->{'model_'.$this->codename.'_designer'}->checkCompleteVersion();
 
         }
         else{

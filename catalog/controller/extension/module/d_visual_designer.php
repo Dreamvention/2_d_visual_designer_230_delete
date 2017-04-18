@@ -93,6 +93,9 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
             $data['text_horizontal'] = $this->language->get('text_horizontal');
             $data['text_vertical'] = $this->language->get('text_vertical');
 
+            $data['text_complete_version'] = $this->language->get('text_complete_version');
+            $data['text_complete_version_template'] = $this->language->get('text_complete_version_template');
+
             $data['entry_border_color'] = $this->language->get('entry_border_color');
             $data['entry_border_style'] = $this->language->get('entry_border_style');
             $data['entry_border_radius'] = $this->language->get('entry_border_radius');
@@ -308,6 +311,7 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 }
 
                 usort($json['blocks'], 'ControllerExtensionModuleDVisualDesigner::sort_block');
+                $json['notify'] = $this->{'model_extension_module_'.$this->codename}->checkCompleteVersion();
 
             }
         }
@@ -518,6 +522,8 @@ class ControllerExtensionModuleDVisualDesigner extends Controller {
                 'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
                 );
         }
+
+        $json['notify'] = $this->{'model_extension_module_'.$this->codename}->checkCompleteVersion();
 
         $json['success'] = 'success';
 

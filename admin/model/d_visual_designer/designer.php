@@ -4,6 +4,9 @@
 */
 
 class ModelDVisualDesignerDesigner extends Model {
+
+    private $codename = 'd_visual_designer';
+
     private $settingJS;
 
     private $settingChild;
@@ -654,6 +657,27 @@ class ModelDVisualDesignerDesigner extends Model {
         return $results;
     }
 
+    public function checkPermission(){
+        $this->load->model('d_shopunity/setting');
+        $setting = $this->model_d_shopunity_setting->getSetting($this->codename);
+
+        if(!empty($setting['limit_access_user'])){
+            if(!empty($setting['access_user']) && in_array($this->user->getId(), $setting['access_user'])){
+               return true;
+            }
+        }
+        elseif(!empty($setting['limit_access_user_group'])){
+            if(!empty($setting['access_user_group']) && in_array($this->user->getGroupId(), $setting['access_user_group'])){
+                return true;
+            }
+        }
+        else{
+            return true;
+        }
+
+        return false;
+    }
+
     public function addScript(){
         if(!empty($setting)){
             if(!empty($setting['limit_access_user'])){
@@ -674,4 +698,17 @@ class ModelDVisualDesignerDesigner extends Model {
             $this->document->addScript('view/javascript/d_visual_designer/d_visual_designer.js?'.rand(5,10));
         }
     }
+
+    public function checkCompleteVersion(){
+        $return = false;
+        if(!file_exists(DIR_SYSTEM.'mbooth/extension/d_visual_designer_module.json')){
+            $return = true; 
+        }
+        if(!file_exists(DIR_SYSTEM.'mbooth/extension/d_visual_designer_landing.json')){
+            $return = true; 
+        }
+
+        return $return;
+    }
+
 }

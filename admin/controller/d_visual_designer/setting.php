@@ -107,6 +107,7 @@ class ControllerDVisualDesignerSetting extends Controller
         $data['text_information'] = $this->language->get('text_information');
         $data['text_select_all'] = $this->language->get('text_select_all');
         $data['text_unselect_all'] = $this->language->get('text_unselect_all');
+        $data['text_complete_version'] = $this->language->get('text_complete_version');
         
         $data['button_add'] = $this->language->get('button_add');
         $data['button_delete'] = $this->language->get('button_delete');
@@ -172,6 +173,13 @@ class ControllerDVisualDesignerSetting extends Controller
         $data['href_setting'] = $this->url->link($this->codename.'/setting', 'token='.$this->session->data['token'], 'SSL');
         $data['href_instruction'] = $this->url->link($this->codename.'/instruction', 'token='.$this->session->data['token'], 'SSL');
         
+        $this->load->model($this->codename.'/designer');
+
+        $data['notify'] = $this->{'model_'.$this->codename.'_designer'}->checkCompleteVersion();
+
+        $data['landing_notify'] = (!file_exists(DIR_SYSTEM.'mbooth/extension/d_visual_designer_landing.json'));
+        $data['module_notify'] = (!file_exists(DIR_SYSTEM.'mbooth/extension/d_visual_designer_module.json'));
+
         if (isset($this->request->post[$this->codename.'_status'])) {
             $data[$this->codename.'_status'] = $this->request->post[$this->codename.'_status'];
         } else {
