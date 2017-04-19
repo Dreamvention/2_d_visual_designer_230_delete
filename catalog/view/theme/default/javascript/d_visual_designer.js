@@ -435,6 +435,7 @@ var d_visual_designer = {
                 that.settings[designer_id].form.find('.vd#sortable').find('.block-content[data-id=\'' + block_id + '\']').append(json['content']);
 
                 that.updateContentBlock(block_id, designer_id);
+                that.setting.stateEdit = true;
             }
         });
     },
@@ -482,6 +483,7 @@ var d_visual_designer = {
                     that.closePopup();
                     that.initPopup(content);
                     that.initColorpicker();
+                    that.setting.stateEdit = true;
                 }
             }
         });
@@ -533,6 +535,8 @@ var d_visual_designer = {
         }
 
         this.settings[designer_id].form.find('#' + block_id).remove();
+
+        this.setting.stateEdit = true;
 
         $('body').trigger('remove_block_success', trigger_data);
     },
@@ -608,6 +612,7 @@ var d_visual_designer = {
 
                     that.updateContentBlock(block_id, designer_id);
                     that.closePopup();
+                    that.setting.stateEdit = true;
                 }
                 console.log(json);
             }
@@ -840,6 +845,7 @@ var d_visual_designer = {
                     that.settings[designer_id].form.find('#' + block_id).after(json['content']);
                     that.initSortable();
                     that.initHover(designer_id);
+                    that.setting.stateEdit = true;
                     var trigger_data = {
                         'title': that.settings[designer_id].form.find('#' + new_block_id).data('title')
                     };
