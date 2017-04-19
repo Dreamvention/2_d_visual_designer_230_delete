@@ -1,6 +1,6 @@
 {
     "codename": "d_visual_designer",
-    "version": "2.1.1",
+    "version": "2.1.2",
     "name": "Visual Designer",
     "description": "Amazing page builder that will blow your mind away. Try out the lite version and swith to pro when you are ready build professional landing pages.",
     "index": "extension/module/d_visual_designer",
@@ -177,6 +177,10 @@
         "catalog/view/stylesheet/d_visual_designer/summernote/font"
     ],
     "changelog": [
+        {
+            "version":"2.1.2",
+            "change":"1.Fix bugs."
+        },
         {
             "version":"2.1.1",
             "change":"1.Added notification for free version."
