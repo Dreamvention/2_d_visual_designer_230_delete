@@ -883,6 +883,7 @@ var d_visual_designer = {
     //Задание параметра для блока
     setValue: function(block_id, designer_id, name, value) {
         this.data[designer_id][block_id]['setting'][name] = value;
+        this.setting.stateEdit = true;
     },
     //Получение текста из формы
     getText: function(designer_id, parent = "") {;

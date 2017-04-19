@@ -999,7 +999,7 @@ var d_visual_designer = {
     //Задание параметра для блока
     setValue: function(block_id, designer_id, name, value) {
         this.data[designer_id][block_id]['setting'][name] = value;
-        that.setting.stateEdit = true;
+        this.setting.stateEdit = true;
     },
     //Задать новый текст
     setText:function(designer_id, content){
