@@ -248,7 +248,7 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $this->load->model('tool/image');
         
         foreach ($results as $result) {
-            
+
             if(file_exists(DIR_IMAGE.$result['image'])){
                 $image = $this->model_tool_image->resize($result['image'], 50,50);
             }
@@ -514,7 +514,7 @@ class ControllerDVisualDesignerTemplate extends Controller {
         $json['categories'] = array();
 
         foreach ($templates as $template) {
-            
+
             $this->load->model('tool/image');
             
             if(file_exists(DIR_IMAGE.$template['image'])){
@@ -533,12 +533,12 @@ class ControllerDVisualDesignerTemplate extends Controller {
                 'config' => $template['config'],
                 'category' => ucfirst($template['category']),
                 'name' => html_entity_decode($template['name'], ENT_QUOTES, "UTF-8")
-            );
-
-            $this->load->model($this->codename.'/designer');
-
-            $json['notify'] = $this->{'model_'.$this->codename.'_designer'}->checkCompleteVersion();
+                );
         }
+
+        $this->load->model($this->codename.'/designer');
+
+        $json['notify'] = $this->{'model_'.$this->codename.'_designer'}->checkCompleteVersion();
 
         $json['success'] = 'success';
 
@@ -612,7 +612,7 @@ class ControllerDVisualDesignerTemplate extends Controller {
                 'category' => $category,
                 'content' => $content,
                 'sort_order' => '0'
-            );
+                );
             $this->{'model_'.$this->codename.'_template'}->addTemplate($template_info);
             $json['success'] = 'success';
         }
