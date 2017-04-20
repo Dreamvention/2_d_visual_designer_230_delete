@@ -406,7 +406,12 @@ var d_visual_designer = {
                     that.setting.stateEdit = true;
 
                 }
-                that.updateSortOrderRow(designer_id);
+                if(target != ''){
+                    that.updateSortOrder(target, designer_id);
+                }
+                else{
+                    that.updateSortOrderRow(designer_id);
+                }
                 that.initSortable();
                 that.initHover(designer_id);
                 that.closePopup();
@@ -433,7 +438,7 @@ var d_visual_designer = {
                 }
 
                 that.settings[designer_id].form.find('.vd#sortable').find('.block-content[data-id=\'' + block_id + '\']').append(json['content']);
-
+                that.updateSortOrder(block_id, designer_id);
                 that.updateContentBlock(block_id, designer_id);
                 that.setting.stateEdit = true;
             }
@@ -846,6 +851,13 @@ var d_visual_designer = {
                     that.initSortable();
                     that.initHover(designer_id);
                     that.setting.stateEdit = true;
+                    if(parent_id != ''){
+                        that.updateSortOrder(parent_id, designer_id);
+                    }
+                    else{
+                        that.updateSortOrderRow(designer_id);
+                    }
+                    
                     var trigger_data = {
                         'title': that.settings[designer_id].form.find('#' + new_block_id).data('title')
                     };

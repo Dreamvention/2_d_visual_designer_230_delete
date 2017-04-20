@@ -409,7 +409,7 @@ var d_visual_designer = {
             }
 
         }).promise().done(function() {
-           if (callback != null) {
+         if (callback != null) {
             callback();
         }
     });
@@ -540,7 +540,13 @@ var d_visual_designer = {
                 }
                 that.initSortable();
                 that.initHover(designer_id);
-                that.updateSortOrderRow(designer_id);
+                
+                if(target != ''){
+                    that.updateSortOrder(target, designer_id);
+                }
+                else{
+                    that.updateSortOrderRow(designer_id);
+                }
                 that.updateValue();
                 that.closePopup();
                 that.setting.stateEdit = true;
@@ -569,6 +575,7 @@ var d_visual_designer = {
                 that.setting.form.find('#' + designer_id).find('.vd#sortable').find('.block-content[data-id=\'' + block_id + '\']').append(json['content']);
 
                 that.updateContentBlock(block_id, designer_id);
+                that.updateSortOrder(block_id, designer_id);
                 that.setting.stateEdit = true;
             }
         });
@@ -932,6 +939,12 @@ var d_visual_designer = {
                     that.setting.form.find('#' + block_id).after(json['content']);
                     that.initSortable();
                     that.initHover(designer_id);
+                    if(parent_id != ''){
+                        that.updateSortOrder(parent_id, designer_id);
+                    }
+                    else{
+                        that.updateSortOrderRow(designer_id);
+                    }
                     that.setting.stateEdit = true;
                 }
             }
