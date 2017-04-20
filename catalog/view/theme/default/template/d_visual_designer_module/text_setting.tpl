@@ -19,6 +19,7 @@
         ['para', ['ul', 'ol', 'paragraph']],
         ['table', ['table']],
         ['height', ['height']],
+        ['insert', ['link']],
         ['cleaner',['cleaner']],
         ['view', ['fullscreen', 'codeview', 'help']]
         ],
