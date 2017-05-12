@@ -403,10 +403,13 @@ var d_visual_designer = {
             if ($(element).hasClass('summernote')) {
                 $(element).summernote('code', content)
             }
-
+            
             if(typeof CKEDITOR != "undefined"){
+                CKEDITOR.config.autoParagraph = false;
                 CKEDITOR.instances[$(element).attr('id')].setData(content);
             }
+
+
 
         }).promise().done(function() {
          if (callback != null) {
